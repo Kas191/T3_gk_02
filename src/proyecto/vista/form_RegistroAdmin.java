@@ -1,10 +1,13 @@
-package Ejercicio01;
+package proyecto.vista;
+
+import proyecto.controlador.UsuarioController;
+import proyecto.modelo.Administrador;
+import proyecto.util.Mensajes;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author User0
@@ -33,7 +36,7 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
         lblApellido = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblcorreo = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtUsuarioAdmin = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtcorreo = new javax.swing.JTextField();
@@ -41,7 +44,7 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         cbroles = new javax.swing.JComboBox<>();
         btnRegistrar = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordFieldAdmin = new javax.swing.JPasswordField();
         btnBackLog = new javax.swing.JButton();
         btnMostrar = new javax.swing.JButton();
 
@@ -92,9 +95,9 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
         lblcorreo.setText("Correo");
         bg.add(lblcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 100, 20));
 
-        txtUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
-        txtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 210, 30));
+        txtUsuarioAdmin.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
+        txtUsuarioAdmin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        bg.add(txtUsuarioAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 210, 30));
 
         txtNombre.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
@@ -118,7 +121,6 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
         lblUsuario.setText("Usuario");
         bg.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 100, 20));
 
-        cbroles.setBackground(new java.awt.Color(204, 255, 255));
         cbroles.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbroles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", " " }));
         cbroles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Roles", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft PhagsPa", 0, 12))); // NOI18N
@@ -137,13 +139,13 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
         });
         bg.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, 210, 30));
 
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        jPasswordFieldAdmin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        jPasswordFieldAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                jPasswordFieldAdminActionPerformed(evt);
             }
         });
-        bg.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 210, 40));
+        bg.add(jPasswordFieldAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 210, 40));
 
         btnBackLog.setBackground(new java.awt.Color(0, 48, 146));
         btnBackLog.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -178,19 +180,53 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
+
+        if (jPasswordFieldAdmin.getEchoChar() == '•') {
+            jPasswordFieldAdmin.setEchoChar((char) 0); // Mostrar texto
+        } else {
+            jPasswordFieldAdmin.setEchoChar('•'); // Ocultar texto
+        }
+
+
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String usuario = txtUsuarioAdmin.getText();
+        String clave = new String(jPasswordFieldAdmin.getPassword());
+        String correo = txtcorreo.getText();
+        String rol = (String) cbroles.getSelectedItem();
+
+        if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
+            Mensajes.mostrarError("Todos los campos son obligatorios");
+            return;
+        }
+
+        UsuarioController usuarioController = new UsuarioController();
+        if (usuarioController.buscarPorUsuario(usuario) != null) {
+            Mensajes.mostrarAdvertencia("El nombre de usuario ya existe");
+            return;
+        }
+
+        Administrador admin = new Administrador(nombre, apellido, usuario, clave, correo, rol);
+        usuarioController.registrarUsuario(admin);
+        Mensajes.mostrarInfo("Administrador registrado exitosamente");
+        form_login login = new form_login();
+        login.setVisible(true);
+        this.dispose();
+
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void jPasswordFieldAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_jPasswordFieldAdminActionPerformed
 
     private void btnBackLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackLogActionPerformed
-        // TODO add your handling code here:
+        form_login login = new form_login();
+        login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnBackLogActionPerformed
 
     /**
@@ -238,7 +274,7 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbroles;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordFieldAdmin;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblSignUpAdmin;
@@ -247,7 +283,7 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblcorreo;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtUsuarioAdmin;
     private javax.swing.JTextField txtcorreo;
     // End of variables declaration//GEN-END:variables
 }

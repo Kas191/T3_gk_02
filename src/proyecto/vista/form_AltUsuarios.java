@@ -1,10 +1,15 @@
-package Ejercicio01;
+package proyecto.vista;
+
+import proyecto.controlador.UsuarioController;
+import proyecto.modelo.Empleado;
+import proyecto.modelo.JefeAbastecimiento;
+import proyecto.modelo.Usuario;
+import proyecto.util.Mensajes;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author User0
@@ -16,6 +21,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
      */
     public form_AltUsuarios() {
         initComponents();
+         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); 
     }
 
     /**
@@ -28,6 +34,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane3 = new javax.swing.JLayeredPane();
+        jLayeredPane6 = new javax.swing.JLayeredPane();
         bg = new javax.swing.JLayeredPane();
         lblSignUpAdmin = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -47,6 +54,9 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         btnMostrar = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLayeredPane4 = new javax.swing.JLayeredPane();
+        jLayeredPane5 = new javax.swing.JLayeredPane();
+        jLayeredPane7 = new javax.swing.JLayeredPane();
+        jLayeredPane8 = new javax.swing.JLayeredPane();
 
         jLayeredPane3.setBackground(new java.awt.Color(0, 48, 146));
         jLayeredPane3.setOpaque(true);
@@ -59,6 +69,20 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
+
+        jLayeredPane6.setBackground(new java.awt.Color(0, 48, 146));
+        jLayeredPane6.setOpaque(true);
+
+        javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
+        jLayeredPane6.setLayout(jLayeredPane6Layout);
+        jLayeredPane6Layout.setHorizontalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jLayeredPane6Layout.setVerticalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 80, Short.MAX_VALUE)
         );
 
@@ -76,7 +100,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         lblSignUpAdmin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblSignUpAdmin.setForeground(new java.awt.Color(0, 48, 146));
         lblSignUpAdmin.setText("Registro de Usuarios");
-        bg.add(lblSignUpAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 450, 60));
+        bg.add(lblSignUpAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 450, 60));
 
         jLayeredPane1.setBackground(new java.awt.Color(0, 48, 146));
         jLayeredPane1.setOpaque(true);
@@ -97,7 +121,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         lblApellido.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblApellido.setForeground(new java.awt.Color(102, 102, 102));
         lblApellido.setText("Apellido Paterno");
-        bg.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 130, -1));
+        bg.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, -1));
 
         lblNombre.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(102, 102, 102));
@@ -109,18 +133,22 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         lblcorreo.setText("Correo");
         bg.add(lblcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 100, 20));
 
+        txtUsuario.setBackground(new java.awt.Color(255, 255, 204));
         txtUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         txtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 210, 30));
 
+        txtNombre.setBackground(new java.awt.Color(255, 255, 204));
         txtNombre.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         bg.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 210, 30));
 
+        txtApellido.setBackground(new java.awt.Color(255, 255, 204));
         txtApellido.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         txtApellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         bg.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 210, 30));
 
+        txtcorreo.setBackground(new java.awt.Color(255, 255, 204));
         txtcorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         txtcorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         bg.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 210, 30));
@@ -135,7 +163,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         lblUsuario.setText("Usuario");
         bg.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 100, 20));
 
-        cbroles.setBackground(new java.awt.Color(204, 255, 255));
+        cbroles.setBackground(new java.awt.Color(255, 255, 204));
         cbroles.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbroles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jefe de Abastecimiento", "Empleado", " " }));
         cbroles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Roles", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Microsoft PhagsPa", 0, 12))); // NOI18N
@@ -154,6 +182,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         });
         bg.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 110, 40));
 
+        jPasswordFieldB.setBackground(new java.awt.Color(255, 255, 204));
         jPasswordFieldB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         jPasswordFieldB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +249,54 @@ public class form_AltUsuarios extends javax.swing.JFrame {
 
         bg.add(jLayeredPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, -1));
 
+        jLayeredPane5.setBackground(new java.awt.Color(0, 48, 146));
+        jLayeredPane5.setOpaque(true);
+
+        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
+        jLayeredPane5.setLayout(jLayeredPane5Layout);
+        jLayeredPane5Layout.setHorizontalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jLayeredPane5Layout.setVerticalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
+
+        bg.add(jLayeredPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
+
+        jLayeredPane7.setBackground(new java.awt.Color(0, 48, 146));
+        jLayeredPane7.setOpaque(true);
+
+        javax.swing.GroupLayout jLayeredPane7Layout = new javax.swing.GroupLayout(jLayeredPane7);
+        jLayeredPane7.setLayout(jLayeredPane7Layout);
+        jLayeredPane7Layout.setHorizontalGroup(
+            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jLayeredPane7Layout.setVerticalGroup(
+            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
+
+        bg.add(jLayeredPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
+
+        jLayeredPane8.setBackground(new java.awt.Color(0, 48, 146));
+        jLayeredPane8.setOpaque(true);
+
+        javax.swing.GroupLayout jLayeredPane8Layout = new javax.swing.GroupLayout(jLayeredPane8);
+        jLayeredPane8.setLayout(jLayeredPane8Layout);
+        jLayeredPane8Layout.setHorizontalGroup(
+            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jLayeredPane8Layout.setVerticalGroup(
+            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+
+        bg.add(jLayeredPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, -1, -1));
+
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 650));
 
         setSize(new java.awt.Dimension(664, 445));
@@ -227,19 +304,61 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
+        if (jPasswordFieldB.getEchoChar() == '•') {
+            jPasswordFieldB.setEchoChar((char) 0); // Mostrar texto
+        } else {
+            jPasswordFieldB.setEchoChar('•'); // Ocultar texto
+        }
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jPasswordFieldBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldBActionPerformed
 
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtUsuario.setText("");
+        jPasswordFieldB.setText("");
+        txtcorreo.setText("");
+        cbroles.setSelectedIndex(0);
+    }
+
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String usuario = txtUsuario.getText();
+        String clave = new String(jPasswordFieldB.getPassword());
+        String correo = txtcorreo.getText();
+        String rol = (String) cbroles.getSelectedItem();
+
+        if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
+            Mensajes.mostrarError("Todos los campos son obligatorios");
+            return;
+        }
+
+        UsuarioController usuarioController = new UsuarioController();
+        if (usuarioController.buscarPorUsuario(usuario) != null || usuarioController.buscarPorCorreo(correo) != null) {
+            Mensajes.mostrarAdvertencia("Ya existe un usuario o correo registrado");
+            return;
+        }
+
+        Usuario nuevo;
+        if (rol.equals("Empleado")) {
+            nuevo = new Empleado(nombre, apellido, usuario, clave, correo, rol);
+        } else {
+            nuevo = new JefeAbastecimiento(nombre, apellido, usuario, clave, correo, rol);
+        }
+
+        usuarioController.registrarUsuario(nuevo);
+        Mensajes.mostrarInfo("Usuario registrado exitosamente");
+        limpiarCampos(); // limpia los campos del formulario
+        // actualizarTabla(); ← eliminado porque no hay tabla aquí
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -294,6 +413,10 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
+    private javax.swing.JLayeredPane jLayeredPane5;
+    private javax.swing.JLayeredPane jLayeredPane6;
+    private javax.swing.JLayeredPane jLayeredPane7;
+    private javax.swing.JLayeredPane jLayeredPane8;
     private javax.swing.JPasswordField jPasswordFieldB;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblNombre;
@@ -306,4 +429,5 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtcorreo;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -1,10 +1,19 @@
-package Ejercicio01;
+package proyecto.vista;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import proyecto.controlador.UsuarioController;
+import proyecto.modelo.Usuario;
+import proyecto.util.Mensajes;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author User0
@@ -16,6 +25,12 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
      */
     public form_SistemaAdmin() {
         initComponents();
+        DefaultTableModel modelo = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Nombre", "Apellido", "Usuario", "Correo", "Rol", "contraseña"}
+        );
+        tableAdmin.setModel(modelo);
+
     }
 
     /**
@@ -35,8 +50,8 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnSalirAdmin = new javax.swing.JButton();
         btnBorrarUsuario = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
-        btnEditarUsuario = new javax.swing.JButton();
         btnCrearNuevoUsuario1 = new javax.swing.JButton();
+        btnGenerarTxt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Admin");
@@ -108,18 +123,6 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnEditarUsuario.setBackground(new java.awt.Color(0, 48, 146));
-        btnEditarUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnEditarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditarUsuario.setText("Editar Usuario");
-        btnEditarUsuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
-        btnEditarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarUsuarioActionPerformed(evt);
-            }
-        });
-
         btnCrearNuevoUsuario1.setBackground(new java.awt.Color(0, 48, 146));
         btnCrearNuevoUsuario1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnCrearNuevoUsuario1.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,6 +135,18 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnGenerarTxt.setBackground(new java.awt.Color(0, 48, 146));
+        btnGenerarTxt.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnGenerarTxt.setForeground(new java.awt.Color(255, 255, 255));
+        btnGenerarTxt.setText("Generar txt");
+        btnGenerarTxt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnGenerarTxt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGenerarTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarTxtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -140,32 +155,31 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(14, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                                .addComponent(btnGenerarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(btnEditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGenerarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(48, 48, 48))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 170, 620));
@@ -177,24 +191,97 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirAdminActionPerformed
+        form_login login = new form_login();
+        login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalirAdminActionPerformed
+    private void actualizarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableAdmin.getModel();
+        modelo.setRowCount(0); // Limpia las filas actuales de la tabla
 
-    private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarUsuarioActionPerformed
+        UsuarioController usuarioController = new UsuarioController();
+        List<Usuario> usuarios = usuarioController.listarUsuarios();
 
+        for (Usuario u : usuarios) {
+            if (!u.getRol().equalsIgnoreCase("Admin")) {
+                modelo.addRow(new Object[]{
+                    u.getNombre(),
+                    u.getApellido(),
+                    u.getUsuario(),
+                    u.getCorreo(),
+                    u.getRol(),
+                    u.getClave()
+                });
+            }
+        }
+    }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        actualizarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed
-        // TODO add your handling code here:
+        int fila = tableAdmin.getSelectedRow();
+        UsuarioController usuarioController = new UsuarioController();
+
+        if (fila >= 0) {
+            String usuario = tableAdmin.getValueAt(fila, 2).toString();
+
+            int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Está seguro que desea eliminar al usuario \"" + usuario + "\"?",
+                    "Confirmar eliminación",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+                usuarioController.eliminarUsuario(usuario);
+                Mensajes.mostrarInfo("Usuario eliminado correctamente");
+                actualizarTabla();
+            }
+
+        } else {
+            Mensajes.mostrarAdvertencia("Seleccione un usuario para eliminar");
+        }
     }//GEN-LAST:event_btnBorrarUsuarioActionPerformed
 
     private void btnCrearNuevoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearNuevoUsuario1ActionPerformed
-        // TODO add your handling code here:
+        form_AltUsuarios altUsuarios = new form_AltUsuarios();
+        altUsuarios.setVisible(true);
+        // ¡NO pongas this.dispose(); ni this.setVisible(false);
+
     }//GEN-LAST:event_btnCrearNuevoUsuario1ActionPerformed
+
+    private void generarArchivoTxt() {
+        try {
+            FileWriter writer = new FileWriter("usuarios.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+            // Escribir encabezados
+            for (int i = 0; i < tableAdmin.getColumnCount(); i++) {
+                bufferedWriter.write(tableAdmin.getColumnName(i) + "\t");
+            }
+            bufferedWriter.newLine();
+
+            // Escribir datos fila por fila
+            for (int i = 0; i < tableAdmin.getRowCount(); i++) {
+                for (int j = 0; j < tableAdmin.getColumnCount(); j++) {
+                    Object valor = tableAdmin.getValueAt(i, j);
+                    bufferedWriter.write((valor != null ? valor.toString() : "") + "\t");
+                }
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+            Mensajes.mostrarInfo("Archivo 'usuarios.txt' generado exitosamente.");
+        } catch (IOException e) {
+            Mensajes.mostrarError("Error al generar archivo: " + e.getMessage());
+        }
+    }
+
+
+    private void btnGenerarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarTxtActionPerformed
+        generarArchivoTxt();
+    }//GEN-LAST:event_btnGenerarTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,11 +326,12 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBorrarUsuario;
     private javax.swing.JButton btnCrearNuevoUsuario1;
-    private javax.swing.JButton btnEditarUsuario;
+    private javax.swing.JButton btnGenerarTxt;
     private javax.swing.JButton btnSalirAdmin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSistemaAdminstrador;
     private javax.swing.JTable tableAdmin;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -1,10 +1,21 @@
-package Ejercicio01;
+package proyecto.vista;
+
+import proyecto.vista.form_SistemaAdmin;
+import proyecto.vista.form_RegistroAdmin;
+import proyecto.controlador.LoginController;
+import proyecto.controlador.RegistroAdminController;
+import proyecto.controlador.UsuarioController;
+
+
+
+import javax.swing.JOptionPane;
+import proyecto.modelo.Usuario;
+import proyecto.util.Mensajes;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author User0
@@ -30,10 +41,9 @@ public class form_login extends javax.swing.JFrame {
         bg = new javax.swing.JLayeredPane();
         lblLogin = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        btnSignUp = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
+        lblContraseña = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
         jPasswordFieldA = new javax.swing.JPasswordField();
         btnMostrar = new javax.swing.JButton();
@@ -71,19 +81,6 @@ public class form_login extends javax.swing.JFrame {
 
         bg.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 440));
 
-        btnSignUp.setBackground(new java.awt.Color(0, 48, 146));
-        btnSignUp.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnSignUp.setForeground(new java.awt.Color(255, 255, 255));
-        btnSignUp.setText("Sign up");
-        btnSignUp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
-        btnSignUp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignUpActionPerformed(evt);
-            }
-        });
-        bg.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 210, 30));
-
         txtUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         txtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -93,15 +90,15 @@ public class form_login extends javax.swing.JFrame {
         });
         bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 210, 40));
 
-        jLabel4.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("Usuario");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 50, -1));
+        lblUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        lblUsuario.setText("Usuario");
+        bg.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 50, -1));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("Contraseña");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 100, -1));
+        lblContraseña.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblContraseña.setForeground(new java.awt.Color(102, 102, 102));
+        lblContraseña.setText("Contraseña");
+        bg.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 100, -1));
 
         btnIngresar.setBackground(new java.awt.Color(0, 48, 146));
         btnIngresar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -114,7 +111,7 @@ public class form_login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        bg.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 210, 30));
+        bg.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 210, 30));
 
         jPasswordFieldA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         bg.add(jPasswordFieldA, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 210, 40));
@@ -138,12 +135,45 @@ public class form_login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSignUpActionPerformed
+    private void validarExistenciaAdmin() {
+        UsuarioController usuarioController = new UsuarioController();
+        if (!usuarioController.existeAdmin()) {
+            int respuesta = Mensajes.confirmar("No hay ningún administrador creado. ¿Desea crear uno?");
+            if (respuesta == JOptionPane.YES_OPTION) {
+                form_RegistroAdmin registroAdmin = new form_RegistroAdmin();
+                registroAdmin.setVisible(true);
+                this.dispose();
+            }
+        }
+    }
+
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
+        UsuarioController usuarioController = new UsuarioController();
+
+        validarExistenciaAdmin();
+        if (!usuarioController.existeAdmin()) {
+            return; // Evita continuar si no se crea un admin
+        }
+
+        String user = txtUsuario.getText();
+        String pass = new String(jPasswordFieldA.getPassword());
+
+        LoginController loginController = new LoginController(usuarioController);
+        Usuario usuario = loginController.autenticar(user, pass);
+
+        if (usuario == null) {
+            Mensajes.mostrarError("Credenciales incorrectas");
+        } else if (usuario.getRol().equals("Admin")) {
+            Mensajes.mostrarInfo("Bienvenido, " + usuario.getNombre());
+            form_SistemaAdmin sistemaAdmin = new form_SistemaAdmin();
+            sistemaAdmin.setVisible(true);
+            this.dispose();
+        } else {
+            Mensajes.mostrarAdvertencia("Acceso denegado. Solo el Administrador puede ingresar aquí.");
+        }
+
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -151,7 +181,11 @@ public class form_login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
+        if (jPasswordFieldA.getEchoChar() == '•') {
+            jPasswordFieldA.setEchoChar((char) 0); // Mostrar texto
+        } else {
+            jPasswordFieldA.setEchoChar('•'); // Ocultar texto
+        }
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     /**
@@ -194,12 +228,11 @@ public class form_login extends javax.swing.JFrame {
     private javax.swing.JLayeredPane bg;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnMostrar;
-    private javax.swing.JButton btnSignUp;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPasswordField jPasswordFieldA;
+    private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
