@@ -1,2 +1,2 @@
 Nombre	Apellido	Usuario	Correo	Rol	contraseña	
-peppa	wewe	pepapig	wewew	Jefe de Abastecimiento	123456	
+Peppa	Sol	peppa	pepa@gmail.com	Jefe de Abastecimiento	123456789*	
