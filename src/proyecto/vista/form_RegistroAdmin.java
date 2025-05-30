@@ -1,7 +1,12 @@
 package proyecto.vista;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import proyecto.controlador.UsuarioController;
 import proyecto.modelo.Administrador;
+import proyecto.modelo.Usuario;
 import proyecto.util.Mensajes;
 
 /*
@@ -190,6 +195,9 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnMostrarActionPerformed
 
+    private void guardarAdminEnArchivo(Usuario usuario) {
+       //siguienteSprintCorregir
+    }
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
@@ -198,8 +206,14 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
         String correo = txtcorreo.getText();
         String rol = (String) cbroles.getSelectedItem();
 
-        if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
-            Mensajes.mostrarError("Todos los campos son obligatorios");
+        if (!correo.toLowerCase().endsWith("@gmail.com")) {
+            Mensajes.mostrarAdvertencia("El correo debe ser de dominio @gmail.com");
+            return;
+        }
+
+        // Validar contraseña segura
+        if (clave.length() < 8 || !clave.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
+            Mensajes.mostrarAdvertencia("La contraseña debe tener al menos 8 caracteres y un símbolo");
             return;
         }
 
@@ -211,6 +225,7 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
 
         Administrador admin = new Administrador(nombre, apellido, usuario, clave, correo, rol);
         usuarioController.registrarUsuario(admin);
+        //guardarAdminEnArchivo(admin);
         Mensajes.mostrarInfo("Administrador registrado exitosamente");
         form_login login = new form_login();
         login.setVisible(true);
@@ -218,6 +233,7 @@ public class form_RegistroAdmin extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
 
     private void jPasswordFieldAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldAdminActionPerformed
         // TODO add your handling code here:

@@ -21,7 +21,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
      */
     public form_AltUsuarios() {
         initComponents();
-         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -337,8 +337,21 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         String correo = txtcorreo.getText();
         String rol = (String) cbroles.getSelectedItem();
 
+        // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
             Mensajes.mostrarError("Todos los campos son obligatorios");
+            return;
+        }
+
+        // Validar correo Gmail
+        if (!correo.endsWith("@gmail.com")) {
+            Mensajes.mostrarAdvertencia("El correo debe ser una cuenta Gmail válida");
+            return;
+        }
+
+        // Validar seguridad de la contraseña
+        if (clave.length() < 8 || !clave.matches(".*[!@#$%^&*()_+=<>?/{}\\[\\]-].*")) {
+            Mensajes.mostrarAdvertencia("La contraseña debe tener al menos 8 caracteres y un símbolo (por ejemplo: !, @, #, etc.)");
             return;
         }
 

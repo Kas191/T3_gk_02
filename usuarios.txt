@@ -1,2 +1,2 @@
 Nombre	Apellido	Usuario	Correo	Rol	contraseña	
-Peppa	Acha	peppa	peppa@gmai.com	Jefe de Abastecimiento	peppa123	
+peppa	wewe	pepapig	wewew	Jefe de Abastecimiento	123456	
