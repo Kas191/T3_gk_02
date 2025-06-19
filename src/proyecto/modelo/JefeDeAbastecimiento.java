@@ -3,42 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyecto.modelo;
-
 import proyecto.modelo.Usuario;
 
 /**
  *
  * @author User0
  */
-public class JefeAbastecimiento extends Usuario{
-     // Atributo específico que indica si el jefe tiene acceso al inventario
-     private boolean accesoInventario;
+public class JefeDeAbastecimiento extends Usuario {
 
-      /**
-     * Constructor que inicializa todos los atributos heredados y 
-     * asigna acceso al inventario por defecto como verdadero.
-     */
-
-    public JefeAbastecimiento(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
-        super(nombre, apellido, usuario, clave, correo, rol);
-        this.accesoInventario = true; // Diferenciador
-    }
-  // Método getter que indica si tiene acceso al inventario
-    public boolean tieneAccesoInventario() {
-        return accesoInventario;
-    }
-
-    // Método setter para modificar si tiene acceso al inventario
-    public void setAccesoInventario(boolean accesoInventario) {
-        this.accesoInventario = accesoInventario;
-    }
-
-    /**
-     * Implementación del método abstracto heredado de Usuario.
-     * Devuelve una descripción personalizada del rol.
-     */
-    @Override
-    public String obtenerDescripcionRol() {
-        return "Jefe de Abastecimiento con acceso al control de inventarios.";
+     public JefeDeAbastecimiento(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
+        // Los jefes de abastecimiento no tienen tokenAdmin, por lo que se pasa null al constructor del padre.
+        super(nombre, apellido, usuario, clave, correo, rol, null);
+        // Asegurarse que el rol para Jefe de Abastecimiento sea "Jefe_Abastecimiento"
+        if (!"Jefe_Abastecimiento".equalsIgnoreCase(rol)) {
+            System.err.println("Advertencia: Se creó un Jefe de Abastecimiento con un rol diferente. Corrigiendo a 'Jefe_Abastecimiento'.");
+            setRol("Jefe_Abastecimiento"); // Fuerza el rol a "Jefe_Abastecimiento"
+        }
     }
 }

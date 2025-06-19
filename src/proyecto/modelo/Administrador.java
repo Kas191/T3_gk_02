@@ -10,15 +10,13 @@ package proyecto.modelo;
  * @author User0
  */
 public class Administrador extends Usuario {
-    // Constructor que recibe todos los atributos necesarios para un usuario
-    public Administrador(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
-        // Llama al constructor de la clase padre Usuario con los mismos parámetros
-        super(nombre, apellido, usuario, clave, correo, rol);
-    }
-
-   
-    @Override    // Método sobrescrito que devuelve la descripción del rol específico de administrador
-    public String obtenerDescripcionRol() {
-        return "Administrador con acceso total al sistema.";
+ // Constructor para Administrador, que incluye el tokenAdmin
+    public Administrador(String nombre, String apellido, String usuario, String clave, String correo, String rol, String tokenAdmin) {
+        super(nombre, apellido, usuario, clave, correo, rol, tokenAdmin);
+        // Asegurarse que el rol para Administrador sea "Admin"
+        if (!"Admin".equalsIgnoreCase(rol)) {
+            System.err.println("Advertencia: Se creó un Administrador con un rol diferente. Corrigiendo a 'Admin'.");
+            setRol("Admin"); // Fuerza el rol a "Admin"
+        }
     }
 }

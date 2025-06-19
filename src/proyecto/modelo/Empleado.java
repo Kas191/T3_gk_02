@@ -9,26 +9,15 @@ package proyecto.modelo;
  * @author User0
  */
 public class Empleado extends Usuario {
-  private String areaAsignada;   // Atributo específico del empleado, indica el área donde trabaja
 
     public Empleado(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
-        super(nombre, apellido, usuario, clave, correo, rol);
-        this.areaAsignada = "Ventas"; // Especificado por el usuario
+        // Los empleados no tienen tokenAdmin, por lo que se pasa null al constructor del padre.
+        super(nombre, apellido, usuario, clave, correo, rol, null);
+        // Asegurarse que el rol para Empleado sea "Empleado"
+        if (!"Empleado".equalsIgnoreCase(rol)) {
+            System.err.println("Advertencia: Se creó un Empleado con un rol diferente. Corrigiendo a 'Empleado'.");
+            setRol("Empleado"); // Fuerza el rol a "Empleado"
+        }
     }
-    // Método getter: devuelve el área asignada del empleado
-    public String getAreaAsignada() {
-        return areaAsignada;
-    }
-  // Método setter: permite modificar el área asignada del empleado
-    public void setAreaAsignada(String areaAsignada) {
-        this.areaAsignada = areaAsignada;
-    }
-  /**
-     * Implementación del método abstracto de Usuario.
-     * Devuelve una descripción que incluye el área del empleado.
-     */
-    @Override
-    public String obtenerDescripcionRol() {
-        return "Empleado del área: " + areaAsignada;
-    }
+
 }

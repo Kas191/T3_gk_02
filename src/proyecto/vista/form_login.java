@@ -1,16 +1,18 @@
-package proyecto.vista;
+package proyecto.vista; // Asegúrate de que este es el paquete correcto para tu archivo.
 
-import proyecto.vista.form_SistemaAdmin;
-import proyecto.vista.form_RegistroAdmin;
+// Importa las clases necesarias de tus paquetes
 import proyecto.controlador.LoginController;
-import proyecto.controlador.RegistroAdminController;
 import proyecto.controlador.UsuarioController;
-
-
-
-import javax.swing.JOptionPane;
-import proyecto.modelo.Usuario;
-import proyecto.util.Mensajes;
+import proyecto.modelo.Usuario; // Para el objeto Usuario que se devuelve al autenticar
+import proyecto.util.Mensajes; // Para mostrar mensajes estandarizados
+import javax.swing.JFileChooser; // Necesario para el selector de archivos
+import javax.swing.JOptionPane; // Para mensajes de diálogo
+import java.io.BufferedReader; // Para leer el archivo de token
+import java.io.File; // Para manejar archivos
+import java.io.FileReader; // Para leer el archivo de token
+import java.io.IOException; // Para manejar excepciones de I/O
+import java.awt.event.KeyEvent; // Necesario para KeyListener
+import java.awt.event.KeyListener; // Necesario para KeyListener
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,7 +28,25 @@ public class form_login extends javax.swing.JFrame {
      * Creates new form login
      */
     public form_login() {
-        initComponents();
+
+        initComponents(); // Método generado por NetBeans para inicializar los componentes visuales
+
+        // Inicializa los controladores después de que los componentes de la UI se han creado
+        // Inicializa los controladores después de que los componentes de la UI se han creado
+        usuarioController = new UsuarioController(); // Esto carga los usuarios desde usuarios.txt o los inicializa
+        loginController = new LoginController(usuarioController);
+
+        // **Configuración inicial de los campos de token: OCULTOS por defecto en el CÓDIGO**
+        // Estas líneas aseguran que txtTokenAdmin y lblTokenAdmin estén ocultos al inicio.
+        // Asegúrate de que 'txtTokenAdmin' y 'lblTokenAdmin' estén creados en el diseñador.
+        txtTokenAdmin.setVisible(false);
+        lblTokenAdmin.setVisible(false);
+
+        // Ajustar el texto del botón "Subir Tk" para que sea más descriptivo
+        btnSubirTk.setText("Subir Token Admin");
+
+        // Añadir ActionListeners a los botones y KeyListener para el campo de usuario
+       
     }
 
     /**
@@ -44,9 +64,13 @@ public class form_login extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         lblUsuario = new javax.swing.JLabel();
         lblContraseña = new javax.swing.JLabel();
-        btnIngresar = new javax.swing.JButton();
-        jPasswordFieldA = new javax.swing.JPasswordField();
+        btnSubirTk = new javax.swing.JButton();
         btnMostrar = new javax.swing.JButton();
+        btnOlvideContrasena = new javax.swing.JButton();
+        btnIngresar2 = new javax.swing.JButton();
+        lblTokenAdmin = new javax.swing.JLabel();
+        jPasswordFieldA1 = new javax.swing.JPasswordField();
+        txtTokenAdmin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -63,7 +87,7 @@ public class form_login extends javax.swing.JFrame {
         lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(0, 48, 146));
         lblLogin.setText("LOGIN");
-        bg.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 200, 60));
+        bg.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 200, 60));
 
         jLayeredPane1.setBackground(new java.awt.Color(0, 48, 146));
         jLayeredPane1.setOpaque(true);
@@ -72,14 +96,14 @@ public class form_login extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGap(0, 340, Short.MAX_VALUE)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        bg.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 440));
+        bg.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 440));
 
         txtUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         txtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
@@ -88,33 +112,30 @@ public class form_login extends javax.swing.JFrame {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 210, 40));
+        bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 210, 40));
 
         lblUsuario.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lblUsuario.setText("Usuario");
-        bg.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 50, -1));
+        bg.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 50, -1));
 
         lblContraseña.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblContraseña.setForeground(new java.awt.Color(102, 102, 102));
         lblContraseña.setText("Contraseña");
-        bg.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 100, -1));
+        bg.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 100, -1));
 
-        btnIngresar.setBackground(new java.awt.Color(0, 48, 146));
-        btnIngresar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar.setText("Ingresar");
-        btnIngresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
-        btnIngresar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+        btnSubirTk.setBackground(new java.awt.Color(0, 48, 146));
+        btnSubirTk.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnSubirTk.setForeground(new java.awt.Color(255, 255, 255));
+        btnSubirTk.setText("Subir Token");
+        btnSubirTk.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnSubirTk.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSubirTk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
+                btnSubirTkActionPerformed(evt);
             }
         });
-        bg.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 210, 30));
-
-        jPasswordFieldA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        bg.add(jPasswordFieldA, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 210, 40));
+        bg.add(btnSubirTk, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 220, 30));
 
         btnMostrar.setBackground(new java.awt.Color(0, 48, 146));
         btnMostrar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -127,66 +148,208 @@ public class form_login extends javax.swing.JFrame {
                 btnMostrarActionPerformed(evt);
             }
         });
-        bg.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 40, 40));
+        bg.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 40, 40));
+
+        btnOlvideContrasena.setBackground(new java.awt.Color(0, 48, 146));
+        btnOlvideContrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnOlvideContrasena.setForeground(new java.awt.Color(255, 255, 255));
+        btnOlvideContrasena.setText("Olvide Contraseña");
+        btnOlvideContrasena.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnOlvideContrasena.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnOlvideContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOlvideContrasenaActionPerformed(evt);
+            }
+        });
+        bg.add(btnOlvideContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 210, 30));
+
+        btnIngresar2.setBackground(new java.awt.Color(0, 48, 146));
+        btnIngresar2.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnIngresar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar2.setText("Ingresar");
+        btnIngresar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnIngresar2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnIngresar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresar2ActionPerformed(evt);
+            }
+        });
+        bg.add(btnIngresar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 210, 30));
+
+        lblTokenAdmin.setText("Token Admin");
+        bg.add(lblTokenAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 90, 30));
+
+        jPasswordFieldA1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        bg.add(jPasswordFieldA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 210, 40));
+        bg.add(txtTokenAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 120, -1));
 
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 440));
 
         setSize(new java.awt.Dimension(682, 448));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void validarExistenciaAdmin() {
-        UsuarioController usuarioController = new UsuarioController();
-        if (!usuarioController.existeAdmin()) {
-            int respuesta = Mensajes.confirmar("No hay ningún administrador creado. ¿Desea crear uno?");
-            if (respuesta == JOptionPane.YES_OPTION) {
-                form_RegistroAdmin registroAdmin = new form_RegistroAdmin();
-                registroAdmin.setVisible(true);
-                this.dispose();
+    private void addEventHandlers() {
+        btnSubirTk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirTkActionPerformed(evt);
             }
-        }
+        });
+
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt); // Este método está vacío por ahora, puedes usarlo si necesitas
+            }
+        });
+
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+
+        btnOlvideContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOlvideContrasenaActionPerformed(evt);
+            }
+        });
+
+        btnIngresar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresar2ActionPerformed(evt);
+            }
+        });
+
+        // Listener para el campo de usuario para controlar la visibilidad del token
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() { // Usa KeyAdapter para KeyListener
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                toggleAdminTokenVisibility();
+            }
+        });
     }
 
+    private void toggleAdminTokenVisibility() {
+        boolean isAdmin = txtUsuario.getText().trim().equalsIgnoreCase("admin");
+        lblTokenAdmin.setVisible(isAdmin);
+        txtTokenAdmin.setVisible(isAdmin);
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        UsuarioController usuarioController = new UsuarioController();
-
-        validarExistenciaAdmin();
-        if (!usuarioController.existeAdmin()) {
-            return; // Evita continuar si no se crea un admin
+        // Opcional: Limpiar el campo de token si se oculta
+        if (!isAdmin) {
+            txtTokenAdmin.setText("");
+            loadedAdminToken = null; // Reiniciar el token cargado
         }
+        // Revalidar y repintar el panel para que los cambios de visibilidad se apliquen
+        bg.revalidate();
+        bg.repaint();
+    }
 
-        String user = txtUsuario.getText();
-        String pass = new String(jPasswordFieldA.getPassword());
+    // Listener para el botón "Subir Token Admin" (btnSubirTk)
+    // Este método abrirá el JFileChooser para seleccionar el archivo de token.
+    private void btnSubirTkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirTkActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar archivo de Token de Administrador");
 
-        LoginController loginController = new LoginController(usuarioController);
-        Usuario usuario = loginController.autenticar(user, pass);
+        // Opcional: Filtrar para mostrar solo archivos de texto
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos de Texto (*.txt)", "txt"));
 
-        if (usuario == null) {
-            Mensajes.mostrarError("Credenciales incorrectas");
-        } else if (usuario.getRol().equals("Admin")) {
-            Mensajes.mostrarInfo("Bienvenido, " + usuario.getNombre());
-            form_SistemaAdmin sistemaAdmin = new form_SistemaAdmin();
-            sistemaAdmin.setVisible(true);
-            this.dispose();
-        } else {
-            Mensajes.mostrarAdvertencia("Acceso denegado. Solo el Administrador puede ingresar aquí.");
+        int userSelection = fileChooser.showOpenDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToLoad = fileChooser.getSelectedFile();
+            try (BufferedReader br = new BufferedReader(new FileReader(fileToLoad))) {
+                loadedAdminToken = br.readLine(); // Leer la primera línea del archivo como el token
+                if (loadedAdminToken != null && !loadedAdminToken.trim().isEmpty()) {
+                    loadedAdminToken = loadedAdminToken.trim(); // Limpiar espacios en blanco
+                    Mensajes.mostrarInfo("Token cargado exitosamente desde: " + fileToLoad.getName());
+                    // Mostrar el token en el campo de texto (si está visible)
+                    if (txtTokenAdmin.isVisible()) {
+                        txtTokenAdmin.setText(loadedAdminToken);
+                    }
+                } else {
+                    loadedAdminToken = null;
+                    Mensajes.mostrarAdvertencia("El archivo de token está vacío o no contiene un token válido.");
+                }
+            } catch (IOException ex) {
+                Mensajes.mostrarError("Error al leer el archivo de token: " + ex.getMessage());
+                loadedAdminToken = null;
+            }
         }
-
-
-    }//GEN-LAST:event_btnIngresarActionPerformed
+    }//GEN-LAST:event_btnSubirTkActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
+        // Este método se dispara al presionar Enter en el campo de usuario.
+        // La lógica de toggleAdminTokenVisibility ya está en KeyReleased para una mejor reactividad.
+
+
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        if (jPasswordFieldA.getEchoChar() == '•') {
-            jPasswordFieldA.setEchoChar((char) 0); // Mostrar texto
+        if (jPasswordFieldA1.getEchoChar() == '•') { // Carácter por defecto para ocultar contraseña
+            jPasswordFieldA1.setEchoChar((char) 0); // Mostrar texto (el caracter 0 no oculta)
         } else {
-            jPasswordFieldA.setEchoChar('•'); // Ocultar texto
+            jPasswordFieldA1.setEchoChar('•'); // Ocultar texto
         }
     }//GEN-LAST:event_btnMostrarActionPerformed
+
+    private void btnOlvideContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOlvideContrasenaActionPerformed
+        // Abrir la ventana de "Olvidé mi Contraseña" (form_restablecercontra.java)
+        Mensajes.mostrarInfo("Abriendo formulario de 'Olvidé mi Contraseña'.");
+        form_restablecercontra restablecerContra = new form_restablecercontra();
+        restablecerContra.setVisible(true);
+        this.dispose(); // Cierra la ventana de login
+    }//GEN-LAST:event_btnOlvideContrasenaActionPerformed
+
+    private void btnIngresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresar2ActionPerformed
+        String username = txtUsuario.getText().trim();
+        String password = new String(jPasswordFieldA1.getPassword()).trim(); // Obtener la contraseña como String
+
+        // Validar que los campos de usuario y contraseña no estén vacíos
+        if (username.isEmpty() || password.isEmpty()) {
+            Mensajes.mostrarError("Por favor, ingresa usuario y contraseña.");
+            return;
+        }
+
+        Usuario loggedInUser = null;
+
+        // Comprobar si el usuario intenta loguearse como administrador
+        if (username.equalsIgnoreCase("admin")) {
+            // Para el administrador, se requiere un token cargado desde archivo
+            if (loadedAdminToken == null || loadedAdminToken.isEmpty()) {
+                Mensajes.mostrarError("Para el administrador, por favor, sube el archivo de Token Admin.");
+                return;
+            }
+            // Intento de login del administrador con usuario, contraseña y token
+            loggedInUser = loginController.autenticarAdminConToken(username, password, loadedAdminToken);
+        } else {
+            // Intento de login para otros roles (empleado, jefe) sin token
+            loggedInUser = loginController.autenticar(username, password);
+        }
+
+        // Manejo del resultado del login
+        if (loggedInUser != null) {
+            Mensajes.mostrarInfo("¡Bienvenido, " + loggedInUser.getNombre() + "! Rol: " + loggedInUser.getRol());
+            JOptionPane.showMessageDialog(this, "Login exitoso!\nRol: " + loggedInUser.getRol(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            // Cerrar la ventana de login
+            this.dispose();
+
+            // Redirigir según el rol del usuario
+            if (loggedInUser.getRol().equalsIgnoreCase("Admin")) {
+                // Abrir la ventana del Sistema Administrador de Usuarios
+                form_SistemaAdmin sistemaAdmin = new form_SistemaAdmin();
+                sistemaAdmin.setVisible(true);
+            } else if (loggedInUser.getRol().equalsIgnoreCase("Jefe_Abastecimiento")) {
+                Mensajes.mostrarInfo("Redirigiendo a la Interfaz de Jefe de Abastecimiento.");
+                // TODO: Aquí deberías abrir la ventana principal para el Jefe de Abastecimiento.
+            } else if (loggedInUser.getRol().equalsIgnoreCase("Empleado")) {
+                Mensajes.mostrarInfo("Redirigiendo a la Interfaz de Empleado (Ventas).");
+                // TODO: Aquí deberías abrir la ventana principal para el Empleado.
+            }
+
+        } else {
+            Mensajes.mostrarError("Usuario, contraseña o token incorrectos.");
+        }
+    }//GEN-LAST:event_btnIngresar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,24 +378,39 @@ public class form_login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                new UsuarioController(); 
                 new form_login().setVisible(true);
             }
         });
     }
 
+    private UsuarioController usuarioController;
+    private LoginController loginController;
+    private String loadedAdminToken = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
-    private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnIngresar2;
     private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnOlvideContrasena;
+    private javax.swing.JButton btnSubirTk;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPasswordField jPasswordFieldA;
+    private javax.swing.JPasswordField jPasswordFieldA1;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblTokenAdmin;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JTextField txtTokenAdmin;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

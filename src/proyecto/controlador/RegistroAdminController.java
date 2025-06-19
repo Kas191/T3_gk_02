@@ -1,38 +1,57 @@
+
+import proyecto.controlador.UsuarioController;
+import proyecto.modelo.Administrador;
+import proyecto.util.Mensajes;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyecto.controlador; // Declara que esta clase pertenece al paquete controlador
-// Importa la clase UsuarioController para manejar usuarios registrados
-import proyecto.controlador.UsuarioController;
-import proyecto.modelo.Administrador;// Importa la clase Administrador que es el tipo de usuario que se registrará
-
-/**
- *
- * @author User0
- */
 public class RegistroAdminController {
-// Controlador de usuarios usado para registrar y verificar existencia de administradores{
-     private UsuarioController usuarioController;
- 
-     
-     
-     // Constructor que recibe una instancia del UsuarioController (inyectado desde fuera)
+    // Controlador de usuarios usado para registrar y verificar existencia de administradores
+    private UsuarioController usuarioController;
+    
+    // Constructor que recibe una instancia del UsuarioController (inyectado desde fuera)
     public RegistroAdminController(UsuarioController usuarioController) {
         this.usuarioController = usuarioController;
     }
-      // Método para registrar un administrador
+
+    /**
+     * Método para registrar un administrador inicial en el sistema.
+     * Genera automáticamente un token para el administrador.
+     * @param nombre Nombre del administrador.
+     * @param apellido Apellido del administrador.
+     * @param usuario Nombre de usuario para el login.
+     * @param clave Clave (contraseña) en texto plano.
+     * @param correo Correo electrónico.
+     * @param rol Rol del usuario (debe ser "Admin").
+     * @return true si el registro fue exitoso, false si el nombre de usuario ya existe.
+     */
     public boolean registrarAdmin(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
-               // Verifica si ya existe un usuario con el mismo nombre de usuario
-        if (usuarioController.buscarPorUsuario(usuario) != null) return false;
+        // Verifica si ya existe un usuario con el mismo nombre de usuario (RF-042)
+        if (usuarioController.buscarPorUsuario(usuario) != null) {
+            return false; // El usuario ya existe, no se puede registrar.
+        }
 
+        // Generar un token aleatorio y único para este administrador inicial.
+        // Este token será CRUCIAL para su futuro login.
+        String generatedToken = java.util.UUID.randomUUID().toString(); 
+
+        // Crea un nuevo administrador con los datos recibidos y el token generado.
+        // La 'clave' (contraseña) se pasa en texto plano aquí; UsuarioController.registrarUsuario la codificará.
+        Administrador nuevoAdmin = new Administrador(nombre, apellido, usuario, clave, correo, rol, generatedToken);
         
-           // Si no existe, se crea un nuevo administrador con los datos recibidos
-        Administrador nuevoAdmin = new Administrador(nombre, apellido, usuario, clave, correo, rol);
-                // Se registra el nuevo administrador en la lista de usuarios
+        // Registra el nuevo administrador en la lista de usuarios y lo persiste en el archivo.
+        boolean registroExitoso = usuarioController.registrarUsuario(nuevoAdmin);
 
-        usuarioController.registrarUsuario(nuevoAdmin);
-           // Devuelve true para indicar que el registro fue exitoso
-        return true;
+        if (registroExitoso) {
+            // Es CRUCIAL mostrar el token al usuario para que lo guarde.
+            Mensajes.mostrarInfo("¡Administrador registrado con éxito!\n"
+                               + "Su token de acceso es: \n" + generatedToken + "\n"
+                               + "¡Guarde este token de forma segura! Lo necesitará para iniciar sesión.");
+        }
+        
+        // Devuelve true para indicar que el registro fue exitoso
+        return registroExitoso;
     }
 }

@@ -1,14 +1,26 @@
 package proyecto.vista;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import proyecto.controlador.UsuarioController;
 import proyecto.modelo.Usuario;
 import proyecto.util.Mensajes;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat; // Para formato de fecha en nombre de archivo
+import java.util.Date; // Para la fecha actual
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import java.awt.Font; // Para el tipo de letra
+import javax.swing.JDialog; // Importante: Extiende de JDialog
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame; 
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -25,12 +37,24 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
      */
     public form_SistemaAdmin() {
         initComponents();
-        DefaultTableModel modelo = new DefaultTableModel(
-                new Object[][]{},
-                new String[]{"Nombre", "Apellido", "Usuario", "Correo", "Rol", "contraseña"}
-        );
-        tableAdmin.setModel(modelo);
 
+        usuarioController = new UsuarioController(); // Instancia del controlador de usuarios
+
+        // Configuración inicial de la tabla de usuarios
+        String[] columnNames = {"Nombre", "Apellido", "Usuario", "Correo", "Rol", "Contraseña"}; // Columna "Contraseña" se mostrará oculta
+        tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Las celdas de la tabla no son editables directamente
+            }
+        };
+        tableAdmin.setModel(tableModel); // Asignar el modelo a la tabla
+        tableAdmin.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Solo una fila seleccionable
+
+        // Asegurarse que el jScrollPane1 envuelve a tableAdmin si usas el diseñador
+        // No es necesario añadirlo aquí si el diseñador ya lo hizo.
+        // Añadir los ActionListeners a los botones
+        cargarTablaUsuarios();//Llama  a la tabla 
     }
 
     /**
@@ -51,7 +75,10 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnBorrarUsuario = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnCrearNuevoUsuario1 = new javax.swing.JButton();
-        btnGenerarTxt = new javax.swing.JButton();
+        btnReportedeVentas = new javax.swing.JButton();
+        btnCredencialesUsuarios = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        btnExportarUsuariosPdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Admin");
@@ -83,7 +110,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableAdmin);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 660, 440));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 660, 440));
 
         jPanel1.setBackground(new java.awt.Color(54, 116, 181));
 
@@ -135,15 +162,15 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnGenerarTxt.setBackground(new java.awt.Color(0, 48, 146));
-        btnGenerarTxt.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnGenerarTxt.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerarTxt.setText("Generar txt");
-        btnGenerarTxt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
-        btnGenerarTxt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnGenerarTxt.addActionListener(new java.awt.event.ActionListener() {
+        btnReportedeVentas.setBackground(new java.awt.Color(0, 48, 146));
+        btnReportedeVentas.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnReportedeVentas.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportedeVentas.setText("Reporte de ventas");
+        btnReportedeVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnReportedeVentas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnReportedeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarTxtActionPerformed(evt);
+                btnReportedeVentasActionPerformed(evt);
             }
         });
 
@@ -154,17 +181,14 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(14, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnGenerarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,20 +199,115 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnGenerarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGap(52, 52, 52))
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 170, 620));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 620));
+
+        btnCredencialesUsuarios.setBackground(new java.awt.Color(0, 48, 146));
+        btnCredencialesUsuarios.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnCredencialesUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        btnCredencialesUsuarios.setText("Genear Txt Respaldo");
+        btnCredencialesUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnCredencialesUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCredencialesUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCredencialesUsuariosActionPerformed(evt);
+            }
+        });
+        bg.add(btnCredencialesUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 220, 40));
+        bg.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 120, 40));
+
+        btnExportarUsuariosPdf.setBackground(new java.awt.Color(0, 48, 146));
+        btnExportarUsuariosPdf.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnExportarUsuariosPdf.setForeground(new java.awt.Color(255, 255, 255));
+        btnExportarUsuariosPdf.setText("Exportar Lista de Usuarios PDF");
+        btnExportarUsuariosPdf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnExportarUsuariosPdf.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExportarUsuariosPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarUsuariosPdfActionPerformed(evt);
+            }
+        });
+        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, 220, 40));
 
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 620));
 
-        setSize(new java.awt.Dimension(866, 624));
+        setSize(new java.awt.Dimension(862, 624));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addEventHandlers() {
+        btnSalirAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirAdminActionPerformed(evt);
+            }
+        });
+
+        btnCrearNuevoUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearNuevoUsuario1ActionPerformed(evt);
+            }
+        });
+
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        btnBorrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarUsuarioActionPerformed(evt);
+            }
+        });
+
+        // Listener para el botón "Subir credenciales de Usuarios" (TXT)
+        btnCredencialesUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCredencialesUsuariosActionPerformed(evt);
+            }
+        });
+
+        // Listener para el botón "Reporte de ventas" (futuro sprint)
+        btnReportedeVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportedeVentasActionPerformed(evt);
+            }
+        });
+
+        // Listener para el botón "Exportar Lista de Usuarios PDF" (futuro sprint)
+        btnExportarUsuariosPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarUsuariosPdfActionPerformed(evt);
+            }
+        });
+    }
+
+    // Método para cargar los usuarios en la tabla (renombrado de 'actualizarTabla')
+    public void cargarTablaUsuarios() {
+        tableModel.setRowCount(0); // Limpia todas las filas existentes
+
+        List<Usuario> users = usuarioController.listarUsuarios();
+
+        for (Usuario u : users) {
+            // Se muestra al usuario 'admin' en la tabla ahora, para ver todos los usuarios.
+            // Si no quieres mostrarlo, agrega: if (!u.getUsuario().equalsIgnoreCase("admin")) { ... }
+            Object[] rowData = {
+                u.getNombre(),
+                u.getApellido(),
+                u.getUsuario(), // Nombre de usuario (username)
+                u.getCorreo(),
+                u.getRol(),
+                "********" // La contraseña se muestra oculta por seguridad
+            };
+            tableModel.addRow(rowData);
+        }
+    }
 
     private void btnSalirAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirAdminActionPerformed
         form_login login = new form_login();
@@ -196,92 +315,74 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirAdminActionPerformed
     private void actualizarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) tableAdmin.getModel();
-        modelo.setRowCount(0); // Limpia las filas actuales de la tabla
+        int selectedRow = tableAdmin.getSelectedRow();
+        if (selectedRow != -1) { // Si hay una fila seleccionada
+            // Obtener el nombre de usuario de la fila seleccionada (columna 2, índice 2)
+            String usernameToEdit = (String) tableModel.getValueAt(selectedRow, 2);
 
-        UsuarioController usuarioController = new UsuarioController();
-        List<Usuario> usuarios = usuarioController.listarUsuarios();
+            // Buscar el objeto Usuario completo usando el controlador
+            Usuario userToEdit = usuarioController.buscarPorUsuario(usernameToEdit);
 
-        for (Usuario u : usuarios) {
-            if (!u.getRol().equalsIgnoreCase("Admin")) {
-                modelo.addRow(new Object[]{
-                    u.getNombre(),
-                    u.getApellido(),
-                    u.getUsuario(),
-                    u.getCorreo(),
-                    u.getRol(),
-                    u.getClave()
-                });
+            if (userToEdit != null) {
+                // Abrir el formulario de alta/edición de usuarios en modo "editar" (pasando el objeto Usuario)
+                form_AltUsuarios altUsuarios = new form_AltUsuarios(this, userToEdit);
+                altUsuarios.setVisible(true); // Mostrar el diálogo modal
+
+                // Si la operación en form_AltUsuarios fue exitosa, refrescar la tabla
+                if (altUsuarios.isSuccess()) {
+                    cargarTablaUsuarios(); // Recargar la tabla
+                }
+            } else {
+                Mensajes.mostrarError("Error: No se pudo encontrar el usuario seleccionado en el sistema.");
             }
+        } else {
+            Mensajes.mostrarAdvertencia("Por favor, selecciona un usuario de la tabla para actualizar.");
         }
     }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         actualizarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed
-        int fila = tableAdmin.getSelectedRow();
-        UsuarioController usuarioController = new UsuarioController();
+    private void BorrarUsuario() {
 
-        if (fila >= 0) {
-            String usuario = tableAdmin.getValueAt(fila, 2).toString();
-
-            int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
-                    this,
-                    "¿Está seguro que desea eliminar al usuario \"" + usuario + "\"?",
-                    "Confirmar eliminación",
-                    javax.swing.JOptionPane.YES_NO_OPTION
-            );
-
-            if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
-                usuarioController.eliminarUsuario(usuario);
-                Mensajes.mostrarInfo("Usuario eliminado correctamente");
-                actualizarTabla();
-            }
-
-        } else {
-            Mensajes.mostrarAdvertencia("Seleccione un usuario para eliminar");
-        }
-    }//GEN-LAST:event_btnBorrarUsuarioActionPerformed
-
-    private void btnCrearNuevoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearNuevoUsuario1ActionPerformed
-        form_AltUsuarios altUsuarios = new form_AltUsuarios();
-        altUsuarios.setVisible(true);
-        // ¡NO pongas this.dispose(); ni this.setVisible(false);
-
-    }//GEN-LAST:event_btnCrearNuevoUsuario1ActionPerformed
-
-    private void generarArchivoTxt() {
-        try {
-            FileWriter writer = new FileWriter("usuarios.txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-
-            // Escribir encabezados
-            for (int i = 0; i < tableAdmin.getColumnCount(); i++) {
-                bufferedWriter.write(tableAdmin.getColumnName(i) + "\t");
-            }
-            bufferedWriter.newLine();
-
-            // Escribir datos fila por fila
-            for (int i = 0; i < tableAdmin.getRowCount(); i++) {
-                for (int j = 0; j < tableAdmin.getColumnCount(); j++) {
-                    Object valor = tableAdmin.getValueAt(i, j);
-                    bufferedWriter.write((valor != null ? valor.toString() : "") + "\t");
-                }
-                bufferedWriter.newLine();
-            }
-
-            bufferedWriter.close();
-            Mensajes.mostrarInfo("Archivo 'usuarios.txt' generado exitosamente.");
-        } catch (IOException e) {
-            Mensajes.mostrarError("Error al generar archivo: " + e.getMessage());
-        }
     }
 
 
-    private void btnGenerarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarTxtActionPerformed
-        generarArchivoTxt();
-    }//GEN-LAST:event_btnGenerarTxtActionPerformed
+    private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed
+        BorrarUsuario();
+    }//GEN-LAST:event_btnBorrarUsuarioActionPerformed
+
+
+    private void btnCrearNuevoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearNuevoUsuario1ActionPerformed
+        // Abrir el formulario de alta/edición de usuarios en modo "crear" (pasando null)
+        form_AltUsuarios altUsuarios = new form_AltUsuarios(this, null); // Pasamos 'this' como padre, null para creación
+        altUsuarios.setVisible(true); // Mostrar el diálogo modal
+
+        // Si la operación en form_AltUsuarios fue exitosa, refrescar la tabla
+        if (altUsuarios.isSuccess()) {
+            cargarTablaUsuarios(); // Recargar la tabla
+        }
+    }//GEN-LAST:event_btnCrearNuevoUsuario1ActionPerformed
+
+
+    private void btnCredencialesUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCredencialesUsuariosActionPerformed
+         Mensajes.mostrarInfo("Abriendo el Panel de Reporte de Ventas");
+         form_PaneldeVentasAdming panelVentas = new form_PaneldeVentasAdming();
+         panelVentas.setVisible(true);
+         
+    }//GEN-LAST:event_btnCredencialesUsuariosActionPerformed
+
+    private void btnReportedeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportedeVentasActionPerformed
+        Mensajes.mostrarInfo("Abriendo el Panel de Reporte de Ventas.");
+        // Aquí se abre la ventana form_PaneldeVentasAdming sin cerrar esta.
+        form_PaneldeVentasAdming panelVentas = new form_PaneldeVentasAdming();
+        panelVentas.setVisible(true);
+        // NO this.dispose(); porque esta ventana debe permanecer abierta.
+    }//GEN-LAST:event_btnReportedeVentasActionPerformed
+
+    private void btnExportarUsuariosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarUsuariosPdfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExportarUsuariosPdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,15 +422,20 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         });
     }
 
+    private UsuarioController usuarioController;
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBorrarUsuario;
     private javax.swing.JButton btnCrearNuevoUsuario1;
-    private javax.swing.JButton btnGenerarTxt;
+    private javax.swing.JButton btnCredencialesUsuarios;
+    private javax.swing.JButton btnExportarUsuariosPdf;
+    private javax.swing.JButton btnReportedeVentas;
     private javax.swing.JButton btnSalirAdmin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblSistemaAdminstrador;
     private javax.swing.JTable tableAdmin;
     // End of variables declaration//GEN-END:variables

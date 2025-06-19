@@ -9,16 +9,15 @@ package proyecto.modelo;
  * @author User0
  */
 public abstract class Usuario {
+    protected String nombre;
+    protected String apellido;
+    protected String usuario; // Este es el nombre de usuario para el login
+    protected String clave; // Esta será la contraseña CODIFICADA (Base64)
+    protected String correo;
+    protected String rol;
+    protected String tokenAdmin; // Nuevo campo para el token del administrador
 
-    // Atributos protegidos: accesibles desde clases hijas
-    protected String nombre;      // Nombre del usuario
-    protected String apellido;    // Apellido del usuario
-    protected String usuario;     // Nombre de usuario único (login)
-    protected String clave;       // Contraseña del usuario
-    protected String correo;      // Correo electrónico del usuario
-    protected String rol;         // Rol del usuario (Admin, Empleado, etc.)
-
-    // Constructor que inicializa todos los atributos de la clase
+    // Constructor base para Usuario (sin token, para roles no admin)
     public Usuario(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -26,59 +25,80 @@ public abstract class Usuario {
         this.clave = clave;
         this.correo = correo;
         this.rol = rol;
+        this.tokenAdmin = null; // Por defecto es null para roles no admin
     }
 
-    // Métodos getter y setter para acceder y modificar los atributos encapsulados
-    // Métodos getter y setter para acceder y modificar los atributos encapsulados
-    public String getUsuario() {
-        return usuario; // Devuelve el valor del atributo 'usuario'
+    // Constructor con tokenAdmin (específico para el rol Administrador)
+    public Usuario(String nombre, String apellido, String usuario, String clave, String correo, String rol, String tokenAdmin) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.clave = clave;
+        this.correo = correo;
+        this.rol = rol;
+        this.tokenAdmin = tokenAdmin; // Se asigna el token proporcionado
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario; // Asigna un nuevo valor al atributo 'usuario'
-    }
-
-    public String getClave() {
-        return clave; // Devuelve el valor de la clave del usuario
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave; // Asigna un nuevo valor a la clave del usuario
-    }
-
+    // --- Getters ---
     public String getNombre() {
-        return nombre; // Devuelve el nombre del usuario
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre; // Asigna un nuevo valor al atributo 'nombre'
+        return nombre;
     }
 
     public String getApellido() {
-        return apellido; // Devuelve el apellido del usuario
+        return apellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido; // Asigna un nuevo valor al atributo 'apellido'
+    public String getUsuario() {
+        return usuario;
     }
 
-    public String getRol() {
-        return rol; // Devuelve el rol del usuario (por ejemplo: Admin, Empleado, etc.)
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol; // Asigna un nuevo valor al atributo 'rol'
+    public String getClave() {
+        return clave;
     }
 
     public String getCorreo() {
-        return correo; // Devuelve el correo electrónico del usuario
+        return correo;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public String getTokenAdmin() {
+        return tokenAdmin;
+    }
+
+    // --- Setters ---
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave; // Esta clave se espera que ya esté codificada al ser seteada aquí
     }
 
     public void setCorreo(String correo) {
-        this.correo = correo; // Asigna un nuevo valor al atributo 'correo'
+        this.correo = correo;
     }
 
-    public abstract String obtenerDescripcionRol();
-// Método abstracto que será implementado por cada subclase para describir su rol específico
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 
+    public void setTokenAdmin(String tokenAdmin) {
+        this.tokenAdmin = tokenAdmin;
+    }
+
+    // Método de conveniencia para verificar si el rol es Administrador
+    public boolean esAdmin() {
+        return "Admin".equalsIgnoreCase(rol);
+    }
 }

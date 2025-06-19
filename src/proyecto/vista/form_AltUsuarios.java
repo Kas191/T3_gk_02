@@ -1,10 +1,18 @@
 package proyecto.vista;
 
 import proyecto.controlador.UsuarioController;
+import proyecto.modelo.Administrador;
 import proyecto.modelo.Empleado;
-import proyecto.modelo.JefeAbastecimiento;
-import proyecto.modelo.Usuario;
+import proyecto.modelo.JefeDeAbastecimiento;
+import proyecto.modelo.Usuario; // Agregado: Importar la clase Usuario
 import proyecto.util.Mensajes;
+
+import javax.swing.JDialog; // Importante: Extiende de JDialog
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,14 +22,30 @@ import proyecto.util.Mensajes;
  *
  * @author User0
  */
-public class form_AltUsuarios extends javax.swing.JFrame {
+public class form_AltUsuarios extends JDialog {
+
+    private UsuarioController usuarioController;
+    private Usuario userToEdit; // Usuario que se está editando (null si es nuevo)
+    private boolean successOperation = false; // Indica si se guardó/actualizó con éxito
 
     /**
      * Creates new form login
      */
-    public form_AltUsuarios() {
-        initComponents();
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    public form_AltUsuarios(JFrame parent, Usuario userToEdi) {
+        super(parent, "Admin: Gestión de Usuario", true); // Diálogo modal (true)
+        initComponents(); // Inicializa los componentes visuales
+
+        this.usuarioController = new UsuarioController(); // Instancia del controlador de usuarios
+        this.userToEdit = userToEdit;
+
+        addEventHandlers(); // Asigna los ActionListeners
+        populateForm(); // Rellena el formulario si es edición
+
+        // Asegúrate que los campos de token estén ocultos al inicio, si no son Admin.
+        // Se usan los nombres de variable de tu diseñador: jTextField1 y jLabel1.
+        jTextField1.setVisible(false); // Ocultar por defecto (controlado por Listener)
+        jLabel1.setVisible(false);
+
     }
 
     /**
@@ -57,6 +81,8 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         jLayeredPane5 = new javax.swing.JLayeredPane();
         jLayeredPane7 = new javax.swing.JLayeredPane();
         jLayeredPane8 = new javax.swing.JLayeredPane();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jLayeredPane3.setBackground(new java.awt.Color(0, 48, 146));
         jLayeredPane3.setOpaque(true);
@@ -97,10 +123,10 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         bg.setOpaque(true);
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSignUpAdmin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblSignUpAdmin.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSignUpAdmin.setForeground(new java.awt.Color(0, 48, 146));
-        lblSignUpAdmin.setText("Registro de Usuarios");
-        bg.add(lblSignUpAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 450, 60));
+        lblSignUpAdmin.setText("Admin: Registro de Usuario");
+        bg.add(lblSignUpAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 550, 50));
 
         jLayeredPane1.setBackground(new java.awt.Color(0, 48, 146));
         jLayeredPane1.setOpaque(true);
@@ -297,6 +323,12 @@ public class form_AltUsuarios extends javax.swing.JFrame {
 
         bg.add(jLayeredPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, -1, -1));
 
+        jTextField1.setText("jTextField1");
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
+
+        jLabel1.setText("jLabel1");
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 60, 20));
+
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 650));
 
         setSize(new java.awt.Dimension(664, 445));
@@ -318,6 +350,13 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     private void jPasswordFieldBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldBActionPerformed
+    private void addEventHandlers() {
+
+    }
+
+    private void populateForm() {
+
+    }
 
     private void limpiarCampos() {
         txtNombre.setText("");
@@ -336,20 +375,18 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         String clave = new String(jPasswordFieldB.getPassword());
         String correo = txtcorreo.getText();
         String rol = (String) cbroles.getSelectedItem();
-
-        // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
             Mensajes.mostrarError("Todos los campos son obligatorios");
             return;
         }
 
-        // Validar correo Gmail
+// Validar correo Gmail
         if (!correo.endsWith("@gmail.com")) {
             Mensajes.mostrarAdvertencia("El correo debe ser una cuenta Gmail válida");
             return;
         }
 
-        // Validar seguridad de la contraseña
+// Validar seguridad de la contraseña
         if (clave.length() < 8 || !clave.matches(".*[!@#$%^&*()_+=<>?/{}\\[\\]-].*")) {
             Mensajes.mostrarAdvertencia("La contraseña debe tener al menos 8 caracteres y un símbolo (por ejemplo: !, @, #, etc.)");
             return;
@@ -365,13 +402,14 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         if (rol.equals("Empleado")) {
             nuevo = new Empleado(nombre, apellido, usuario, clave, correo, rol);
         } else {
-            nuevo = new JefeAbastecimiento(nombre, apellido, usuario, clave, correo, rol);
+            nuevo = new JefeDeAbastecimiento(nombre, apellido, usuario, clave, correo, rol);
         }
 
         usuarioController.registrarUsuario(nuevo);
         Mensajes.mostrarInfo("Usuario registrado exitosamente");
         limpiarCampos(); // limpia los campos del formulario
-        // actualizarTabla(); ← eliminado porque no hay tabla aquí
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -379,17 +417,19 @@ public class form_AltUsuarios extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
+
             }
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(form_AltUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -399,19 +439,21 @@ public class form_AltUsuarios extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(form_AltUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
+//</editor-fold>
+//</editor-fold>
+//</editor-fold>
+//</editor-fold>
+//</editor-fold>
+//</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+//</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new form_AltUsuarios().setVisible(true);
+
             }
         });
     }
@@ -422,6 +464,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMostrar;
     private javax.swing.JComboBox<String> cbroles;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
@@ -431,6 +474,7 @@ public class form_AltUsuarios extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JLayeredPane jLayeredPane8;
     private javax.swing.JPasswordField jPasswordFieldB;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblSignUpAdmin;
