@@ -340,10 +340,12 @@ public class form_login extends javax.swing.JFrame {
                 sistemaAdmin.setVisible(true);
             } else if (loggedInUser.getRol().equalsIgnoreCase("Jefe_Abastecimiento")) {
                 Mensajes.mostrarInfo("Redirigiendo a la Interfaz de Jefe de Abastecimiento.");
-                // TODO: Aquí deberías abrir la ventana principal para el Jefe de Abastecimiento.
+                form_GestionInventario gestionInventario = new form_GestionInventario();
+                gestionInventario.setVisible(true);
             } else if (loggedInUser.getRol().equalsIgnoreCase("Empleado")) {
                 Mensajes.mostrarInfo("Redirigiendo a la Interfaz de Empleado (Ventas).");
-                // TODO: Aquí deberías abrir la ventana principal para el Empleado.
+                form_Empleado panelEmpleado = new form_Empleado();
+                panelEmpleado.setVisible(true);
             }
 
         } else {

@@ -20,7 +20,10 @@ import javax.swing.JDialog; // Importante: Extiende de JDialog
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame; 
+import java.io.File;
+import javax.swing.JFrame;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -95,7 +98,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         lblSistemaAdminstrador.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador.setForeground(new java.awt.Color(0, 48, 146));
         lblSistemaAdminstrador.setText("Sistema Administrador de Usuarios");
-        bg.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 660, 60));
+        bg.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 660, 60));
 
         tableAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,7 +113,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableAdmin);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 660, 440));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 650, 320));
 
         jPanel1.setBackground(new java.awt.Color(54, 116, 181));
 
@@ -364,12 +367,29 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCrearNuevoUsuario1ActionPerformed
 
+    private void generarArchivoTXT() {
+        try {
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String nombreArchivo = "respaldo_admin_" + timestamp + ".txt";
+            File archivo = new File(nombreArchivo);
+            FileWriter writer = new FileWriter(archivo);
+
+            // Aquí agregas los datos que quieres guardar
+            writer.write("Datos de respaldo aquí...");
+
+            writer.close();
+
+            JOptionPane.showMessageDialog(null, "Respaldo generado correctamente: " + nombreArchivo);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al generar el archivo: " + e.getMessage());
+        }
+    }
 
     private void btnCredencialesUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCredencialesUsuariosActionPerformed
-         Mensajes.mostrarInfo("Abriendo el Panel de Reporte de Ventas");
-         form_PaneldeVentasAdming panelVentas = new form_PaneldeVentasAdming();
-         panelVentas.setVisible(true);
-         
+        Mensajes.mostrarInfo("Generando Archivo TXT de respaldo.....");
+        generarArchivoTXT();
+
+
     }//GEN-LAST:event_btnCredencialesUsuariosActionPerformed
 
     private void btnReportedeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportedeVentasActionPerformed
