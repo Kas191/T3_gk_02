@@ -27,10 +27,10 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txt_correo = new javax.swing.JPasswordField();
         txtpasscontrasena = new javax.swing.JTextField();
         lblCorreo = new javax.swing.JLabel();
         lblconficontrasena = new javax.swing.JLabel();
-        txt_correo = new javax.swing.JPasswordField();
         txtrpassconfircontra = new javax.swing.JPasswordField();
         lblcontrasena = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -39,6 +39,9 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         btnMostrar = new javax.swing.JButton();
         btnMostrar1 = new javax.swing.JButton();
         btnMostrar2 = new javax.swing.JButton();
+        txtCorreo = new javax.swing.JTextField();
+
+        txt_correo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -61,9 +64,6 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         lblconficontrasena.setForeground(new java.awt.Color(102, 102, 102));
         lblconficontrasena.setText("Confirmar Contraseña");
         getContentPane().add(lblconficontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 160, -1));
-
-        txt_correo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        getContentPane().add(txt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 240, 40));
 
         txtrpassconfircontra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
         getContentPane().add(txtrpassconfircontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 40));
@@ -133,6 +133,15 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         });
         jPanel1.add(btnMostrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 40, 40));
 
+        txtCorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 240, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 510));
 
         pack();
@@ -165,6 +174,12 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
     private void btnMostrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrar2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMostrar2ActionPerformed
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // Este método se dispara al presionar Enter en el campo de usuario.
+        // La lógica de toggleAdminTokenVisibility ya está en KeyReleased para una mejor reactividad.
+
+    }//GEN-LAST:event_txtCorreoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +233,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
     private javax.swing.JLabel lblRestablerContrasena;
     private javax.swing.JLabel lblconficontrasena;
     private javax.swing.JLabel lblcontrasena;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JPasswordField txt_correo;
     private javax.swing.JTextField txtpasscontrasena;
     private javax.swing.JPasswordField txtrpassconfircontra;

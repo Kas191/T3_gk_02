@@ -4,26 +4,41 @@ import proyecto.controlador.UsuarioController;
 import proyecto.modelo.Usuario;
 import proyecto.util.Mensajes;
 
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat; // Para formato de fecha en nombre de archivo
-import java.util.Date; // Para la fecha actual
-import java.util.List;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import java.awt.Font; // Para el tipo de letra
-import javax.swing.JDialog; // Importante: Extiende de JDialog
-import javax.swing.JOptionPane;
+// iText (PDF)
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfPCell;
+import java.awt.Color;
+
+// Utilidades Java
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
-import javax.swing.JFrame;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+// Swing
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -79,10 +94,11 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         btnCrearNuevoUsuario1 = new javax.swing.JButton();
         btnReportedeVentas = new javax.swing.JButton();
-        btnCredencialesUsuarios = new javax.swing.JButton();
+        btnbBuscar = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         btnExportarUsuariosPdf = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        btnCredencialesUsuarios1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Admin");
@@ -99,7 +115,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         lblSistemaAdminstrador.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador.setForeground(new java.awt.Color(0, 48, 146));
         lblSistemaAdminstrador.setText("Sistema Administrador de Usuarios");
-        bg.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 660, 60));
+        bg.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 660, 60));
 
         tableAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,18 +228,18 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 620));
 
-        btnCredencialesUsuarios.setBackground(new java.awt.Color(0, 48, 146));
-        btnCredencialesUsuarios.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnCredencialesUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnCredencialesUsuarios.setText("Generar TXT de Backup");
-        btnCredencialesUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
-        btnCredencialesUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCredencialesUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        btnbBuscar.setBackground(new java.awt.Color(0, 48, 146));
+        btnbBuscar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnbBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnbBuscar.setText("Buscar");
+        btnbBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnbBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCredencialesUsuariosActionPerformed(evt);
+                btnbBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnCredencialesUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 220, 40));
+        bg.add(btnbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 110, 20));
         bg.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 120, 40));
 
         btnExportarUsuariosPdf.setBackground(new java.awt.Color(0, 48, 146));
@@ -244,7 +260,20 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 520, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 530, -1));
+
+        btnCredencialesUsuarios1.setBackground(new java.awt.Color(0, 48, 146));
+        btnCredencialesUsuarios1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnCredencialesUsuarios1.setForeground(new java.awt.Color(255, 255, 255));
+        btnCredencialesUsuarios1.setText("Generar TXT de Backup");
+        btnCredencialesUsuarios1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnCredencialesUsuarios1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCredencialesUsuarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCredencialesUsuarios1ActionPerformed(evt);
+            }
+        });
+        bg.add(btnCredencialesUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 220, 40));
 
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 490));
 
@@ -278,12 +307,11 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         });
 
         // Listener para el botón "Subir credenciales de Usuarios" (TXT)
-        btnCredencialesUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCredencialesUsuariosActionPerformed(evt);
-            }
-        });
-
+        //btnbBuscar.addActionListener(new java.awt.event.ActionListener() {
+        //public void actionPerformed(java.awt.event.ActionEvent evt) {
+        // btnCredencialesUsuariosActionPerformed(evt);
+        //}
+        //});
         // Listener para el botón "Reporte de ventas" (futuro sprint)
         btnReportedeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,12 +464,12 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         }
     }
 
-    private void btnCredencialesUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCredencialesUsuariosActionPerformed
-        Mensajes.mostrarInfo("Generando Archivo TXT de respaldo.....");
-        generarArchivoTXT();
+    private void btnbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbBuscarActionPerformed
+
+        Mensajes.mostrarInfo("Buscando apellido .....");
 
 
-    }//GEN-LAST:event_btnCredencialesUsuariosActionPerformed
+    }//GEN-LAST:event_btnbBuscarActionPerformed
 
     private void btnReportedeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportedeVentasActionPerformed
         Mensajes.mostrarInfo("Abriendo el Panel de Reporte de Ventas.");
@@ -451,13 +479,97 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         // NO this.dispose(); porque esta ventana debe permanecer abierta.
     }//GEN-LAST:event_btnReportedeVentasActionPerformed
 
+    private void exportarUsuariosAPDF() {
+
+        try {
+            // Crear el documento y el archivo de salida
+            Document documento = new Document(PageSize.A4, 40, 40, 40, 40);
+            String nombreArchivo = "usuarios_exportados.pdf";
+            PdfWriter.getInstance(documento, new FileOutputStream(nombreArchivo));
+            documento.open();
+
+            // Fuentes personalizadas de iText
+            Font tituloFont = new Font(Font.HELVETICA, 16, Font.BOLD, new Color(0, 48, 146));
+            Font subFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
+            Font headerFont = new Font(Font.HELVETICA, 11, Font.BOLD, Color.WHITE);
+            Font cellFont = new Font(Font.HELVETICA, 10, Font.NORMAL);
+
+            // Cabecera de empresa
+            Paragraph empresa = new Paragraph("MULTITEC D & J MEPRESA", tituloFont);
+            empresa.setAlignment(Element.ALIGN_CENTER);
+            documento.add(empresa);
+
+            Paragraph ruc = new Paragraph("RUC: 20613001728", subFont);
+            ruc.setAlignment(Element.ALIGN_CENTER);
+            documento.add(ruc);
+            documento.add(Chunk.NEWLINE); // espacio
+
+            // Título del listado
+            Paragraph titulo = new Paragraph("LISTA DE USUARIOS", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            documento.add(titulo);
+            documento.add(Chunk.NEWLINE);
+
+            // Columnas visibles (sin contraseña)
+            int[] columnasVisibles = {0, 1, 2, 3, 4}; // nombre, apellido, usuario, correo, rol
+            String[] titulosColumnas = {"Nombre", "Apellido", "Usuario", "Correo", "Rol"};
+
+            PdfPTable tabla = new PdfPTable(columnasVisibles.length);
+            tabla.setWidthPercentage(100);
+            tabla.setSpacingBefore(10f);
+            tabla.setSpacingAfter(10f);
+            tabla.setWidths(new float[]{2f, 2f, 2f, 3f, 1.5f});
+
+            // Encabezados
+            for (String tituloCol : titulosColumnas) {
+                PdfPCell th = new PdfPCell(new Phrase(tituloCol, headerFont));
+                th.setBackgroundColor(new Color(0, 48, 146));
+                th.setHorizontalAlignment(Element.ALIGN_CENTER);
+                th.setPadding(8f);
+                tabla.addCell(th);
+            }
+
+            // Datos de la tabla
+            for (int fila = 0; fila < tableAdmin.getRowCount(); fila++) {
+                for (int col : columnasVisibles) {
+                    Object valor = tableAdmin.getValueAt(fila, col);
+                    PdfPCell celda = new PdfPCell(new Phrase(valor != null ? valor.toString() : "", cellFont));
+                    celda.setHorizontalAlignment(Element.ALIGN_LEFT);
+                    celda.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    celda.setPadding(6f);
+                    tabla.addCell(celda);
+                }
+            }
+
+            documento.add(tabla);
+
+            // Pie con hora de exportación
+            String fechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+            Paragraph pie = new Paragraph("Hora generada: " + fechaHora, subFont);
+            pie.setAlignment(Element.ALIGN_RIGHT);
+            documento.add(pie);
+
+            documento.close();
+            JOptionPane.showMessageDialog(this, "PDF generado correctamente:\n" + nombreArchivo);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al exportar PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+
     private void btnExportarUsuariosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarUsuariosPdfActionPerformed
-        // TODO add your handling code here:
+        exportarUsuariosAPDF();
     }//GEN-LAST:event_btnExportarUsuariosPdfActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnCredencialesUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCredencialesUsuarios1ActionPerformed
+       generarArchivoTXT();
+    }//GEN-LAST:event_btnCredencialesUsuarios1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -504,10 +616,11 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBorrarUsuario;
     private javax.swing.JButton btnCrearNuevoUsuario1;
-    private javax.swing.JButton btnCredencialesUsuarios;
+    private javax.swing.JButton btnCredencialesUsuarios1;
     private javax.swing.JButton btnExportarUsuariosPdf;
     private javax.swing.JButton btnReportedeVentas;
     private javax.swing.JButton btnSalirAdmin;
+    private javax.swing.JButton btnbBuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
