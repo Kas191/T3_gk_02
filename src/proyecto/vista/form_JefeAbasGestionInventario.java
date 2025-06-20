@@ -11,8 +11,66 @@ import javax.swing.table.DefaultTableModel;
 import proyecto.controlador.ProductoController;
 import proyecto.modelo.Producto;
 import proyecto.modelo.Producto;
-
 import proyecto.vista.form_RegistraProducto;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfPCell;
+import java.awt.Color;
+
+// Utilidades Java
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+// Swing
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -29,7 +87,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
      */
     public form_JefeAbasGestionInventario() {
         initComponents();
-
+        configurarTablaDetalleOrden();
     }
 
     /**
@@ -60,22 +118,22 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         JP_GenOrdenesCompra = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDetalleOrden = new javax.swing.JTable();
-        btnGenerarPDF = new javax.swing.JToggleButton();
+        btnGenerarPDF1 = new javax.swing.JToggleButton();
         cmbUbicacionOrden = new javax.swing.JComboBox<>();
         cmbModeloOrden = new javax.swing.JComboBox<>();
         cmbMarcaOrden = new javax.swing.JComboBox<>();
         txtBusquedaOrden = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         jProgressBar1 = new javax.swing.JProgressBar();
-        btnBuscarOrden = new javax.swing.JToggleButton();
         lblCantidad = new javax.swing.JLabel();
-        cmbProveedorBusquedaOrden = new javax.swing.JComboBox<>();
         btnGenerarOrdenCompra = new javax.swing.JToggleButton();
         lblCantidadOrdenesCreadas = new javax.swing.JLabel();
         cmbProveedorOrden = new javax.swing.JComboBox<>();
         btnCerrarSesion4 = new javax.swing.JToggleButton();
+        cmbMarcaBusqueda1 = new javax.swing.JComboBox<>();
+        btnRefrescar1 = new javax.swing.JButton();
+        btnEliminar1 = new javax.swing.JButton();
         JP_Productos = new javax.swing.JPanel();
-        txtBusquedaProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         btnEliminarProducto = new javax.swing.JButton();
@@ -84,6 +142,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JToggleButton();
         btnDesc = new javax.swing.JButton();
         btnAsc = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -164,47 +223,46 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblDetalleOrden);
 
-        JP_GenOrdenesCompra.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 680, 160));
+        JP_GenOrdenesCompra.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 590, 160));
 
-        btnGenerarPDF.setText("Generar PDF");
-        JP_GenOrdenesCompra.add(btnGenerarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 300, -1));
+        btnGenerarPDF1.setText("Generar PDF");
+        btnGenerarPDF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarPDF1ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(btnGenerarPDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, 120, -1));
 
-        cmbUbicacionOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ubicación", "San Ignacio", "Lima", " " }));
+        cmbUbicacionOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ubicación", "Cajamarca", "Lima", " " }));
         JP_GenOrdenesCompra.add(cmbUbicacionOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 310, 30));
 
         cmbModeloOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modelo", "Note 10 5G", "M51", "S7", "14 Note Pro", "K55", "Note 14", "16 5G", "16", "A32", "A50 5G", "A30 5G", "M4 Pro 5G", "200", "Note 12 Pro", "Note 14M", "A10", "Note 12S", "A25 5G", "Note 10S", "Note 10 Pro", "A12", "4.2", "30 C", "X6A", "X7B", "Note 13", "Note 13C", "C31", "14C", "M6 Note", "Y6 Prime", "A Cool", "F Cool", "P Cool", "Y6 2017", "Y6 2019", "B154 Pro", "Y7 Pro 2019", "A03", "E22i", "A09", "E15", "Spark GO1", "A03s", "K22", "Y15S", "A73", "Play 9A", "A9X", "X5 6 Plus", "A3X", "A06", "A05", "A05S", "Blade A05", "Android 6.0", "10 5G", "Mobile 2.5D", "BL 54 prime", "A55", "A35", "Q3", "3", "2", "C100", "I129a", "1Valeaa", "i29a", "F5G", " " }));
+        cmbModeloOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbModeloOrdenActionPerformed(evt);
+            }
+        });
         JP_GenOrdenesCompra.add(cmbModeloOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 160, 30));
 
         cmbMarcaOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
         JP_GenOrdenesCompra.add(cmbMarcaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 30));
-        JP_GenOrdenesCompra.add(txtBusquedaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 440, -1));
+        JP_GenOrdenesCompra.add(txtBusquedaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 410, -1));
         JP_GenOrdenesCompra.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 140, 30));
         JP_GenOrdenesCompra.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 690, 20));
-
-        btnBuscarOrden.setText("Buscar");
-        btnBuscarOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarOrdenActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(btnBuscarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 80, -1));
 
         lblCantidad.setText("Cantidad");
         JP_GenOrdenesCompra.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 100, -1));
 
-        cmbProveedorBusquedaOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MARCA", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " ", " " }));
-        cmbProveedorBusquedaOrden.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerarOrdenCompra.setText("Generar Orden de Compra");
+        btnGenerarOrdenCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbProveedorBusquedaOrdenActionPerformed(evt);
+                btnGenerarOrdenCompraActionPerformed(evt);
             }
         });
-        JP_GenOrdenesCompra.add(cmbProveedorBusquedaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 120, -1));
-
-        btnGenerarOrdenCompra.setText("Generar Orden de Compra");
-        JP_GenOrdenesCompra.add(btnGenerarOrdenCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 300, -1));
+        JP_GenOrdenesCompra.add(btnGenerarOrdenCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 300, -1));
 
         lblCantidadOrdenesCreadas.setText("Cantidad de ordenes de compra creadas: ");
-        JP_GenOrdenesCompra.add(lblCantidadOrdenesCreadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
+        JP_GenOrdenesCompra.add(lblCantidadOrdenesCreadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
 
         cmbProveedorOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedores", "RIVACELL S.A.C. ", " " }));
         cmbProveedorOrden.addActionListener(new java.awt.event.ActionListener() {
@@ -222,16 +280,23 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         });
         JP_GenOrdenesCompra.add(btnCerrarSesion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 470, -1, -1));
 
+        cmbMarcaBusqueda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
+        cmbMarcaBusqueda1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMarcaBusqueda1ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(cmbMarcaBusqueda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 160, -1));
+
+        btnRefrescar1.setText("Refrescar Tabla");
+        JP_GenOrdenesCompra.add(btnRefrescar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, -1, -1));
+
+        btnEliminar1.setText("Eliminar");
+        JP_GenOrdenesCompra.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, -1));
+
         JP_Sistema.addTab("Generación de Ordenes de Compra", JP_GenOrdenesCompra);
 
         JP_Productos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtBusquedaProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusquedaProductoActionPerformed(evt);
-            }
-        });
-        JP_Productos.add(txtBusquedaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 600, -1));
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,7 +337,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 cmbMarcaBusquedaActionPerformed(evt);
             }
         });
-        JP_Productos.add(cmbMarcaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, -1, -1));
+        JP_Productos.add(cmbMarcaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 130, -1));
 
         btnCerrarSesion.setText("Cerrar sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -288,7 +353,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnDescActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 490, 70, 30));
+        JP_Productos.add(btnDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 70, -1));
 
         btnAsc.setText("ASC");
         btnAsc.addActionListener(new java.awt.event.ActionListener() {
@@ -296,13 +361,21 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnAscActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnAsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, 60, 30));
+        JP_Productos.add(btnAsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 60, 20));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        JP_Productos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 360, -1));
 
         JP_Sistema.addTab("Productos", JP_Productos);
 
-        getContentPane().add(JP_Sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 580));
+        getContentPane().add(JP_Sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 610));
 
-        pack();
+        setSize(new java.awt.Dimension(748, 578));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarTablaProductos() {
@@ -322,6 +395,29 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         tblProductos.setModel(modeloTabla);
     }
 
+    private void configurarTablaDetalleOrden() {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnIndex == 0 ? Boolean.class : String.class;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 0; // Solo el checkbox editable
+            }
+        };
+
+        modelo.addColumn("Seleccionar");
+        modelo.addColumn("Marca");
+        modelo.addColumn("Modelo");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio Unitario");
+        modelo.addColumn("Total");
+
+        tblDetalleOrden.setModel(modelo);
+    }
+
 
     private void btnVisualizarProductoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarProductoDetalleActionPerformed
         // TODO add your handling code here:
@@ -330,10 +426,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private void cmbProveedorOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorOrdenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbProveedorOrdenActionPerformed
-
-    private void cmbProveedorBusquedaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorBusquedaOrdenActionPerformed
-
-    }//GEN-LAST:event_cmbProveedorBusquedaOrdenActionPerformed
 
 
     private void cmbMarcaBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMarcaBusquedaActionPerformed
@@ -433,14 +525,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCerrarSesion4ActionPerformed
 
-    private void txtBusquedaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBusquedaProductoActionPerformed
-
-    private void btnBuscarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarOrdenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarOrdenActionPerformed
-
     private void mostrarProductosEnTabla(List<Producto> productos) {
         DefaultTableModel modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("Marca");
@@ -456,23 +540,130 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }
 
     private void btnAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAscActionPerformed
+        String marcaSeleccionada = cmbMarcaBusqueda.getSelectedItem().toString().trim();
+
         ProductoController controller = new ProductoController();
         List<Producto> productos = controller.listarProductos();
 
-        productos.sort(Comparator.comparingDouble(Producto::getPrecio)); // 🔼 ASC
+        if (!marcaSeleccionada.equalsIgnoreCase("Marca")) {
+            productos.removeIf(p -> !p.getMarca().equalsIgnoreCase(marcaSeleccionada));
+        }
+
+        productos.sort(Comparator.comparingDouble(Producto::getPrecio));
 
         mostrarProductosEnTabla(productos);
     }//GEN-LAST:event_btnAscActionPerformed
 
     private void btnDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescActionPerformed
-        // TODO add your handling code here:
+        String marcaSeleccionada = cmbMarcaBusqueda.getSelectedItem().toString().trim();
+
         ProductoController controller = new ProductoController();
         List<Producto> productos = controller.listarProductos();
 
-        productos.sort(Comparator.comparingDouble(Producto::getPrecio).reversed()); // 🔽 DESC
+        if (!marcaSeleccionada.equalsIgnoreCase("Marca")) {
+            productos.removeIf(p -> !p.getMarca().equalsIgnoreCase(marcaSeleccionada));
+        }
+
+        productos.sort(Comparator.comparingDouble(Producto::getPrecio).reversed());
 
         mostrarProductosEnTabla(productos);
     }//GEN-LAST:event_btnDescActionPerformed
+
+    private void cmbMarcaBusqueda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMarcaBusqueda1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMarcaBusqueda1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void cmbModeloOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbModeloOrdenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbModeloOrdenActionPerformed
+
+    public void generarPDFOrdenCompra() {
+        try {
+            Document documento = new Document(PageSize.A4, 40, 40, 40, 40);
+            String nombreArchivo = "orden_compra.pdf";
+            PdfWriter.getInstance(documento, new FileOutputStream(nombreArchivo));
+            documento.open();
+
+            // Colores y fuentes
+            Color rojoEmpresa = new Color(204, 0, 0);
+            Font tituloFont = new Font(Font.HELVETICA, 16, Font.BOLD, rojoEmpresa);
+            Font subFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
+            Font headerFont = new Font(Font.HELVETICA, 11, Font.BOLD, Color.WHITE);
+            Font cellFont = new Font(Font.HELVETICA, 10, Font.NORMAL);
+
+            // Cabecera de empresa
+            Paragraph empresa = new Paragraph("MULTITEC D & J MEPRESA", tituloFont);
+            empresa.setAlignment(Element.ALIGN_CENTER);
+            documento.add(empresa);
+
+            Paragraph ruc = new Paragraph("RUC: 20613001728", subFont);
+            ruc.setAlignment(Element.ALIGN_CENTER);
+            documento.add(ruc);
+            documento.add(Chunk.NEWLINE);
+
+            Paragraph titulo = new Paragraph("ORDEN DE COMPRA", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            documento.add(titulo);
+            documento.add(Chunk.NEWLINE);
+
+            // Tabla de productos
+            PdfPTable tabla = new PdfPTable(5);
+            tabla.setWidthPercentage(100);
+            tabla.setSpacingBefore(10f);
+            tabla.setWidths(new float[]{2f, 2f, 1f, 1f, 1.5f});
+
+            String[] columnas = {"Marca", "Modelo", "Cantidad", "Precio Unitario", "Total"};
+
+            for (String col : columnas) {
+                PdfPCell header = new PdfPCell(new Phrase(col, headerFont));
+                header.setBackgroundColor(rojoEmpresa);
+                header.setHorizontalAlignment(Element.ALIGN_CENTER);
+                header.setPadding(8f);
+                tabla.addCell(header);
+            }
+
+            for (int i = 0; i < tblDetalleOrden.getRowCount(); i++) {
+                String marca = tblDetalleOrden.getValueAt(i, 1).toString(); // Col 1: Marca
+                String modelo = tblDetalleOrden.getValueAt(i, 2).toString(); // Col 2: Modelo
+                String cantidad = tblDetalleOrden.getValueAt(i, 3).toString(); // Col 3: Cantidad
+                String precio = tblDetalleOrden.getValueAt(i, 4).toString(); // Col 4: Precio unitario
+                double total = Double.parseDouble(cantidad) * Double.parseDouble(precio);
+
+                tabla.addCell(new PdfPCell(new Phrase(marca, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(modelo, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(cantidad, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(precio, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(String.format("%.2f", total), cellFont)));
+            }
+
+            documento.add(tabla);
+
+            // Pie con fecha
+            String fechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+            Paragraph pie = new Paragraph("Generado el: " + fechaHora, subFont);
+            pie.setAlignment(Element.ALIGN_RIGHT);
+            documento.add(pie);
+
+            documento.close();
+            JOptionPane.showMessageDialog(this, "PDF generado correctamente: " + nombreArchivo);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al generar PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    private void btnGenerarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarOrdenCompraActionPerformed
+
+    }//GEN-LAST:event_btnGenerarOrdenCompraActionPerformed
+
+    private void btnGenerarPDF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPDF1ActionPerformed
+          generarPDFOrdenCompra();
+    }//GEN-LAST:event_btnGenerarPDF1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -522,23 +713,24 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JTabbedPane JP_Sistema;
     private javax.swing.JPanel JP_StockCritico;
     private javax.swing.JButton btnAsc;
-    private javax.swing.JToggleButton btnBuscarOrden;
     private javax.swing.JButton btnBuscarStockCritico;
     private javax.swing.JToggleButton btnCerrarSesion;
     private javax.swing.JToggleButton btnCerrarSesion3;
     private javax.swing.JToggleButton btnCerrarSesion4;
     private javax.swing.JButton btnDesc;
+    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnExportarStockCritico;
     private javax.swing.JToggleButton btnGenerarOrdenCompra;
-    private javax.swing.JToggleButton btnGenerarPDF;
+    private javax.swing.JToggleButton btnGenerarPDF1;
+    private javax.swing.JButton btnRefrescar1;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JButton btnVisualizarProductoDetalle;
     private javax.swing.JComboBox<String> cmbMarcaBusqueda;
+    private javax.swing.JComboBox<String> cmbMarcaBusqueda1;
     private javax.swing.JComboBox<String> cmbMarcaOrden;
     private javax.swing.JComboBox<String> cmbMarcaStockCritico;
     private javax.swing.JComboBox<String> cmbModeloOrden;
-    private javax.swing.JComboBox<String> cmbProveedorBusquedaOrden;
     private javax.swing.JComboBox<String> cmbProveedorOrden;
     private javax.swing.JComboBox<String> cmbUbicacionOrden;
     private javax.swing.JButton jButton1;
@@ -549,6 +741,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCantidadOrdenesCreadas;
@@ -556,7 +749,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblStockCritico;
     private javax.swing.JTextField txtBusquedaOrden;
-    private javax.swing.JTextField txtBusquedaProducto;
     private javax.swing.JTextField txtBusquedaStockCritico;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextArea txtDetalleProducto;
