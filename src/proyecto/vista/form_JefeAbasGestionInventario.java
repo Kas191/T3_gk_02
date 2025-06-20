@@ -34,6 +34,7 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Chunk;
+import com.lowagie.text.FontFactory;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfPCell;
@@ -53,24 +54,14 @@ import java.util.List;
 
 // Swing
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -131,7 +122,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         cmbProveedorOrden = new javax.swing.JComboBox<>();
         btnCerrarSesion4 = new javax.swing.JToggleButton();
         cmbMarcaBusqueda1 = new javax.swing.JComboBox<>();
-        btnRefrescar1 = new javax.swing.JButton();
         btnEliminar1 = new javax.swing.JButton();
         JP_Productos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -231,7 +221,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnGenerarPDF1ActionPerformed(evt);
             }
         });
-        JP_GenOrdenesCompra.add(btnGenerarPDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, 120, -1));
+        JP_GenOrdenesCompra.add(btnGenerarPDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 110, -1));
 
         cmbUbicacionOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ubicación", "Cajamarca", "Lima", " " }));
         JP_GenOrdenesCompra.add(cmbUbicacionOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 310, 30));
@@ -288,11 +278,13 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         });
         JP_GenOrdenesCompra.add(cmbMarcaBusqueda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 160, -1));
 
-        btnRefrescar1.setText("Refrescar Tabla");
-        JP_GenOrdenesCompra.add(btnRefrescar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, -1, -1));
-
         btnEliminar1.setText("Eliminar");
-        JP_GenOrdenesCompra.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, -1));
+        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar1ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 110, -1));
 
         JP_Sistema.addTab("Generación de Ordenes de Compra", JP_GenOrdenesCompra);
 
@@ -399,7 +391,22 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? Boolean.class : String.class;
+                switch (columnIndex) {
+                    case 0:
+                        return Boolean.class; // Selección
+                    case 1:
+                        return String.class;  // Marca
+                    case 2:
+                        return String.class;  // Modelo
+                    case 3:
+                        return Integer.class; // Cantidad
+                    case 4:
+                        return Double.class;  // Precio Unitario
+                    case 5:
+                        return Double.class;  // Total
+                    default:
+                        return Object.class;
+                }
             }
 
             @Override
@@ -409,6 +416,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         };
 
         modelo.addColumn("Seleccionar");
+        modelo.addColumn("Proveedor");
         modelo.addColumn("Marca");
         modelo.addColumn("Modelo");
         modelo.addColumn("Cantidad");
@@ -582,88 +590,173 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbModeloOrdenActionPerformed
 
     public void generarPDFOrdenCompra() {
-        try {
-            Document documento = new Document(PageSize.A4, 40, 40, 40, 40);
-            String nombreArchivo = "orden_compra.pdf";
-            PdfWriter.getInstance(documento, new FileOutputStream(nombreArchivo));
-            documento.open();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar PDF de Orden de Compra");
 
-            // Colores y fuentes
-            Color rojoEmpresa = new Color(204, 0, 0);
-            Font tituloFont = new Font(Font.HELVETICA, 16, Font.BOLD, rojoEmpresa);
-            Font subFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
-            Font headerFont = new Font(Font.HELVETICA, 11, Font.BOLD, Color.WHITE);
-            Font cellFont = new Font(Font.HELVETICA, 10, Font.NORMAL);
+        int userSelection = fileChooser.showSaveDialog(this);
 
-            // Cabecera de empresa
-            Paragraph empresa = new Paragraph("MULTITEC D & J MEPRESA", tituloFont);
-            empresa.setAlignment(Element.ALIGN_CENTER);
-            documento.add(empresa);
-
-            Paragraph ruc = new Paragraph("RUC: 20613001728", subFont);
-            ruc.setAlignment(Element.ALIGN_CENTER);
-            documento.add(ruc);
-            documento.add(Chunk.NEWLINE);
-
-            Paragraph titulo = new Paragraph("ORDEN DE COMPRA", tituloFont);
-            titulo.setAlignment(Element.ALIGN_CENTER);
-            documento.add(titulo);
-            documento.add(Chunk.NEWLINE);
-
-            // Tabla de productos
-            PdfPTable tabla = new PdfPTable(5);
-            tabla.setWidthPercentage(100);
-            tabla.setSpacingBefore(10f);
-            tabla.setWidths(new float[]{2f, 2f, 1f, 1f, 1.5f});
-
-            String[] columnas = {"Marca", "Modelo", "Cantidad", "Precio Unitario", "Total"};
-
-            for (String col : columnas) {
-                PdfPCell header = new PdfPCell(new Phrase(col, headerFont));
-                header.setBackgroundColor(rojoEmpresa);
-                header.setHorizontalAlignment(Element.ALIGN_CENTER);
-                header.setPadding(8f);
-                tabla.addCell(header);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File archivoPDF = fileChooser.getSelectedFile();
+            if (!archivoPDF.getAbsolutePath().endsWith(".pdf")) {
+                archivoPDF = new File(archivoPDF.getAbsolutePath() + ".pdf");
             }
 
-            for (int i = 0; i < tblDetalleOrden.getRowCount(); i++) {
-                String marca = tblDetalleOrden.getValueAt(i, 1).toString(); // Col 1: Marca
-                String modelo = tblDetalleOrden.getValueAt(i, 2).toString(); // Col 2: Modelo
-                String cantidad = tblDetalleOrden.getValueAt(i, 3).toString(); // Col 3: Cantidad
-                String precio = tblDetalleOrden.getValueAt(i, 4).toString(); // Col 4: Precio unitario
-                double total = Double.parseDouble(cantidad) * Double.parseDouble(precio);
+            try {
+                Document documento = new Document(PageSize.A4.rotate());
+                PdfWriter.getInstance(documento, new FileOutputStream(archivoPDF));
+                documento.open();
 
-                tabla.addCell(new PdfPCell(new Phrase(marca, cellFont)));
-                tabla.addCell(new PdfPCell(new Phrase(modelo, cellFont)));
-                tabla.addCell(new PdfPCell(new Phrase(cantidad, cellFont)));
-                tabla.addCell(new PdfPCell(new Phrase(precio, cellFont)));
-                tabla.addCell(new PdfPCell(new Phrase(String.format("%.2f", total), cellFont)));
+                // Encabezado
+                Font tituloFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Font.BOLD, Color.RED);
+                Paragraph titulo = new Paragraph("ORDEN DE COMPRA - MULTITEC D & J MEPRESA", tituloFont);
+                titulo.setAlignment(Element.ALIGN_CENTER);
+                documento.add(titulo);
+
+                documento.add(new Paragraph(" "));
+                documento.add(new Paragraph("RUC: 20547854123"));
+                documento.add(new Paragraph("Generado por: Jefe de Abastecimiento"));
+                documento.add(new Paragraph("Fecha y hora: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())));
+                documento.add(new Paragraph(" "));
+
+                // Crear tabla
+                PdfPTable tabla = new PdfPTable(6); // columnas
+                tabla.setWidthPercentage(100);
+
+                String[] encabezados = {"Proveedor", "Marca", "Modelo", "Cantidad", "Precio Unitario", "Total"};
+                for (String enc : encabezados) {
+                    PdfPCell cell = new PdfPCell(new Phrase(enc));
+                    cell.setBackgroundColor(Color.LIGHT_GRAY);
+                    tabla.addCell(cell);
+                }
+
+                DefaultTableModel modeloTabla = (DefaultTableModel) tblDetalleOrden.getModel();
+                int totalFilas = modeloTabla.getRowCount();
+
+                for (int i = 0; i < totalFilas; i++) {
+                    Boolean seleccionado = Boolean.valueOf(modeloTabla.getValueAt(i, 0).toString());
+                    if (seleccionado) {
+                        tabla.addCell(modeloTabla.getValueAt(i, 1).toString()); // Proveedor
+                        tabla.addCell(modeloTabla.getValueAt(i, 2).toString()); // Marca
+                        tabla.addCell(modeloTabla.getValueAt(i, 3).toString()); // Modelo
+                        tabla.addCell(modeloTabla.getValueAt(i, 4).toString()); // Cantidad
+                        tabla.addCell(modeloTabla.getValueAt(i, 5).toString()); // Precio Unitario
+                        tabla.addCell(modeloTabla.getValueAt(i, 6).toString()); // Total
+                    }
+                }
+
+                documento.add(tabla);
+                documento.close();
+
+                JOptionPane.showMessageDialog(this, "PDF generado correctamente: " + archivoPDF.getAbsolutePath());
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage());
+                e.printStackTrace();
             }
-
-            documento.add(tabla);
-
-            // Pie con fecha
-            String fechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
-            Paragraph pie = new Paragraph("Generado el: " + fechaHora, subFont);
-            pie.setAlignment(Element.ALIGN_RIGHT);
-            documento.add(pie);
-
-            documento.close();
-            JOptionPane.showMessageDialog(this, "PDF generado correctamente: " + nombreArchivo);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al generar PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 
     private void btnGenerarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarOrdenCompraActionPerformed
+        String proveedor = cmbProveedorOrden.getSelectedItem().toString();
+        String marca = cmbMarcaOrden.getSelectedItem().toString();
+        String modelo = cmbModeloOrden.getSelectedItem().toString();
+        String ubicacion = cmbUbicacionOrden.getSelectedItem().toString();
+        String cantidadStr = txtCantidad.getText().trim();
 
+        // Validar proveedor vs ubicación
+        if (proveedor.equalsIgnoreCase("RIVACELL S.A.C.") && !ubicacion.equalsIgnoreCase("Cajamarca")) {
+            JOptionPane.showMessageDialog(this, "El proveedor RIVACELL S.A.C. solo está disponible en Cajamarca.", "Proveedor no disponible", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Validar campos vacíos
+        if (marca.isEmpty() || modelo.isEmpty() || cantidadStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int cantidad;
+        try {
+            cantidad = Integer.parseInt(cantidadStr);
+            if (cantidad <= 0) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida mayor a 0.", "Cantidad inválida", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtener precio del producto desde la lista de productos
+        double precioUnitario = 0.0;
+        for (Producto p : new ProductoController().listarProductos()) {
+            if (p.getModelo().equalsIgnoreCase(modelo) && p.getMarca().equalsIgnoreCase(marca)) {
+                precioUnitario = p.getPrecio();
+                break;
+            }
+        }
+
+        if (precioUnitario == 0.0) {
+            JOptionPane.showMessageDialog(this, "No se encontró el producto seleccionado en la base de datos.", "Producto no disponible", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double precioTotal = cantidad * precioUnitario;
+
+        // Agregar fila a la tabla
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblDetalleOrden.getModel();
+        modeloTabla.addRow(new Object[]{
+            false, // Checkbox
+            proveedor,
+            marca,
+            modelo,
+            cantidad,
+            precioUnitario,
+            precioTotal
+        });
+
+        JOptionPane.showMessageDialog(this, "Orden generada correctamente.");
     }//GEN-LAST:event_btnGenerarOrdenCompraActionPerformed
 
     private void btnGenerarPDF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPDF1ActionPerformed
-          generarPDFOrdenCompra();
+        generarPDFOrdenCompra();
     }//GEN-LAST:event_btnGenerarPDF1ActionPerformed
+
+    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblDetalleOrden.getModel();
+        boolean haySeleccion = false;
+
+        // Verificar si hay al menos una fila seleccionada
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            Boolean seleccionado = Boolean.valueOf(modeloTabla.getValueAt(i, 0).toString());
+            if (seleccionado != null && seleccionado) {
+                haySeleccion = true;
+                break;
+            }
+        }
+
+        if (!haySeleccion) {
+            JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fila para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int respuesta = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro de que desea eliminar las filas seleccionadas?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            // Eliminar de abajo hacia arriba
+            for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
+                Boolean seleccionado = Boolean.valueOf(modeloTabla.getValueAt(i, 0).toString());
+                if (seleccionado != null && seleccionado) {
+                    modeloTabla.removeRow(i);
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Filas eliminadas correctamente.");
+        }
+    }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -723,7 +816,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JButton btnExportarStockCritico;
     private javax.swing.JToggleButton btnGenerarOrdenCompra;
     private javax.swing.JToggleButton btnGenerarPDF1;
-    private javax.swing.JButton btnRefrescar1;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JButton btnVisualizarProductoDetalle;
     private javax.swing.JComboBox<String> cmbMarcaBusqueda;
