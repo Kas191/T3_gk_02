@@ -94,35 +94,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jMenuItem1 = new javax.swing.JMenuItem();
         JP_Sistema = new javax.swing.JTabbedPane();
-        JP_StockCritico = new javax.swing.JPanel();
-        btnBuscarStockCritico = new javax.swing.JButton();
-        txtBusquedaStockCritico = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblStockCritico = new javax.swing.JTable();
-        btnExportarStockCritico = new javax.swing.JButton();
-        btnVisualizarProductoDetalle = new javax.swing.JButton();
-        cmbMarcaStockCritico = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtDetalleProducto = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
-        btnCerrarSesion3 = new javax.swing.JToggleButton();
-        JP_GenOrdenesCompra = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblDetalleOrden = new javax.swing.JTable();
-        btnGenerarPDF1 = new javax.swing.JToggleButton();
-        cmbUbicacionOrden = new javax.swing.JComboBox<>();
-        cmbModeloOrden = new javax.swing.JComboBox<>();
-        cmbMarcaOrden = new javax.swing.JComboBox<>();
-        txtBusquedaOrden = new javax.swing.JTextField();
-        txtCantidad = new javax.swing.JTextField();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        lblCantidad = new javax.swing.JLabel();
-        btnGenerarOrdenCompra = new javax.swing.JToggleButton();
-        lblCantidadOrdenesCreadas = new javax.swing.JLabel();
-        cmbProveedorOrden = new javax.swing.JComboBox<>();
-        btnCerrarSesion4 = new javax.swing.JToggleButton();
-        cmbMarcaBusqueda1 = new javax.swing.JComboBox<>();
-        btnEliminar1 = new javax.swing.JButton();
         JP_Productos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
@@ -133,6 +104,35 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         btnDesc = new javax.swing.JButton();
         btnAsc = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        lblLogin = new javax.swing.JLabel();
+        JP_StockCritico = new javax.swing.JPanel();
+        btnBuscarStockCritico = new javax.swing.JButton();
+        txtBusquedaStockCritico = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblStockCritico = new javax.swing.JTable();
+        btnExportarStockCritico = new javax.swing.JButton();
+        btnVisualizarProductoDetalle = new javax.swing.JButton();
+        cmbMarcaStockCritico = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtDetalleProducto = new javax.swing.JTextArea();
+        btnCerrarSesion1 = new javax.swing.JToggleButton();
+        lblLogin2 = new javax.swing.JLabel();
+        JP_GenOrdenesCompra = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblDetalleOrden = new javax.swing.JTable();
+        btnGenerarPDF1 = new javax.swing.JToggleButton();
+        cmbUbicacionOrden = new javax.swing.JComboBox<>();
+        cmbModeloOrden = new javax.swing.JComboBox<>();
+        cmbMarcaOrden = new javax.swing.JComboBox<>();
+        txtBusquedaOrden = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        lblCantidad = new javax.swing.JLabel();
+        btnGenerarOrdenCompra = new javax.swing.JToggleButton();
+        cmbProveedorOrden = new javax.swing.JComboBox<>();
+        cmbMarcaBusqueda1 = new javax.swing.JComboBox<>();
+        btnEliminar1 = new javax.swing.JButton();
+        lblLogin1 = new javax.swing.JLabel();
+        btnCerrarSesion2 = new javax.swing.JToggleButton();
 
         jButton1.setText("jButton1");
 
@@ -141,153 +141,12 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Panel de Gestión de Inventario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JP_StockCritico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JP_Sistema.setBackground(new java.awt.Color(255, 184, 35));
 
-        btnBuscarStockCritico.setText("Buscar");
-        JP_StockCritico.add(btnBuscarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, -1, -1));
-        JP_StockCritico.add(txtBusquedaStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 400, -1));
-
-        tblStockCritico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tblStockCritico);
-
-        JP_StockCritico.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 500, 210));
-
-        btnExportarStockCritico.setText("Exportar Stock Crítico PDF");
-        JP_StockCritico.add(btnExportarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 210, 30));
-
-        btnVisualizarProductoDetalle.setText("Visualizar");
-        btnVisualizarProductoDetalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarProductoDetalleActionPerformed(evt);
-            }
-        });
-        JP_StockCritico.add(btnVisualizarProductoDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 160, 30));
-
-        cmbMarcaStockCritico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
-        JP_StockCritico.add(cmbMarcaStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
-
-        txtDetalleProducto.setColumns(20);
-        txtDetalleProducto.setRows(5);
-        txtDetalleProducto.setText("\n");
-        jScrollPane4.setViewportView(txtDetalleProducto);
-
-        JP_StockCritico.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 480, 120));
-
-        jLabel1.setText("jLabel1");
-        JP_StockCritico.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
-
-        btnCerrarSesion3.setText("Cerrar sesión");
-        btnCerrarSesion3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesion3ActionPerformed(evt);
-            }
-        });
-        JP_StockCritico.add(btnCerrarSesion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, -1));
-
-        JP_Sistema.addTab("Stock Critico", JP_StockCritico);
-
-        JP_GenOrdenesCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblDetalleOrden.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(tblDetalleOrden);
-
-        JP_GenOrdenesCompra.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 590, 160));
-
-        btnGenerarPDF1.setText("Generar PDF");
-        btnGenerarPDF1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarPDF1ActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(btnGenerarPDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 110, -1));
-
-        cmbUbicacionOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ubicación", "Cajamarca", "Lima", " " }));
-        JP_GenOrdenesCompra.add(cmbUbicacionOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 310, 30));
-
-        cmbModeloOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modelo", "Note 10 5G", "M51", "S7", "14 Note Pro", "K55", "Note 14", "16 5G", "16", "A32", "A50 5G", "A30 5G", "M4 Pro 5G", "200", "Note 12 Pro", "Note 14M", "A10", "Note 12S", "A25 5G", "Note 10S", "Note 10 Pro", "A12", "4.2", "30 C", "X6A", "X7B", "Note 13", "Note 13C", "C31", "14C", "M6 Note", "Y6 Prime", "A Cool", "F Cool", "P Cool", "Y6 2017", "Y6 2019", "B154 Pro", "Y7 Pro 2019", "A03", "E22i", "A09", "E15", "Spark GO1", "A03s", "K22", "Y15S", "A73", "Play 9A", "A9X", "X5 6 Plus", "A3X", "A06", "A05", "A05S", "Blade A05", "Android 6.0", "10 5G", "Mobile 2.5D", "BL 54 prime", "A55", "A35", "Q3", "3", "2", "C100", "I129a", "1Valeaa", "i29a", "F5G", " " }));
-        cmbModeloOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbModeloOrdenActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(cmbModeloOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 160, 30));
-
-        cmbMarcaOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
-        JP_GenOrdenesCompra.add(cmbMarcaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 30));
-        JP_GenOrdenesCompra.add(txtBusquedaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 410, -1));
-        JP_GenOrdenesCompra.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 140, 30));
-        JP_GenOrdenesCompra.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 690, 20));
-
-        lblCantidad.setText("Cantidad");
-        JP_GenOrdenesCompra.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 100, -1));
-
-        btnGenerarOrdenCompra.setText("Generar Orden de Compra");
-        btnGenerarOrdenCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarOrdenCompraActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(btnGenerarOrdenCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 300, -1));
-
-        lblCantidadOrdenesCreadas.setText("Cantidad de ordenes de compra creadas: ");
-        JP_GenOrdenesCompra.add(lblCantidadOrdenesCreadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
-
-        cmbProveedorOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedores", "RIVACELL S.A.C. ", " " }));
-        cmbProveedorOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbProveedorOrdenActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(cmbProveedorOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 310, -1));
-
-        btnCerrarSesion4.setText("Cerrar sesión");
-        btnCerrarSesion4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesion4ActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(btnCerrarSesion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 470, -1, -1));
-
-        cmbMarcaBusqueda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
-        cmbMarcaBusqueda1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMarcaBusqueda1ActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(cmbMarcaBusqueda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 160, -1));
-
-        btnEliminar1.setText("Eliminar");
-        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar1ActionPerformed(evt);
-            }
-        });
-        JP_GenOrdenesCompra.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 110, -1));
-
-        JP_Sistema.addTab("Generación de Ordenes de Compra", JP_GenOrdenesCompra);
-
+        JP_Productos.setBackground(new java.awt.Color(255, 241, 202));
         JP_Productos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -323,50 +182,229 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         });
         JP_Productos.add(btnRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 210, 30));
 
+        cmbMarcaBusqueda.setBackground(new java.awt.Color(255, 227, 187));
         cmbMarcaBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
         cmbMarcaBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbMarcaBusquedaActionPerformed(evt);
             }
         });
-        JP_Productos.add(cmbMarcaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 130, -1));
+        JP_Productos.add(cmbMarcaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 130, -1));
 
+        btnCerrarSesion.setBackground(new java.awt.Color(255, 153, 153));
         btnCerrarSesion.setText("Cerrar sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, -1, 30));
+        JP_Productos.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, 30));
 
+        btnDesc.setBackground(new java.awt.Color(255, 227, 187));
         btnDesc.setText("DESC");
         btnDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDescActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 70, -1));
+        JP_Productos.add(btnDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 70, -1));
 
+        btnAsc.setBackground(new java.awt.Color(255, 227, 187));
         btnAsc.setText("ASC");
         btnAsc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAscActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnAsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 60, 20));
+        JP_Productos.add(btnAsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 60, 20));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        JP_Productos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 360, -1));
+        JP_Productos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 390, -1));
+
+        lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(0, 48, 146));
+        lblLogin.setText("GESTIÓN PRODUCTOS");
+        JP_Productos.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 600, 80));
 
         JP_Sistema.addTab("Productos", JP_Productos);
 
-        getContentPane().add(JP_Sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 610));
+        JP_StockCritico.setBackground(new java.awt.Color(255, 233, 154));
+        JP_StockCritico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        setSize(new java.awt.Dimension(748, 578));
+        btnBuscarStockCritico.setBackground(new java.awt.Color(255, 230, 225));
+        btnBuscarStockCritico.setText("Buscar");
+        JP_StockCritico.add(btnBuscarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, -1, -1));
+        JP_StockCritico.add(txtBusquedaStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 500, -1));
+
+        tblStockCritico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tblStockCritico);
+
+        JP_StockCritico.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 680, 180));
+
+        btnExportarStockCritico.setBackground(new java.awt.Color(255, 153, 51));
+        btnExportarStockCritico.setText("Exportar Stock Crítico PDF");
+        JP_StockCritico.add(btnExportarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 210, 30));
+
+        btnVisualizarProductoDetalle.setBackground(new java.awt.Color(144, 209, 202));
+        btnVisualizarProductoDetalle.setText("Visualizar");
+        btnVisualizarProductoDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarProductoDetalleActionPerformed(evt);
+            }
+        });
+        JP_StockCritico.add(btnVisualizarProductoDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 160, 30));
+
+        cmbMarcaStockCritico.setBackground(new java.awt.Color(255, 230, 225));
+        cmbMarcaStockCritico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
+        JP_StockCritico.add(cmbMarcaStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
+
+        txtDetalleProducto.setColumns(20);
+        txtDetalleProducto.setRows(5);
+        txtDetalleProducto.setText("\n");
+        jScrollPane4.setViewportView(txtDetalleProducto);
+
+        JP_StockCritico.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 430, 150));
+
+        btnCerrarSesion1.setBackground(new java.awt.Color(255, 153, 153));
+        btnCerrarSesion1.setText("Cerrar sesión");
+        btnCerrarSesion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesion1ActionPerformed(evt);
+            }
+        });
+        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, 30));
+
+        lblLogin2.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin2.setForeground(new java.awt.Color(0, 48, 146));
+        lblLogin2.setText("STOCK");
+        JP_StockCritico.add(lblLogin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 600, 80));
+
+        JP_Sistema.addTab("Verificación de Stock", JP_StockCritico);
+
+        JP_GenOrdenesCompra.setBackground(new java.awt.Color(255, 233, 154));
+        JP_GenOrdenesCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblDetalleOrden.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tblDetalleOrden);
+
+        JP_GenOrdenesCompra.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 690, 160));
+
+        btnGenerarPDF1.setBackground(new java.awt.Color(178, 205, 156));
+        btnGenerarPDF1.setText("Generar PDF");
+        btnGenerarPDF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarPDF1ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(btnGenerarPDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 110, -1));
+
+        cmbUbicacionOrden.setBackground(new java.awt.Color(234, 250, 234));
+        cmbUbicacionOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ubicación", "Cajamarca", "Lima", " " }));
+        cmbUbicacionOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUbicacionOrdenActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(cmbUbicacionOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 280, 30));
+
+        cmbModeloOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modelo", "Note 10 5G", "M51", "S7", "14 Note Pro", "K55", "Note 14", "16 5G", "16", "A32", "A50 5G", "A30 5G", "M4 Pro 5G", "200", "Note 12 Pro", "Note 14M", "A10", "Note 12S", "A25 5G", "Note 10S", "Note 10 Pro", "A12", "4.2", "30 C", "X6A", "X7B", "Note 13", "Note 13C", "C31", "14C", "M6 Note", "Y6 Prime", "A Cool", "F Cool", "P Cool", "Y6 2017", "Y6 2019", "B154 Pro", "Y7 Pro 2019", "A03", "E22i", "A09", "E15", "Spark GO1", "A03s", "K22", "Y15S", "A73", "Play 9A", "A9X", "X5 6 Plus", "A3X", "A06", "A05", "A05S", "Blade A05", "Android 6.0", "10 5G", "Mobile 2.5D", "BL 54 prime", "A55", "A35", "Q3", "3", "2", "C100", "I129a", "1Valeaa", "i29a", "F5G", " " }));
+        cmbModeloOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbModeloOrdenActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(cmbModeloOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 160, 30));
+
+        cmbMarcaOrden.setBackground(new java.awt.Color(234, 250, 234));
+        cmbMarcaOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
+        JP_GenOrdenesCompra.add(cmbMarcaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, 30));
+        JP_GenOrdenesCompra.add(txtBusquedaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 500, -1));
+
+        txtCantidad.setBackground(new java.awt.Color(234, 250, 234));
+        JP_GenOrdenesCompra.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 130, 30));
+
+        lblCantidad.setText("Cantidad");
+        JP_GenOrdenesCompra.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 100, -1));
+
+        btnGenerarOrdenCompra.setBackground(new java.awt.Color(234, 250, 234));
+        btnGenerarOrdenCompra.setText("Generar Orden de Compra");
+        btnGenerarOrdenCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarOrdenCompraActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(btnGenerarOrdenCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 280, -1));
+
+        cmbProveedorOrden.setBackground(new java.awt.Color(234, 250, 234));
+        cmbProveedorOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedores", "RIVACELL S.A.C. ", " " }));
+        cmbProveedorOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProveedorOrdenActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(cmbProveedorOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 280, -1));
+
+        cmbMarcaBusqueda1.setBackground(new java.awt.Color(255, 204, 255));
+        cmbMarcaBusqueda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
+        cmbMarcaBusqueda1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMarcaBusqueda1ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(cmbMarcaBusqueda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 160, -1));
+
+        btnEliminar1.setBackground(new java.awt.Color(255, 240, 189));
+        btnEliminar1.setText("Eliminar");
+        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar1ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 90, -1));
+
+        lblLogin1.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin1.setForeground(new java.awt.Color(0, 48, 146));
+        lblLogin1.setText("ORDENES DE COMPRA");
+        JP_GenOrdenesCompra.add(lblLogin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 600, 60));
+
+        btnCerrarSesion2.setBackground(new java.awt.Color(255, 153, 153));
+        btnCerrarSesion2.setText("Cerrar sesión");
+        btnCerrarSesion2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesion2ActionPerformed(evt);
+            }
+        });
+        JP_GenOrdenesCompra.add(btnCerrarSesion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, 30));
+
+        JP_Sistema.addTab("Generación de Ordenes de Compra", JP_GenOrdenesCompra);
+
+        getContentPane().add(JP_Sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 570));
+
+        setSize(new java.awt.Dimension(739, 583));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -524,14 +562,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
-    private void btnCerrarSesion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesion3ActionPerformed
-
-    private void btnCerrarSesion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesion4ActionPerformed
 
     private void mostrarProductosEnTabla(List<Producto> productos) {
         DefaultTableModel modeloTabla = new DefaultTableModel();
@@ -758,6 +788,18 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
+    private void btnCerrarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarSesion1ActionPerformed
+
+    private void btnCerrarSesion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarSesion2ActionPerformed
+
+    private void cmbUbicacionOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUbicacionOrdenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUbicacionOrdenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -808,8 +850,8 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JButton btnAsc;
     private javax.swing.JButton btnBuscarStockCritico;
     private javax.swing.JToggleButton btnCerrarSesion;
-    private javax.swing.JToggleButton btnCerrarSesion3;
-    private javax.swing.JToggleButton btnCerrarSesion4;
+    private javax.swing.JToggleButton btnCerrarSesion1;
+    private javax.swing.JToggleButton btnCerrarSesion2;
     private javax.swing.JButton btnDesc;
     private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnEliminarProducto;
@@ -826,9 +868,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbProveedorOrden;
     private javax.swing.JComboBox<String> cmbUbicacionOrden;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -836,7 +876,9 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lblCantidad;
-    private javax.swing.JLabel lblCantidadOrdenesCreadas;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblLogin1;
+    private javax.swing.JLabel lblLogin2;
     private javax.swing.JTable tblDetalleOrden;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblStockCritico;
