@@ -146,13 +146,46 @@ public class form_AltUsuarios extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- private void addEventHandlers() {
+    private void addEventHandlers() {
+        btnGuardar1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnGuardar1ActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnCerrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
+        btnMostrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
     }
 
     private void populateForm() {
-
+        if (userToEdit != null) {
+            lblCreacion.setText("Edición de Usuario");
+            txtNombre.setText(userToEdit.getNombre());
+            txtApellido.setText(userToEdit.getApellido());
+            txtUsuario1.setText(userToEdit.getUsuario());
+            txtcorreo.setText(userToEdit.getCorreo());
+            // No seteamos la contraseña por seguridad
+            cbroles.setSelectedItem(userToEdit.getRol());
+        }
     }
-
+    public boolean isSuccess(){return successOperation;}
+    
+    
     private void limpiarCampos() {
         txtNombre.setText("");
         txtApellido.setText("");
