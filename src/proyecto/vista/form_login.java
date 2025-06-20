@@ -46,7 +46,6 @@ public class form_login extends javax.swing.JFrame {
         btnSubirTk.setText("Subir Token Admin");
 
         // Añadir ActionListeners a los botones y KeyListener para el campo de usuario
-       
     }
 
     /**
@@ -294,9 +293,11 @@ public class form_login extends javax.swing.JFrame {
     private void btnOlvideContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOlvideContrasenaActionPerformed
         // Abrir la ventana de "Olvidé mi Contraseña" (form_restablecercontra.java)
         Mensajes.mostrarInfo("Abriendo formulario de 'Olvidé mi Contraseña'.");
-        form_restablecercontra restablecerContra = new form_restablecercontra();
+        java.awt.Frame parent = (java.awt.Frame) this.getParent();
+        form_restablecerContraNew restablecerContra = new form_restablecerContraNew(parent, true);
         restablecerContra.setVisible(true);
-        this.dispose(); // Cierra la ventana de login
+        this.dispose();
+        
     }//GEN-LAST:event_btnOlvideContrasenaActionPerformed
 
     private void btnIngresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresar2ActionPerformed
@@ -340,7 +341,7 @@ public class form_login extends javax.swing.JFrame {
                 sistemaAdmin.setVisible(true);
             } else if (loggedInUser.getRol().equalsIgnoreCase("Jefe_Abastecimiento")) {
                 Mensajes.mostrarInfo("Redirigiendo a la Interfaz de Jefe de Abastecimiento.");
-                form_GestionInventario gestionInventario = new form_GestionInventario();
+                form_JefeAbasGestionInventario gestionInventario = new form_JefeAbasGestionInventario();
                 gestionInventario.setVisible(true);
             } else if (loggedInUser.getRol().equalsIgnoreCase("Empleado")) {
                 Mensajes.mostrarInfo("Redirigiendo a la Interfaz de Empleado (Ventas).");
@@ -390,8 +391,8 @@ public class form_login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                new UsuarioController(); 
+
+                new UsuarioController();
                 new form_login().setVisible(true);
             }
         });

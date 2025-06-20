@@ -1,0 +1,4 @@
+Nombre	Apellido	Usuario	Correo	Rol	Contraseña	
+Administrador	General	admin	admin@empresa.com	Admin	********	
+Juan	Perez	empleado1	juan.perez@empresa.com	Empleado	********	
+Derly Yosoni	Cruz Amari	jefeabast	derlyYosoni@empresa.com	Jefe_Abastecimiento	********	

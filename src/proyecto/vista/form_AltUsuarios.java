@@ -192,6 +192,9 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         txtUsuario1.setText("");
         txtcorreo.setText("");
         cbroles.setSelectedIndex(0);
+        String clave = new String(jPasswordFieldB.getPassword());
+        
+        
     }
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarCampos();
@@ -209,6 +212,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         String clave = new String(jPasswordFieldB.getPassword());
         String correo = txtcorreo.getText();
         String rol = (String) cbroles.getSelectedItem();
+       
 // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
             Mensajes.mostrarError("Todos los campos son obligatorios");
@@ -241,6 +245,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
 
         usuarioController.registrarUsuario(nuevo);
         Mensajes.mostrarInfo("Usuario registrado exitosamente");
+        successOperation = true;
         limpiarCampos(); // limpia los campos del formulario
         // actualizarTabla();  eliminado porque no hay tabla aquí
 
@@ -292,7 +297,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                form_AltUsuarios dialog = new form_AltUsuarios(new javax.swing.JFrame(), true);
+                form_AltUsuarios dialog = new form_AltUsuarios(new javax.swing.JFrame(), null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -303,8 +308,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
             }
         });
     }
-    private UsuarioController usuarioController;
-    private LoginController loginController;
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar1;

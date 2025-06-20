@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
-
 package proyecto.controlador;
 
 import java.io.BufferedReader;
@@ -21,10 +19,12 @@ import proyecto.modelo.JefeDeAbastecimiento; // Necesario para crear jefe por de
 import proyecto.modelo.Usuario;
 
 /**
- * Controlador para la gestión de usuarios, incluyendo persistencia en archivo de texto.
- * Maneja la carga, guardado, registro, actualización, eliminación y búsqueda de usuarios xd nose .
+ * Controlador para la gestión de usuarios, incluyendo persistencia en archivo
+ * de texto. Maneja la carga, guardado, registro, actualización, eliminación y
+ * búsqueda de usuarios xd nose .
  */
 public class UsuarioController {
+
     // La lista se mantiene estática para que todas las instancias de los controladores
     // accedan a la misma lista de usuarios en memoria durante la ejecución de la aplicación.
     private static List<Usuario> listaUsuarios = new ArrayList<>();
@@ -34,8 +34,9 @@ public class UsuarioController {
     private static boolean usuariosCargadosInicialmente = false;
 
     /**
-     * Constructor que se encargará de cargar los usuarios al inicio de la aplicación.
-     * Se ejecuta al crear la primera instancia de UsuarioController.
+     * Constructor que se encargará de cargar los usuarios al inicio de la
+     * aplicación. Se ejecuta al crear la primera instancia de
+     * UsuarioController.
      */
     public UsuarioController() {
         if (!usuariosCargadosInicialmente) {
@@ -52,10 +53,10 @@ public class UsuarioController {
     }
 
     // --- Métodos para persistencia en archivo ---
-
     /**
      * Carga los usuarios desde el archivo 'usuarios.txt' a la lista en memoria.
-     * El formato esperado en el archivo es: nombre|apellido|usuario|clave_codificada|correo|rol|tokenAdmin
+     * El formato esperado en el archivo es:
+     * nombre|apellido|usuario|clave_codificada|correo|rol|tokenAdmin
      */
     private void cargarUsuariosDesdeArchivo() {
         listaUsuarios.clear(); // Limpia la lista actual antes de cargar nuevos datos.
@@ -66,7 +67,7 @@ public class UsuarioController {
                 lineNumber++;
                 String[] partes = linea.split("\\|"); // Divide la línea por el delimitador '|'
                 // Verificar que la línea tenga al menos 6 partes (nombre a rol) y hasta 7 (con tokenAdmin)
-                if (partes.length >= 6 && partes.length <= 7) { 
+                if (partes.length >= 6 && partes.length <= 7) {
                     String nombre = partes[0];
                     String apellido = partes[1];
                     String usuarioStr = partes[2]; // 'usuarioStr' para evitar conflicto con la clase 'Usuario'
@@ -121,15 +122,15 @@ public class UsuarioController {
                 // La 'clave' ya debe estar codificada en Base64.
                 // El 'tokenAdmin' solo se guarda si el usuario es Admin y el token no es nulo/vacío.
                 String tokenParaGuardar = (usuario.getRol().equalsIgnoreCase("Admin") && usuario.getTokenAdmin() != null && !usuario.getTokenAdmin().isEmpty())
-                                            ? usuario.getTokenAdmin() : "";
+                        ? usuario.getTokenAdmin() : "";
 
                 String linea = usuario.getNombre() + "|"
-                             + usuario.getApellido() + "|"
-                             + usuario.getUsuario() + "|"
-                             + usuario.getClave() + "|" // Asume que getClave() ya retorna la codificada.
-                             + usuario.getCorreo() + "|"
-                             + usuario.getRol() + "|"
-                             + tokenParaGuardar;
+                        + usuario.getApellido() + "|"
+                        + usuario.getUsuario() + "|"
+                        + usuario.getClave() + "|" // Asume que getClave() ya retorna la codificada.
+                        + usuario.getCorreo() + "|"
+                        + usuario.getRol() + "|"
+                        + tokenParaGuardar;
 
                 bw.write(linea);
                 bw.newLine(); // Agrega un salto de línea para el siguiente usuario.
@@ -143,6 +144,7 @@ public class UsuarioController {
 
     /**
      * Codifica una contraseña de texto plano a Base64.
+     *
      * @param password La contraseña en texto plano.
      * @return La contraseña codificada en Base64.
      */
@@ -155,6 +157,7 @@ public class UsuarioController {
 
     /**
      * Decodifica una contraseña de Base64 a texto plano.
+     *
      * @param encodedPassword La contraseña codificada en Base64.
      * @return La contraseña decodificada en texto plano.
      */
@@ -171,116 +174,120 @@ public class UsuarioController {
     }
 
     /**
-     * Inicializa la lista de usuarios con un administrador, un empleado y un jefe de abastecimiento
-     * por defecto. Se ejecuta si el archivo de usuarios está vacío o no hay un admin registrado.
+     * Inicializa la lista de usuarios con un administrador, un empleado y un
+     * jefe de abastecimiento por defecto. Se ejecuta si el archivo de usuarios
+     * está vacío o no hay un admin registrado.
      */
     private void inicializarUsuariosDefault() {
         // Administrador por defecto (con token)
         Administrador admin = new Administrador(
-            "Administrador",
-            "General",
-            "admin", // Nombre de usuario para login
-            encodePassword("adminpass"), // Contraseña codificada
-            "admin@empresa.com",
-            "Admin",
-            "4a3b8c2d-9e1f-4g5h-6i7j-8k9l0m1n2o3p" // El token para el administrador
+                "Administrador",
+                "General",
+                "admin", // Nombre de usuario para login
+                encodePassword("adminpass"), // Contraseña codificada
+                "admin@empresa.com",
+                "Admin",
+                "4a3b8c2d-9e1f-4g5h-6i7j-8k9l0m1n2o3p" // El token para el administrador
         );
         listaUsuarios.add(admin);
 
         // Empleado por defecto (sin token)
         Empleado empleado = new Empleado(
-            "Juan",
-            "Perez",
-            "empleado1", // Nombre de usuario para login
-            encodePassword("empleadopass"), // Contraseña codificada
-            "juan.perez@empresa.com",
-            "Empleado"
+                "Juan",
+                "Perez",
+                "empleado1", // Nombre de usuario para login
+                encodePassword("empleadopass"), // Contraseña codificada
+                "juan.perez@empresa.com",
+                "Empleado"
         );
         listaUsuarios.add(empleado);
 
         // Jefe de Abastecimiento por defecto (sin token)
         JefeDeAbastecimiento jefe = new JefeDeAbastecimiento(
-            "Derly Yosoni",
-            "Cruz Amari",
-            "jefeabast", // Nombre de usuario para login
-            encodePassword("1356989*Abc_A"), // Contraseña codificada
-            "derlyYosoni@empresa.com",
-            "Jefe_Abastecimiento"
+                "Derly Yosoni",
+                "Cruz Amari",
+                "jefeabast", // Nombre de usuario para login
+                encodePassword("1356989*Abc_A"), // Contraseña codificada
+                "derlyYosoni@empresa.com",
+                "Jefe_Abastecimiento"
         );
         listaUsuarios.add(jefe);
     }
 
     // --- Métodos de gestión de usuarios (CRUD) ---
-
     /**
-     * Busca un usuario en la lista por su nombre de usuario (ignorando mayúsculas/minúsculas).
+     * Busca un usuario en la lista por su nombre de usuario (ignorando
+     * mayúsculas/minúsculas).
+     *
      * @param usuario El nombre de usuario a buscar.
      * @return El objeto Usuario si se encuentra, de lo contrario, null.
      */
     public Usuario buscarPorUsuario(String usuario) {
         return listaUsuarios.stream()
-                            .filter(u -> u.getUsuario().equalsIgnoreCase(usuario))
-                            .findFirst()
-                            .orElse(null);
+                .filter(u -> u.getUsuario().equalsIgnoreCase(usuario))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
-     * Busca un usuario en la lista por su correo electrónico (ignorando mayúsculas/minúsculas).
+     * Busca un usuario en la lista por su correo electrónico (ignorando
+     * mayúsculas/minúsculas).
+     *
      * @param correo El correo electrónico a buscar.
      * @return El objeto Usuario si se encuentra, de lo contrario, null.
      */
     public Usuario buscarPorCorreo(String correo) {
         return listaUsuarios.stream()
-                            .filter(u -> u.getCorreo().equalsIgnoreCase(correo))
-                            .findFirst()
-                            .orElse(null);
+                .filter(u -> u.getCorreo().equalsIgnoreCase(correo))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
-     * Registra un nuevo usuario en el sistema.
-     * La contraseña en el objeto 'usuario' debe venir en texto plano desde la UI.
-     * Este método la codificará antes de guardarla.
+     * Registra un nuevo usuario en el sistema. La contraseña en el objeto
+     * 'usuario' debe venir en texto plano desde la UI. Este método la
+     * codificará antes de guardarla.
+     *
      * @param usuario El objeto Usuario a registrar.
-     * @return true si el usuario se registró exitosamente, false si ya existe un usuario con el mismo nombre.
+     * @return true si el usuario se registró exitosamente, false si ya existe
+     * un usuario con el mismo nombre.
      */
     public boolean registrarUsuario(Usuario usuario) {
         if (buscarPorUsuario(usuario.getUsuario()) != null) {
             return false; // RF-042: Ya existe un usuario con este nombre de usuario.
         }
-        
+
         // Codifica la contraseña del usuario antes de añadirla a la lista y guardarla.
         // Asume que la clave del objeto 'usuario' viene en texto plano del formulario.
         usuario.setClave(encodePassword(usuario.getClave()));
-        
-        // El token del admin, si se proporciona, ya viene en el objeto Usuario y se guarda directamente.
 
+        // El token del admin, si se proporciona, ya viene en el objeto Usuario y se guarda directamente.
         listaUsuarios.add(usuario);
         guardarUsuariosEnArchivo(); // Persiste los cambios en el archivo.
         return true;
     }
 
     /**
-     * Actualiza la información de un usuario existente*
-     * La contraseña en el objeto 'usuarioActualizado' puede ser:
-     * 1. Una nueva contraseña en texto plano (si el usuario la cambió en el formulario).
-     * 2. La contraseña codificada existente (si el campo de contraseña se dejó vacío).
-     * param usuarioActualizado El objeto Usuario con la información actualizada.
-     * return true si el usuario se actualizó exitosamente, false si el usuario no fue encontrado.
+     * Actualiza la información de un usuario existente* La contraseña en el
+     * objeto 'usuarioActualizado' puede ser: 1. Una nueva contraseña en texto
+     * plano (si el usuario la cambió en el formulario). 2. La contraseña
+     * codificada existente (si el campo de contraseña se dejó vacío). param
+     * usuarioActualizado El objeto Usuario con la información actualizada.
+     * return true si el usuario se actualizó exitosamente, false si el usuario
+     * no fue encontrado.
      */
-    
-    
     public boolean actualizarUsuario(Usuario usuarioActualizado) {
         boolean encontrado = false;
         for (int i = 0; i < listaUsuarios.size(); i++) {
             if (listaUsuarios.get(i).getUsuario().equalsIgnoreCase(usuarioActualizado.getUsuario())) {
                 Usuario usuarioExistente = listaUsuarios.get(i);
-                
+
                 // Actualiza los campos del usuario existente con los nuevos valores.
                 usuarioExistente.setNombre(usuarioActualizado.getNombre());
                 usuarioExistente.setApellido(usuarioActualizado.getApellido());
                 usuarioExistente.setCorreo(usuarioActualizado.getCorreo());
                 usuarioExistente.setRol(usuarioActualizado.getRol());
-                
+
                 // Manejo de la contraseña:
                 String nuevaClavePlana = usuarioActualizado.getClave(); // Clave del formulario (puede ser texto plano o vacío)
                 if (nuevaClavePlana != null && !nuevaClavePlana.isEmpty()) {
@@ -311,17 +318,21 @@ public class UsuarioController {
 
     /**
      * Elimina un usuario de la lista y persiste los cambios en el archivo.
+     *
      * @param usuarioNombre El nombre de usuario del usuario a eliminar.
+     * @return
      */
-    public void eliminarUsuario(String usuarioNombre) {
+    public boolean eliminarUsuario(String usuarioNombre) {
         boolean eliminado = listaUsuarios.removeIf(u -> u.getUsuario().equalsIgnoreCase(usuarioNombre));
         if (eliminado) {
             guardarUsuariosEnArchivo(); // Persiste los cambios si se eliminó un usuario.
         }
+        return eliminado;
     }
 
     /**
      * Devuelve una copia de la lista actual de usuarios registrados.
+     *
      * @return Una nueva ArrayList con todos los objetos Usuario.
      */
     public List<Usuario> listarUsuarios() {
@@ -330,6 +341,7 @@ public class UsuarioController {
 
     /**
      * Verifica si existe al menos un usuario con el rol "Admin".
+     *
      * @return true si se encuentra un administrador, false de lo contrario.
      */
     public boolean existeAdmin() {
@@ -337,12 +349,15 @@ public class UsuarioController {
     }
 
     /**
-     * Restablece la contraseña de un usuario si el nombre de usuario y el correo coinciden.
-     * Este método se utiliza para la funcionalidad "Olvidé mi Contraseña".
+     * Restablece la contraseña de un usuario si el nombre de usuario y el
+     * correo coinciden. Este método se utiliza para la funcionalidad "Olvidé mi
+     * Contraseña".
+     *
      * @param username El nombre de usuario.
      * @param email El correo electrónico registrado.
      * @param newPassword La nueva contraseña en texto plano.
-     * @return true si la contraseña se restableció exitosamente, false si las credenciales no coinciden.
+     * @return true si la contraseña se restableció exitosamente, false si las
+     * credenciales no coinciden.
      */
     public boolean restablecerContrasena(String username, String email, String newPassword) {
         Usuario user = buscarPorUsuario(username);

@@ -82,6 +82,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnCredencialesUsuarios = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         btnExportarUsuariosPdf = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Admin");
@@ -98,7 +99,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         lblSistemaAdminstrador.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador.setForeground(new java.awt.Color(0, 48, 146));
         lblSistemaAdminstrador.setText("Sistema Administrador de Usuarios");
-        bg.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 660, 60));
+        bg.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 660, 60));
 
         tableAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,7 +114,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableAdmin);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 650, 320));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 650, 270));
 
         jPanel1.setBackground(new java.awt.Color(54, 116, 181));
 
@@ -184,13 +185,13 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,9 +205,9 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                .addGap(71, 71, 71)
                 .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 620));
@@ -214,7 +215,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnCredencialesUsuarios.setBackground(new java.awt.Color(0, 48, 146));
         btnCredencialesUsuarios.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnCredencialesUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnCredencialesUsuarios.setText("Genear Txt Respaldo");
+        btnCredencialesUsuarios.setText("Generar TXT de Backup");
         btnCredencialesUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
         btnCredencialesUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCredencialesUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +223,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 btnCredencialesUsuariosActionPerformed(evt);
             }
         });
-        bg.add(btnCredencialesUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 220, 40));
+        bg.add(btnCredencialesUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 220, 40));
         bg.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 120, 40));
 
         btnExportarUsuariosPdf.setBackground(new java.awt.Color(0, 48, 146));
@@ -236,11 +237,18 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 btnExportarUsuariosPdfActionPerformed(evt);
             }
         });
-        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, 220, 40));
+        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 220, 40));
 
-        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 620));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 520, -1));
 
-        setSize(new java.awt.Dimension(862, 624));
+        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 490));
+
+        setSize(new java.awt.Dimension(862, 495));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -347,7 +355,39 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void BorrarUsuario() {
+        int filaSeleccionada = tableAdmin.getSelectedRow();
 
+        if (filaSeleccionada == -1) {
+            Mensajes.mostrarAdvertencia("Selecciona un usuario de la tabla para eliminar.");
+            return;
+        }
+
+        // Obtener el nombre de usuario (columna 2, índice 2)
+        String nombreUsuario = (String) tableModel.getValueAt(filaSeleccionada, 2);
+
+        // Protección para evitar eliminar al admin
+        if ("admin".equalsIgnoreCase(nombreUsuario)) {
+            Mensajes.mostrarAdvertencia("El usuario administrador no puede ser eliminado.");
+            return;
+        }
+
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas eliminar al usuario \"" + nombreUsuario + "\"?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            boolean eliminado = usuarioController.eliminarUsuario(nombreUsuario);
+
+            if (eliminado) {
+                Mensajes.mostrarInfo("Usuario eliminado correctamente.");
+                cargarTablaUsuarios(); // Refrescar la tabla
+            } else {
+                Mensajes.mostrarError("No se pudo eliminar el usuario. Verifica si existe.");
+            }
+        }
     }
 
 
@@ -372,16 +412,27 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String nombreArchivo = "respaldo_admin_" + timestamp + ".txt";
             File archivo = new File(nombreArchivo);
-            FileWriter writer = new FileWriter(archivo);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(archivo));
 
-            // Aquí agregas los datos que quieres guardar
-            writer.write("Datos de respaldo aquí...");
+            // Escribir encabezados
+            for (int col = 0; col < tableAdmin.getColumnCount(); col++) {
+                writer.write(tableAdmin.getColumnName(col) + "\t");
+            }
+            writer.newLine();
+
+            // Escribir filas
+            for (int row = 0; row < tableAdmin.getRowCount(); row++) {
+                for (int col = 0; col < tableAdmin.getColumnCount(); col++) {
+                    Object valor = tableAdmin.getValueAt(row, col);
+                    writer.write((valor != null ? valor.toString() : "") + "\t");
+                }
+                writer.newLine();
+            }
 
             writer.close();
-
-            JOptionPane.showMessageDialog(null, "Respaldo generado correctamente: " + nombreArchivo);
+            JOptionPane.showMessageDialog(this, "Respaldo generado correctamente:\n" + archivo.getAbsolutePath());
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al generar el archivo: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al generar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -395,7 +446,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private void btnReportedeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportedeVentasActionPerformed
         Mensajes.mostrarInfo("Abriendo el Panel de Reporte de Ventas.");
         // Aquí se abre la ventana form_PaneldeVentasAdming sin cerrar esta.
-        form_PaneldeVentasAdming panelVentas = new form_PaneldeVentasAdming();
+        Panel_ReporteVentasAdmin panelVentas = new Panel_ReporteVentasAdmin(this, true);
         panelVentas.setVisible(true);
         // NO this.dispose(); porque esta ventana debe permanecer abierta.
     }//GEN-LAST:event_btnReportedeVentasActionPerformed
@@ -403,6 +454,10 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private void btnExportarUsuariosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarUsuariosPdfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExportarUsuariosPdfActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,6 +511,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblSistemaAdminstrador;
     private javax.swing.JTable tableAdmin;
     // End of variables declaration//GEN-END:variables
