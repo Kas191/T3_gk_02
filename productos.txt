@@ -73,3 +73,5 @@ Very Kool|i29a|1105.96
 Snap nini|3|1463.4
 Snap nini|3|742.47
 Logic|F5G|439.86
+M15|Itel|200.0
+Samsung|A20|200.0

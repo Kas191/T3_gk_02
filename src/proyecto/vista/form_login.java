@@ -179,6 +179,11 @@ public class form_login extends javax.swing.JFrame {
         bg.add(lblTokenAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 90, 30));
 
         jPasswordFieldA1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        jPasswordFieldA1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldA1ActionPerformed(evt);
+            }
+        });
         bg.add(jPasswordFieldA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 210, 40));
         bg.add(txtTokenAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 120, -1));
 
@@ -353,6 +358,10 @@ public class form_login extends javax.swing.JFrame {
             Mensajes.mostrarError("Usuario, contraseña o token incorrectos.");
         }
     }//GEN-LAST:event_btnIngresar2ActionPerformed
+
+    private void jPasswordFieldA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldA1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldA1ActionPerformed
 
     /**
      * @param args the command line arguments

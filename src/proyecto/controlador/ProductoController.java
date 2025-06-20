@@ -25,11 +25,15 @@ import proyecto.modelo.Producto;
  */
 public class ProductoController {
 
-    private static List<Producto> listaProductos = new ArrayList<>();
+    public static List<Producto> listaProductos = new ArrayList<>();
     private static final String ARCHIVO_PRODUCTOS = "productos.txt";
 
     public ProductoController() {
         cargarProductosDesdeArchivo();
+    }
+
+    public List<Producto> listarProductos() {
+        return new ArrayList<>(listaProductos);
     }
 
     private void cargarProductosDesdeArchivo() {
@@ -39,9 +43,9 @@ public class ProductoController {
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split("\\|");
                 if (partes.length == 3) {
-                    String modelo = partes[0];
-                    String marca = partes[1];
-                    double precio = Double.parseDouble(partes[2]);
+                    String modelo = partes[0].trim();
+                    String marca = partes[1].trim(); // 👈 aquí se corrige
+                    double precio = Double.parseDouble(partes[2].trim());
                     Producto producto = new Producto(modelo, marca, precio);
                     listaProductos.add(producto);
                 }
@@ -89,14 +93,14 @@ public class ProductoController {
     }
 
     public boolean eliminarProducto(String modelo, String marca) {
-        boolean eliminado = listaProductos.removeIf(p -> p.getModelo().equalsIgnoreCase(modelo) && p.getMarca().equalsIgnoreCase(marca));
+        boolean eliminado = listaProductos.removeIf(p
+                -> p.getModelo().equalsIgnoreCase(modelo)
+                && p.getMarca().equalsIgnoreCase(marca)
+        );
+
         if (eliminado) {
             return guardarProductosEnArchivo();
         }
         return false;
-    }
-
-    public List<Producto> listarProductos() {
-        return new ArrayList<>(listaProductos);
     }
 }

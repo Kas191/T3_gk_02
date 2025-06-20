@@ -85,7 +85,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         });
         jPanel1.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 240, 40));
 
-        cmbMarcaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", " " }));
+        cmbMarcaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
         jPanel1.add(cmbMarcaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, -1));
 
         lblCorreo1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -136,7 +136,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         lblSistemaAdminstrador.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador.setForeground(new java.awt.Color(0, 48, 146));
         lblSistemaAdminstrador.setText("Productos");
-        jPanel1.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 300, 60));
+        jPanel1.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 300, 60));
 
         lblSistemaAdminstrador1.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador1.setForeground(new java.awt.Color(0, 48, 146));
@@ -148,6 +148,11 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean productoRegistrado = false;
+
+    public boolean isProductoRegistrado() {
+        return productoRegistrado;
+    }
     private void txtpasscontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasscontrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpasscontrasenaActionPerformed
@@ -161,31 +166,40 @@ public class form_RegistraProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_txtModeloProductoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        productoRegistrado = false;
+        dispose(); // Cierra el JDialog
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
         String modelo = txtModeloProducto.getText().trim();
-        String marca = (String) cmbMarcaProducto.getSelectedItem();
-        String precioStr = txtPrecioProducto.getText().trim();
+        String marca = cmbMarcaProducto.getSelectedItem().toString();
+        String precioTexto = txtPrecioProducto.getText().trim();
 
-        if (modelo.isEmpty() || marca == null || precioStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+        // Validación básica
+        if (modelo.isEmpty() || marca.equals("Seleccione") || precioTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        double precio;
         try {
-            double precio = Double.parseDouble(precioStr);
-            Producto nuevo = new Producto(modelo, marca, precio);
-            ProductoController pc = new ProductoController();
-            if (pc.registrarProducto(nuevo)) {
-                JOptionPane.showMessageDialog(this, "Producto registrado.");
-                dispose(); // Cierra el JDialog
-            } else {
-                JOptionPane.showMessageDialog(this, "Ya existe ese producto.");
-            }
+            precio = Double.parseDouble(precioTexto);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Precio inválido.");
+            JOptionPane.showMessageDialog(this, "Ingrese un precio válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Producto nuevoProducto = new Producto(modelo, marca, precio);
+        ProductoController controller = new ProductoController();
+
+        boolean guardado = controller.registrarProducto(nuevoProducto);
+
+        if (guardado) {
+            JOptionPane.showMessageDialog(this, "Producto registrado correctamente.");
+            productoRegistrado = true;
+            dispose(); // Cierra el JDialog
+        } else {
+            JOptionPane.showMessageDialog(this, "El producto ya existe o ocurrió un error.");
         }
     }//GEN-LAST:event_btnGuardarProductoActionPerformed
 
