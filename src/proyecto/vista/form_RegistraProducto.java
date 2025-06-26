@@ -206,7 +206,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
             return;
         }
 
-        Producto nuevoProducto = new Producto(modelo, marca, precio,stock);
+        Producto nuevoProducto = new Producto(marca, modelo, precio,stock);
         ProductoController controller = new ProductoController();
 
         boolean guardado = controller.registrarProducto(nuevoProducto);

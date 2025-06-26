@@ -45,9 +45,8 @@ public class ProductoController {
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(";");
                 if (partes.length == 4) {
-
-                    String marca = partes[1].trim();
-                    String modelo = partes[0].trim();
+                    String marca = partes[0].trim();       // MARCA primero
+                    String modelo = partes[1].trim();      // MODELO luego
                     double precio = Double.parseDouble(partes[2].trim());
                     int stock = Integer.parseInt(partes[3].trim());
                     Producto producto = new Producto(marca, modelo, precio, stock);
@@ -87,7 +86,7 @@ public class ProductoController {
     public boolean actualizarProducto(Producto productoActualizado) {
         for (int i = 0; i < listaProductos.size(); i++) {
             Producto actual = listaProductos.get(i);
-            if (  actual.getMarca().equalsIgnoreCase(productoActualizado.getMarca())
+            if (actual.getMarca().equalsIgnoreCase(productoActualizado.getMarca())
                     && actual.getModelo().equalsIgnoreCase(productoActualizado.getModelo())) {
                 listaProductos.set(i, productoActualizado);
                 return guardarProductosEnArchivo();
@@ -103,7 +102,7 @@ public class ProductoController {
         );
 
         if (eliminado) {
-            // Ordenar primero por Marca, luego por Modelo
+            // Ordenar por Marca, luego Modelo
             Collections.sort(listaProductos, new Comparator<Producto>() {
                 @Override
                 public int compare(Producto p1, Producto p2) {
@@ -111,7 +110,6 @@ public class ProductoController {
                     return (comp != 0) ? comp : p1.getModelo().compareToIgnoreCase(p2.getModelo());
                 }
             });
-
             return guardarProductosEnArchivo();
         }
 

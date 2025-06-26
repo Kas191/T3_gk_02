@@ -538,27 +538,32 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
             return;
         }
 
-        String marca = tblProductos.getValueAt(filaSeleccionada, 0).toString();   // Columna 0 = Marca
-        String modelo = tblProductos.getValueAt(filaSeleccionada, 1).toString();  // Columna 1 = Modelo
+        // ? CORREGIDO: primero MARCA, luego MODELO
+        String marca = tblProductos.getValueAt(filaSeleccionada, 0).toString(); // Columna 0 = Marca
+        String modelo = tblProductos.getValueAt(filaSeleccionada, 1).toString(); // Columna 1 = Modelo
 
-        int confirmacion = JOptionPane.showConfirmDialog(this,
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
                 "¿Estás seguro que deseas eliminar el producto:\nMarca: " + marca + "\nModelo: " + modelo + "?",
                 "Confirmar eliminación",
-                JOptionPane.YES_NO_OPTION);
+                JOptionPane.YES_NO_OPTION
+        );
 
         if (confirmacion == JOptionPane.YES_OPTION) {
             ProductoController controller = new ProductoController();
-            boolean eliminado = controller.eliminarProducto(modelo, marca); // modelo primero, luego marca
+
+            // ⚠️ CORREGIDO: primero marca, luego modelo
+            boolean eliminado = controller.eliminarProducto(marca, modelo);
 
             if (eliminado) {
                 JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
-                cmbMarcaBusquedaActionPerformed(null); // refresca tabla filtrada
+                cmbMarcaBusquedaActionPerformed(null); // refresca tabla si está filtrada
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
 
-        cargarTablaProductos();
+            cargarTablaProductos(); // refresca la tabla completa
+        }
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
