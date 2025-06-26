@@ -277,7 +277,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnCerrarSesion1ActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 540, -1, 30));
+        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 530, -1, 30));
 
         lblLogin2.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblLogin2.setForeground(new java.awt.Color(0, 48, 146));
@@ -887,11 +887,41 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnCerrarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion1ActionPerformed
-        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas cerrar sesión?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Abre el formulario de login
+            form_login login = new form_login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+
+            // Cierra la ventana actual
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCerrarSesion1ActionPerformed
 
     private void btnCerrarSesion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion2ActionPerformed
-        // TODO add your handling code here:
+         int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas cerrar sesión?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Abre el formulario de login
+            form_login login = new form_login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+
+            // Cierra la ventana actual
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCerrarSesion2ActionPerformed
 
     private void cmbUbicacionOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUbicacionOrdenActionPerformed
