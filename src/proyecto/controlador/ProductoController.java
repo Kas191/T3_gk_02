@@ -115,4 +115,15 @@ public class ProductoController {
 
         return false;
     }
+
+    public boolean actualizarStock(String marca, String modelo, int nuevoStock) {
+        for (Producto p : listaProductos) {
+            if (p.getMarca().equalsIgnoreCase(marca) && p.getModelo().equalsIgnoreCase(modelo)) {
+                p.setStock(nuevoStock);
+                return guardarProductosEnArchivo();
+            }
+        }
+        return false;
+    }
+
 }

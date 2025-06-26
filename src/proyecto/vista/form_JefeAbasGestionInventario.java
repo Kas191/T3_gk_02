@@ -1,5 +1,6 @@
 package proyecto.vista;
 
+import java.text.DecimalFormat;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Comparator;
@@ -106,7 +107,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         btnAsc = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         lblLogin = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnActualizarCantidad = new javax.swing.JButton();
         JP_StockCritico = new javax.swing.JPanel();
         btnBuscarStockCritico = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -231,8 +232,13 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         lblLogin.setText("GESTIÓN PRODUCTOS");
         JP_Productos.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 600, 80));
 
-        jButton2.setText("Actualizar Cantidad");
-        JP_Productos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 150, 30));
+        btnActualizarCantidad.setText("Actualizar Cantidad");
+        btnActualizarCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarCantidadActionPerformed(evt);
+            }
+        });
+        JP_Productos.add(btnActualizarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 150, 30));
 
         JP_Sistema.addTab("Productos", JP_Productos);
 
@@ -644,6 +650,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
 
     public void generarPDFOrdenCompra() {
         JFileChooser fileChooser = new JFileChooser();
+        DecimalFormat formatoDecimal = new DecimalFormat("#.00");
         fileChooser.setDialogTitle("Guardar PDF de Orden de Compra");
 
         int userSelection = fileChooser.showSaveDialog(this);
@@ -661,7 +668,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
 
                 // Encabezado
                 Font tituloFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Font.BOLD, Color.RED);
-                Paragraph titulo = new Paragraph("ORDEN DE COMPRA - MULTITEC D & J MEPRESA", tituloFont);
+                Paragraph titulo = new Paragraph("ORDEN DE COMPRA - MULTITEC D & J EMPRESA", tituloFont);
                 titulo.setAlignment(Element.ALIGN_CENTER);
                 documento.add(titulo);
 
@@ -694,6 +701,14 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                         tabla.addCell(modeloTabla.getValueAt(i, 4).toString()); // Cantidad
                         tabla.addCell(modeloTabla.getValueAt(i, 5).toString()); // Precio Unitario
                         tabla.addCell(modeloTabla.getValueAt(i, 6).toString()); // Total
+
+                        // Formatear precio unitario y total con 2 decimales
+                        double precioUnitario = Double.parseDouble(modeloTabla.getValueAt(i, 5).toString());
+                        double total = Double.parseDouble(modeloTabla.getValueAt(i, 6).toString());
+
+                        tabla.addCell("S/ " + formatoDecimal.format(precioUnitario));
+                        tabla.addCell("S/ " + formatoDecimal.format(total));
+
                     }
                 }
 
@@ -823,6 +838,54 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbUbicacionOrdenActionPerformed
 
+    private void btnActualizarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCantidadActionPerformed
+        int filaSeleccionada = tblProductos.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor selecciona un producto para actualizar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String marca = tblProductos.getValueAt(filaSeleccionada, 0).toString();
+        String modelo = tblProductos.getValueAt(filaSeleccionada, 1).toString();
+        String stockActual = tblProductos.getValueAt(filaSeleccionada, 3).toString();
+
+        String nuevoStockStr = JOptionPane.showInputDialog(this,
+                "Producto seleccionado:\nMarca: " + marca + "\nModelo: " + modelo
+                + "\nStock actual: " + stockActual + "\n\nIngrese el nuevo stock:");
+
+        if (nuevoStockStr != null && !nuevoStockStr.trim().isEmpty()) {
+            try {
+                int nuevoStock = Integer.parseInt(nuevoStockStr.trim());
+
+                if (nuevoStock < 0) {
+                    JOptionPane.showMessageDialog(this, "El stock no puede ser negativo.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int confirmacion = JOptionPane.showConfirmDialog(this,
+                        "¿Deseas actualizar el stock de:\nMarca: " + marca + "\nModelo: " + modelo
+                        + "\na " + nuevoStock + " unidades?",
+                        "Confirmar actualización", JOptionPane.YES_NO_OPTION);
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    ProductoController controller = new ProductoController();
+                    boolean actualizado = controller.actualizarStock(marca, modelo, nuevoStock);
+
+                    if (actualizado) {
+                        JOptionPane.showMessageDialog(this, "Stock actualizado correctamente.");
+                        cargarTablaProductos(); // Refresca la tabla
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo actualizar el stock.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnActualizarCantidadActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -870,6 +933,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JPanel JP_Productos;
     private javax.swing.JTabbedPane JP_Sistema;
     private javax.swing.JPanel JP_StockCritico;
+    private javax.swing.JButton btnActualizarCantidad;
     private javax.swing.JButton btnAsc;
     private javax.swing.JButton btnBuscarStockCritico;
     private javax.swing.JToggleButton btnCerrarSesion;
@@ -891,7 +955,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbProveedorOrden;
     private javax.swing.JComboBox<String> cmbUbicacionOrden;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
