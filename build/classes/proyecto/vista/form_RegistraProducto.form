@@ -134,32 +134,33 @@
         <Component class="javax.swing.JComboBox" name="cmbMarcaProducto">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="25">
-                <StringItem index="0" value="Samsung"/>
-                <StringItem index="1" value="Redmi"/>
-                <StringItem index="2" value="Huawei"/>
-                <StringItem index="3" value="Motorola"/>
-                <StringItem index="4" value="POCO"/>
-                <StringItem index="5" value="Honor"/>
-                <StringItem index="6" value="ZTE"/>
-                <StringItem index="7" value="LG"/>
-                <StringItem index="8" value="Nokia"/>
-                <StringItem index="9" value="Vivo"/>
-                <StringItem index="10" value="Tecno"/>
-                <StringItem index="11" value="Itel"/>
-                <StringItem index="12" value="Meizu"/>
-                <StringItem index="13" value="Etoway"/>
-                <StringItem index="14" value="JTEl"/>
-                <StringItem index="15" value="SPARK"/>
-                <StringItem index="16" value="Lotn"/>
-                <StringItem index="17" value="Snapnini"/>
-                <StringItem index="18" value="Sky Rock"/>
-                <StringItem index="19" value="Sole"/>
-                <StringItem index="20" value="Very Kool"/>
-                <StringItem index="21" value="Logic"/>
-                <StringItem index="22" value="Verde"/>
-                <StringItem index="23" value="Gol"/>
-                <StringItem index="24" value="Movie"/>
+              <StringArray count="26">
+                <StringItem index="0" value="Seleccione"/>
+                <StringItem index="1" value="Samsung"/>
+                <StringItem index="2" value="Redmi"/>
+                <StringItem index="3" value="Huawei"/>
+                <StringItem index="4" value="Motorola"/>
+                <StringItem index="5" value="POCO"/>
+                <StringItem index="6" value="Honor"/>
+                <StringItem index="7" value="ZTE"/>
+                <StringItem index="8" value="LG"/>
+                <StringItem index="9" value="Nokia"/>
+                <StringItem index="10" value="Vivo"/>
+                <StringItem index="11" value="Tecno"/>
+                <StringItem index="12" value="Itel"/>
+                <StringItem index="13" value="Meizu"/>
+                <StringItem index="14" value="Etoway"/>
+                <StringItem index="15" value="JTEl"/>
+                <StringItem index="16" value="SPARK"/>
+                <StringItem index="17" value="Lotn"/>
+                <StringItem index="18" value="Snapnini"/>
+                <StringItem index="19" value="Sky Rock"/>
+                <StringItem index="20" value="Sole"/>
+                <StringItem index="21" value="Very Kool"/>
+                <StringItem index="22" value="Logic"/>
+                <StringItem index="23" value="Verde"/>
+                <StringItem index="24" value="Gol"/>
+                <StringItem index="25" value="Movie"/>
               </StringArray>
             </Property>
           </Properties>

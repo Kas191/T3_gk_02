@@ -40,6 +40,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfPCell;
 import java.awt.Color;
+import java.awt.Component;
 
 // Utilidades Java
 import java.awt.event.ActionEvent;
@@ -50,6 +51,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +64,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -109,16 +112,14 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         lblLogin = new javax.swing.JLabel();
         btnActualizarCantidad = new javax.swing.JButton();
         JP_StockCritico = new javax.swing.JPanel();
-        btnBuscarStockCritico = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblStockCritico = new javax.swing.JTable();
-        btnExportarStockCritico = new javax.swing.JButton();
         btnVisualizarProductoDetalle = new javax.swing.JButton();
-        cmbMarcaStockCritico = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtDetalleProducto = new javax.swing.JTextArea();
         btnCerrarSesion1 = new javax.swing.JToggleButton();
         lblLogin2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        cmbNivelStock = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         JP_GenOrdenesCompra = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDetalleOrden = new javax.swing.JTable();
@@ -245,10 +246,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         JP_StockCritico.setBackground(new java.awt.Color(255, 233, 154));
         JP_StockCritico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBuscarStockCritico.setBackground(new java.awt.Color(255, 230, 225));
-        btnBuscarStockCritico.setText("Buscar");
-        JP_StockCritico.add(btnBuscarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, -1, -1));
-
         tblStockCritico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -262,11 +259,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblStockCritico);
 
-        JP_StockCritico.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 680, 180));
-
-        btnExportarStockCritico.setBackground(new java.awt.Color(255, 153, 51));
-        btnExportarStockCritico.setText("Exportar Stock Crítico PDF");
-        JP_StockCritico.add(btnExportarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 210, 30));
+        JP_StockCritico.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 870, 360));
 
         btnVisualizarProductoDetalle.setBackground(new java.awt.Color(144, 209, 202));
         btnVisualizarProductoDetalle.setText("Visualizar");
@@ -275,18 +268,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnVisualizarProductoDetalleActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(btnVisualizarProductoDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 160, 30));
-
-        cmbMarcaStockCritico.setBackground(new java.awt.Color(255, 230, 225));
-        cmbMarcaStockCritico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
-        JP_StockCritico.add(cmbMarcaStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
-
-        txtDetalleProducto.setColumns(20);
-        txtDetalleProducto.setRows(5);
-        txtDetalleProducto.setText("\n");
-        jScrollPane4.setViewportView(txtDetalleProducto);
-
-        JP_StockCritico.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 430, 150));
+        JP_StockCritico.add(btnVisualizarProductoDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 120, 30));
 
         btnCerrarSesion1.setBackground(new java.awt.Color(255, 153, 153));
         btnCerrarSesion1.setText("Cerrar sesión");
@@ -295,12 +277,31 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnCerrarSesion1ActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, -1, 30));
+        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 540, -1, 30));
 
         lblLogin2.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblLogin2.setForeground(new java.awt.Color(0, 48, 146));
-        lblLogin2.setText("STOCK");
-        JP_StockCritico.add(lblLogin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 600, 80));
+        lblLogin2.setText("Verificación de Stock");
+        JP_StockCritico.add(lblLogin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 600, 80));
+
+        jButton2.setText("Resumen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        JP_StockCritico.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 100, 30));
+
+        cmbNivelStock.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Crítico", "Moderado" }));
+        cmbNivelStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNivelStockActionPerformed(evt);
+            }
+        });
+        JP_StockCritico.add(cmbNivelStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, -1, -1));
+
+        jLabel1.setText("Nivel de Stock: ");
+        JP_StockCritico.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, -1, -1));
 
         JP_Sistema.addTab("Verificación de Stock", JP_StockCritico);
 
@@ -411,9 +412,9 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
 
         JP_Sistema.addTab("Generación de Ordenes de Compra", JP_GenOrdenesCompra);
 
-        getContentPane().add(JP_Sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 570));
+        getContentPane().add(JP_Sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 620));
 
-        setSize(new java.awt.Dimension(739, 583));
+        setSize(new java.awt.Dimension(921, 625));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -478,10 +479,69 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         tblDetalleOrden.setModel(modelo);
     }
 
+    private void cargarTablaStockCritico() {
+        // Configurar el modelo de la tabla con columnas
+        DefaultTableModel modelo = new DefaultTableModel(
+                new Object[]{"Marca", "Modelo", "Precio", "Stock", "Nivel"}, 0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // La tabla será solo de lectura
+            }
+        };
+
+        tblStockCritico.setModel(modelo);
+
+        // Verificar si hay productos en la lista
+        if (ProductoController.listaProductos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Llenar la tabla con los productos
+        for (Producto p : ProductoController.listaProductos) {
+            String nivel = (p.getStock() < 3) ? "Crítico" : "Moderado";
+            modelo.addRow(new Object[]{
+                p.getMarca(),
+                p.getModelo(),
+                String.format("%.2f", p.getPrecio()), // Precio con 2 decimales
+                p.getStock(),
+                nivel
+            });
+        }
+
+        // Aplicar colores por fila según el nivel
+        tblStockCritico.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                    boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                // Solo aplicar colores si la tabla tiene suficientes columnas
+                if (table.getColumnCount() > 4) {
+                    String nivel = table.getValueAt(row, 4).toString(); // Columna 4 = "Nivel"
+
+                    if (!isSelected) {
+                        if (nivel.equalsIgnoreCase("Crítico")) {
+                            c.setBackground(new Color(255, 204, 204)); // Rojo claro
+                        } else {
+                            c.setBackground(new Color(204, 255, 204)); // Verde claro
+                        }
+                    } else {
+                        c.setBackground(new Color(184, 207, 229)); // Azul de selección
+                    }
+                }
+                return c;
+            }
+        });
+
+    }
+
 
     private void btnVisualizarProductoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarProductoDetalleActionPerformed
-        // TODO add your handling code here:
+        cargarTablaStockCritico();
     }//GEN-LAST:event_btnVisualizarProductoDetalleActionPerformed
+
 
     private void cmbProveedorOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorOrdenActionPerformed
         // TODO add your handling code here:
@@ -886,6 +946,76 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnActualizarCantidadActionPerformed
 
+
+    private void cmbNivelStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNivelStockActionPerformed
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Marca");
+        modelo.addColumn("Modelo");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Nivel");
+
+        String nivelSeleccionado = cmbNivelStock.getSelectedItem().toString();
+        
+
+        for (Producto p : ProductoController.listaProductos) {
+            int stock = p.getStock();
+            String nivel = (stock < 3) ? "Crítico" : "Moderado";
+
+            boolean coincideNivel = nivelSeleccionado.equals("Todos") || nivel.equalsIgnoreCase(nivelSeleccionado);
+           
+
+            if (coincideNivel ) {
+                modelo.addRow(new Object[]{
+                    p.getMarca(),
+                    p.getModelo(),
+                    String.format("%.2f", p.getPrecio()),
+                    p.getStock(),
+                    nivel
+                });
+            }
+        }
+
+        tblStockCritico.setModel(modelo);
+
+        // Renderizado con colores
+        tblStockCritico.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                String nivel = table.getValueAt(row, 4).toString();
+                if (!isSelected) {
+                    if (nivel.equalsIgnoreCase("Crítico")) {
+                        c.setBackground(new Color(255, 204, 204)); // Rojo claro
+                    } else {
+                        c.setBackground(new Color(204, 255, 204)); // Verde claro
+                    }
+                } else {
+                    c.setBackground(new Color(184, 207, 229)); // Azul al seleccionar
+                }
+
+                return c;
+            }
+        });
+
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No hay productos que coincidan con los filtros seleccionados.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_cmbNivelStockActionPerformed
+
+    
+    
+    private void ResumenCritico(){
+     
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -935,14 +1065,12 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JPanel JP_StockCritico;
     private javax.swing.JButton btnActualizarCantidad;
     private javax.swing.JButton btnAsc;
-    private javax.swing.JButton btnBuscarStockCritico;
     private javax.swing.JToggleButton btnCerrarSesion;
     private javax.swing.JToggleButton btnCerrarSesion1;
     private javax.swing.JToggleButton btnCerrarSesion2;
     private javax.swing.JButton btnDesc;
     private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnEliminarProducto;
-    private javax.swing.JButton btnExportarStockCritico;
     private javax.swing.JToggleButton btnGenerarOrdenCompra;
     private javax.swing.JToggleButton btnGenerarPDF1;
     private javax.swing.JButton btnRegistrarProducto;
@@ -950,16 +1078,17 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbMarcaBusqueda;
     private javax.swing.JComboBox<String> cmbMarcaBusqueda1;
     private javax.swing.JComboBox<String> cmbMarcaOrden;
-    private javax.swing.JComboBox<String> cmbMarcaStockCritico;
     private javax.swing.JComboBox<String> cmbModeloOrden;
+    private javax.swing.JComboBox<String> cmbNivelStock;
     private javax.swing.JComboBox<String> cmbProveedorOrden;
     private javax.swing.JComboBox<String> cmbUbicacionOrden;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lblCantidad;
@@ -971,6 +1100,5 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JTable tblStockCritico;
     private javax.swing.JTextField txtBusquedaOrden;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextArea txtDetalleProducto;
     // End of variables declaration//GEN-END:variables
 }

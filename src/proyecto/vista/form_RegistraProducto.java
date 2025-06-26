@@ -87,7 +87,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         });
         jPanel1.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 240, 40));
 
-        cmbMarcaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
+        cmbMarcaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
         jPanel1.add(cmbMarcaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, -1));
 
         lblCorreo1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -187,26 +187,45 @@ public class form_RegistraProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
-
-        String marca = cmbMarcaProducto.getSelectedItem().toString();
+        String marca = cmbMarcaProducto.getSelectedItem().toString().trim();
         String modelo = txtModeloProducto.getText().trim();
         String precioTexto = txtPrecioProducto1.getText().trim();
-        int stock = Integer.parseInt(txtStock.getText()); // 
-        // Validación básica
-        if (modelo.isEmpty() || marca.equals("Seleccione") || precioTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        String stockTexto = txtStock.getText().trim(); // primero como String
+
+// Validación de campos vacíos
+        if (marca.equals("Seleccione") || modelo.isEmpty() || precioTexto.isEmpty() || stockTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos (Marca, Modelo, Precio y Stock) son obligatorios.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+// Validación de precio
         double precio;
         try {
             precio = Double.parseDouble(precioTexto);
+            if (precio <= 0) {
+                JOptionPane.showMessageDialog(this, "El precio debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ingrese un precio válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        Producto nuevoProducto = new Producto(marca, modelo, precio,stock);
+// Validación de stock
+        int stock;
+        try {
+            stock = Integer.parseInt(stockTexto);
+            if (stock < 0 || stock > 5) {
+                JOptionPane.showMessageDialog(this, "El stock debe estar entre 0 y 5.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número válido para el stock.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+// Registro del producto
+        Producto nuevoProducto = new Producto(marca, modelo, precio, stock);
         ProductoController controller = new ProductoController();
 
         boolean guardado = controller.registrarProducto(nuevoProducto);
@@ -218,6 +237,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "El producto ya existe o ocurrió un error.");
         }
+
     }//GEN-LAST:event_btnGuardarProductoActionPerformed
 
     private void txtPrecioProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioProducto1ActionPerformed
