@@ -117,7 +117,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         btnVisualizarProductoDetalle = new javax.swing.JButton();
         btnCerrarSesion1 = new javax.swing.JToggleButton();
         lblLogin2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnResumenCritico = new javax.swing.JButton();
         cmbNivelStock = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         JP_GenOrdenesCompra = new javax.swing.JPanel();
@@ -284,13 +284,13 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         lblLogin2.setText("Verificación de Stock");
         JP_StockCritico.add(lblLogin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 600, 80));
 
-        jButton2.setText("Resumen");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnResumenCritico.setText("Resumen");
+        btnResumenCritico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnResumenCriticoActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 100, 30));
+        JP_StockCritico.add(btnResumenCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 100, 30));
 
         cmbNivelStock.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Crítico", "Moderado" }));
         cmbNivelStock.addActionListener(new java.awt.event.ActionListener() {
@@ -956,16 +956,14 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         modelo.addColumn("Nivel");
 
         String nivelSeleccionado = cmbNivelStock.getSelectedItem().toString();
-        
 
         for (Producto p : ProductoController.listaProductos) {
             int stock = p.getStock();
             String nivel = (stock < 3) ? "Crítico" : "Moderado";
 
             boolean coincideNivel = nivelSeleccionado.equals("Todos") || nivel.equalsIgnoreCase(nivelSeleccionado);
-           
 
-            if (coincideNivel ) {
+            if (coincideNivel) {
                 modelo.addRow(new Object[]{
                     p.getMarca(),
                     p.getModelo(),
@@ -1006,15 +1004,46 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbNivelStockActionPerformed
 
-    
-    
-    private void ResumenCritico(){
-     
+    private void ResumenCritico() {
+        int totalCriticos = 0;
+        int totalUrgentes = 0;
+        List<String> productosUrgentes = new ArrayList<>();
+
+        for (Producto p : ProductoController.listaProductos) {
+            if (p.getStock() < 3) {
+                totalCriticos++;
+                if (p.getStock() == 0) {
+                    totalUrgentes++;
+                    productosUrgentes.add(p.getMarca() + " - " + p.getModelo());
+                }
+            }
+        }
+
+        StringBuilder mensaje = new StringBuilder();
+        mensaje.append("🔴 Total de productos con stock crítico (< 3): ").append(totalCriticos).append("\n");
+
+        if (totalUrgentes == totalCriticos && totalCriticos > 0) {
+            mensaje.append("🚨 Todos los productos críticos están en stock 0. ¡Reabastecimiento urgente requerido!\n");
+        } else if (productosUrgentes.isEmpty()) {
+            mensaje.append("✅ No hay productos con stock 0.");
+        } else {
+            mensaje.append("🚨 Productos con stock = 0 (requieren atención urgente):\n");
+            for (String producto : productosUrgentes) {
+                mensaje.append("• ").append(producto).append("\n");
+            }
+        }
+
+        if (totalCriticos == 0) {
+            mensaje.setLength(0);
+            mensaje.append("✅ Actualmente no hay productos con stock crítico.");
+        }
+
+        JOptionPane.showMessageDialog(this, mensaje.toString(), "Resumen de Stock Crítico", JOptionPane.INFORMATION_MESSAGE);
     }
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnResumenCriticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumenCriticoActionPerformed
+        ResumenCritico();
+    }//GEN-LAST:event_btnResumenCriticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1074,6 +1103,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnGenerarOrdenCompra;
     private javax.swing.JToggleButton btnGenerarPDF1;
     private javax.swing.JButton btnRegistrarProducto;
+    private javax.swing.JButton btnResumenCritico;
     private javax.swing.JButton btnVisualizarProductoDetalle;
     private javax.swing.JComboBox<String> cmbMarcaBusqueda;
     private javax.swing.JComboBox<String> cmbMarcaBusqueda1;
@@ -1083,7 +1113,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbProveedorOrden;
     private javax.swing.JComboBox<String> cmbUbicacionOrden;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
