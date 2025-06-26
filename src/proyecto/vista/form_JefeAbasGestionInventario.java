@@ -79,6 +79,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     public form_JefeAbasGestionInventario() {
         initComponents();
         configurarTablaDetalleOrden();
+        cargarTablaProductos();
     }
 
     /**
@@ -105,9 +106,9 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         btnAsc = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         lblLogin = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         JP_StockCritico = new javax.swing.JPanel();
         btnBuscarStockCritico = new javax.swing.JButton();
-        txtBusquedaStockCritico = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblStockCritico = new javax.swing.JTable();
         btnExportarStockCritico = new javax.swing.JButton();
@@ -171,7 +172,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnEliminarProductoActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnEliminarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 150, 30));
+        JP_Productos.add(btnEliminarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 150, 30));
 
         btnRegistrarProducto.setBackground(new java.awt.Color(255, 255, 204));
         btnRegistrarProducto.setText("Ventana Registro Producto");
@@ -180,10 +181,10 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnRegistrarProductoActionPerformed(evt);
             }
         });
-        JP_Productos.add(btnRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 210, 30));
+        JP_Productos.add(btnRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 190, 30));
 
         cmbMarcaBusqueda.setBackground(new java.awt.Color(255, 227, 187));
-        cmbMarcaBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie", " " }));
+        cmbMarcaBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", "Redmi", "Samsung", "LG", "Galaxi", "POCO", "Honor", "Nokia", "SPARK", "Meizu", "Huawei", "Movie", "Moto", "Tecno", "Vivo", "ZTE", "Itel", "Etoway", "Verde", "Mobile", "Lotn", "Snapnini", "Sky rock", "Sole", "Very Kool", "Gol", "Snap nini", "Logic", "JTEL" }));
         cmbMarcaBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbMarcaBusquedaActionPerformed(evt);
@@ -230,6 +231,9 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         lblLogin.setText("GESTIÓN PRODUCTOS");
         JP_Productos.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 600, 80));
 
+        jButton2.setText("Actualizar Cantidad");
+        JP_Productos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 150, 30));
+
         JP_Sistema.addTab("Productos", JP_Productos);
 
         JP_StockCritico.setBackground(new java.awt.Color(255, 233, 154));
@@ -238,7 +242,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         btnBuscarStockCritico.setBackground(new java.awt.Color(255, 230, 225));
         btnBuscarStockCritico.setText("Buscar");
         JP_StockCritico.add(btnBuscarStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, -1, -1));
-        JP_StockCritico.add(txtBusquedaStockCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 500, -1));
 
         tblStockCritico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,7 +294,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         lblLogin2.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblLogin2.setForeground(new java.awt.Color(0, 48, 146));
         lblLogin2.setText("STOCK");
-        JP_StockCritico.add(lblLogin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 600, 80));
+        JP_StockCritico.add(lblLogin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 600, 80));
 
         JP_Sistema.addTab("Verificación de Stock", JP_StockCritico);
 
@@ -416,9 +419,14 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         modeloTabla.addColumn("Marca");
         modeloTabla.addColumn("Modelo");
         modeloTabla.addColumn("Precio");
+        modeloTabla.addColumn("Stock");
+
+        if (productos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron productos registrados.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
 
         for (Producto p : productos) {
-            Object[] fila = {p.getMarca(), p.getModelo(), p.getPrecio()};
+            Object[] fila = {p.getMarca(), p.getModelo(), p.getPrecio(), p.getStock()};
             modeloTabla.addRow(fila);
         }
 
@@ -481,20 +489,29 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         ProductoController controller = new ProductoController();
         List<Producto> productos = controller.listarProductos();
 
+        // Crear modelo de tabla con columnas
         DefaultTableModel modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("Marca");
         modeloTabla.addColumn("Modelo");
         modeloTabla.addColumn("Precio");
+        modeloTabla.addColumn("Stock"); // Asegúrate de tener esta columna
 
+        // Agregar productos filtrados por marca
         for (Producto p : productos) {
-            String marca = p.getMarca() != null ? p.getMarca().trim() : "";
+            String marca = (p.getMarca() != null) ? p.getMarca().trim() : "";
 
             if (marcaSeleccionada.equalsIgnoreCase("Marca") || marca.equalsIgnoreCase(marcaSeleccionada)) {
-                Object[] fila = {p.getMarca(), p.getModelo(), p.getPrecio()};
+                Object[] fila = {
+                    p.getMarca(),
+                    p.getModelo(),
+                    p.getPrecio(),
+                    p.getStock() // ← Este era el que faltaba
+                };
                 modeloTabla.addRow(fila);
             }
         }
 
+        // Establecer el modelo corregido en la tabla
         tblProductos.setModel(modeloTabla);
     }//GEN-LAST:event_cmbMarcaBusquedaActionPerformed
 
@@ -568,9 +585,10 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         modeloTabla.addColumn("Marca");
         modeloTabla.addColumn("Modelo");
         modeloTabla.addColumn("Precio");
+        modeloTabla.addColumn("Stock");
 
         for (Producto p : productos) {
-            Object[] fila = {p.getMarca(), p.getModelo(), p.getPrecio()};
+            Object[] fila = {p.getMarca(), p.getModelo(), p.getPrecio(), p.getStock()};
             modeloTabla.addRow(fila);
         }
 
@@ -868,6 +886,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbProveedorOrden;
     private javax.swing.JComboBox<String> cmbUbicacionOrden;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -883,7 +902,6 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblStockCritico;
     private javax.swing.JTextField txtBusquedaOrden;
-    private javax.swing.JTextField txtBusquedaStockCritico;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextArea txtDetalleProducto;
     // End of variables declaration//GEN-END:variables

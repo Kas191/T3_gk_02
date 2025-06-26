@@ -1,0 +1,76 @@
+Note 10 5G;Redmi;935.18;1
+M51;Samsung;1175.46;3
+S7;Samsung;1393.78;5
+14 Note Pro;Redmi;937.93;3
+K55;LG;660.96;1
+Note 14;Redmi;635.0;3
+16 5G;Samsung;885.6;0
+16;Galaxi;997.48;3
+A32;Samsung;926.2;3
+A50 5G;Galaxi;649.06;2
+A30 5G;Galaxi;1022.95;0
+M4 Pro 5G;POCO;499.38;1
+200;Honor;874.92;4
+Note 12 Pro;Redmi;811.93;3
+Note 14;Redmi;635.0;3
+Note 14M;Redmi;873.04;5
+A10;Galaxi;947.21;4
+Note 12S;Redmi;763.52;1
+A25 5G;Galaxi;906.33;2
+Note 10S;Redmi;482.41;3
+Note 10 Pro;Redmi;751.35;4
+A12;Galaxi;729.5;5
+4.2;Nokia;333.34;2
+30 C;SPARK;384.14;5
+X6A;Honor;941.59;0
+X7B;Honor;1045.59;2
+Note 13;Redmi;985.38;3
+Note 13C;Redmi;641.41;1
+C31;Redmi;1034.69;2
+14C;Redmi;245.0;2
+M6 Note;Meizu;618.83;5
+Y6 Prime;Huawei;1031.1;5
+A Cool;Movie;534.71;5
+F Cool;Movie;1166.67;2
+P Cool;Movie;401.67;2
+Y6 2017;Huawei;478.52;2
+Y6 2019;Huawei;1092.76;0
+B154 Pro;Movie;542.62;1
+Y7 Pro 2019;Huawei;1298.77;1
+A03;Samsung;344.83;1
+E22i;Moto;824.84;0
+A09;Redmi;519.33;3
+E15;Moto;388.82;4
+Spark GO1;Tecno;205.23;2
+A03s;Galaxi;898.5;5
+K22;LG;829.04;2
+Y15S;Vivo;740.65;2
+A73;ZTE;873.71;3
+Play 9A;Honor;1323.79;2
+A9X;Redmi;446.2;1
+X5 6 Plus;Honor;585.49;4
+A3X;Redmi;873.71;3
+A06;Galaxi;552.13;5
+A05;JTEL;734.2;0
+A05S;Itel;1338.47;1
+Blade A05;ZTE;786.53;3
+Android 6.0;Etoway;80.0;5
+10 5G;Redmi;911.84;5
+A06;Samsung;1203.73;0
+Mobile 2.5D;Verde;466.26;1
+BL 54 prime;Mobile;764.11;5
+A55;ZTE;855.59;2
+A35;ZTE;702.63;4
+A3X;Redmi;873.71;3
+Q3;Lotn;660.45;1
+3;Snapnini;115.93;1
+2;Sky rock;726.61;5
+C100;Sole;962.8;1
+C100;Sole;962.8;1
+I129a;Very Kool;689.76;2
+1Valeaa;Gol;131.66;1
+i29a;Very Kool;763.54;3
+3;Snap nini;146.2;0
+3;Snap nini;221.92;1
+F5G;Logic;438.34;0
+A99;Samsung;1000.0;2

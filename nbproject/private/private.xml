@@ -12,6 +12,12 @@
             <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/vista/form_RegistrarProducto.java</file>
             <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/vista/form_SistemaAdmin.java</file>
             <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/vista/form_restablecerContraNew.java</file>
+            <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/modelo/Producto.java</file>
+            <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/modelo/Usuario.java</file>
+            <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/modelo/JefeDeAbastecimiento.java</file>
+            <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/modelo/Empleado.java</file>
+            <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/controlador/ProductoController.java</file>
+            <file>file:/E:/t2_java/Cuarta_prueba/T3_gk_02/src/proyecto/ClasePrincipal.java</file>
         </group>
     </open-files>
 </project-private>

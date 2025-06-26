@@ -37,7 +37,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         txtpasscontrasena = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblCorreo = new javax.swing.JLabel();
-        txtPrecioProducto = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
         cmbMarcaProducto = new javax.swing.JComboBox<>();
         lblCorreo1 = new javax.swing.JLabel();
         lblCorreo2 = new javax.swing.JLabel();
@@ -46,6 +46,8 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         btnGuardarProducto = new javax.swing.JButton();
         lblSistemaAdminstrador = new javax.swing.JLabel();
         lblSistemaAdminstrador1 = new javax.swing.JLabel();
+        txtPrecioProducto1 = new javax.swing.JTextField();
+        lblCorreo3 = new javax.swing.JLabel();
 
         txtrpassconfircontra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
 
@@ -73,17 +75,17 @@ public class form_RegistraProducto extends javax.swing.JDialog {
 
         lblCorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(102, 102, 102));
-        lblCorreo.setText("Precio");
-        jPanel1.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 170, -1));
+        lblCorreo.setText("Stock");
+        jPanel1.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 170, -1));
 
-        txtPrecioProducto.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        txtPrecioProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        txtPrecioProducto.addActionListener(new java.awt.event.ActionListener() {
+        txtStock.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtStock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioProductoActionPerformed(evt);
+                txtStockActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 240, 40));
+        jPanel1.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 240, 40));
 
         cmbMarcaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
         jPanel1.add(cmbMarcaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, -1));
@@ -118,7 +120,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 240, 30));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 240, 30));
 
         btnGuardarProducto.setBackground(new java.awt.Color(0, 48, 146));
         btnGuardarProducto.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -131,7 +133,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
                 btnGuardarProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 240, 30));
+        jPanel1.add(btnGuardarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 240, 30));
 
         lblSistemaAdminstrador.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador.setForeground(new java.awt.Color(0, 48, 146));
@@ -143,7 +145,21 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         lblSistemaAdminstrador1.setText("Registro de");
         jPanel1.add(lblSistemaAdminstrador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 300, 60));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 520));
+        txtPrecioProducto1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtPrecioProducto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        txtPrecioProducto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioProducto1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPrecioProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 240, 40));
+
+        lblCorreo3.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblCorreo3.setForeground(new java.awt.Color(102, 102, 102));
+        lblCorreo3.setText("Precio");
+        jPanel1.add(lblCorreo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 170, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,9 +173,9 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpasscontrasenaActionPerformed
 
-    private void txtPrecioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioProductoActionPerformed
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioProductoActionPerformed
+    }//GEN-LAST:event_txtStockActionPerformed
 
     private void txtModeloProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloProductoActionPerformed
         // TODO add your handling code here:
@@ -171,10 +187,11 @@ public class form_RegistraProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
-        String modelo = txtModeloProducto.getText().trim();
-        String marca = cmbMarcaProducto.getSelectedItem().toString();
-        String precioTexto = txtPrecioProducto.getText().trim();
 
+        String marca = cmbMarcaProducto.getSelectedItem().toString();
+        String modelo = txtModeloProducto.getText().trim();
+        String precioTexto = txtPrecioProducto1.getText().trim();
+        int stock = Integer.parseInt(txtStock.getText()); // 
         // Validación básica
         if (modelo.isEmpty() || marca.equals("Seleccione") || precioTexto.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -189,7 +206,7 @@ public class form_RegistraProducto extends javax.swing.JDialog {
             return;
         }
 
-        Producto nuevoProducto = new Producto(modelo, marca, precio);
+        Producto nuevoProducto = new Producto(modelo, marca, precio,stock);
         ProductoController controller = new ProductoController();
 
         boolean guardado = controller.registrarProducto(nuevoProducto);
@@ -202,6 +219,10 @@ public class form_RegistraProducto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "El producto ya existe o ocurrió un error.");
         }
     }//GEN-LAST:event_btnGuardarProductoActionPerformed
+
+    private void txtPrecioProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioProducto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioProducto1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,12 +274,14 @@ public class form_RegistraProducto extends javax.swing.JDialog {
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblCorreo1;
     private javax.swing.JLabel lblCorreo2;
+    private javax.swing.JLabel lblCorreo3;
     private javax.swing.JLabel lblSistemaAdminstrador;
     private javax.swing.JLabel lblSistemaAdminstrador1;
     private javax.swing.JLabel lblconficontrasena;
     private javax.swing.JLabel lblcontrasena;
     private javax.swing.JTextField txtModeloProducto;
-    private javax.swing.JTextField txtPrecioProducto;
+    private javax.swing.JTextField txtPrecioProducto1;
+    private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtpasscontrasena;
     private javax.swing.JPasswordField txtrpassconfircontra;
     // End of variables declaration//GEN-END:variables

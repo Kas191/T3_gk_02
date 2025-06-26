@@ -13,12 +13,14 @@ public class Producto {
     private String modelo;
     private String marca;
     private double precio;
+    private int stock;
 
-    public Producto(String marca, String modelo, double precio) {
-        
+    public Producto(String marca, String modelo, double precio, int stock) {
+
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
+        this.stock = stock;
     }
 
     public String getModelo() {
@@ -44,5 +46,16 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+ 
+    
 
 }

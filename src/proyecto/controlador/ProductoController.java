@@ -16,6 +16,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import proyecto.modelo.Producto;
 
@@ -26,7 +28,7 @@ import proyecto.modelo.Producto;
 public class ProductoController {
 
     public static List<Producto> listaProductos = new ArrayList<>();
-    private static final String ARCHIVO_PRODUCTOS = "productos.txt";
+    private static final String ARCHIVO_PRODUCTOS = "productos_stock.txt";
 
     public ProductoController() {
         cargarProductosDesdeArchivo();
@@ -41,12 +43,14 @@ public class ProductoController {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_PRODUCTOS, StandardCharsets.UTF_8))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split("\\|");
-                if (partes.length == 3) {
+                String[] partes = linea.split(";");
+                if (partes.length == 4) {
+
+                    String marca = partes[1].trim();
                     String modelo = partes[0].trim();
-                    String marca = partes[1].trim(); // 👈 aquí se corrige
                     double precio = Double.parseDouble(partes[2].trim());
-                    Producto producto = new Producto(modelo, marca, precio);
+                    int stock = Integer.parseInt(partes[3].trim());
+                    Producto producto = new Producto(marca, modelo, precio, stock);
                     listaProductos.add(producto);
                 }
             }
@@ -58,7 +62,7 @@ public class ProductoController {
     public boolean guardarProductosEnArchivo() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO_PRODUCTOS, StandardCharsets.UTF_8))) {
             for (Producto producto : listaProductos) {
-                String linea = producto.getModelo() + "|" + producto.getMarca() + "|" + producto.getPrecio();
+                String linea = producto.getMarca() + ";" + producto.getModelo() + ";" + producto.getPrecio() + ";" + producto.getStock();
                 bw.write(linea);
                 bw.newLine();
             }
@@ -71,9 +75,9 @@ public class ProductoController {
 
     public boolean registrarProducto(Producto nuevoProducto) {
         for (Producto producto : listaProductos) {
-            if (producto.getModelo().equalsIgnoreCase(nuevoProducto.getModelo())
-                    && producto.getMarca().equalsIgnoreCase(nuevoProducto.getMarca())) {
-                return false; // Producto ya existe
+            if (producto.getMarca().equalsIgnoreCase(nuevoProducto.getMarca())
+                    && producto.getModelo().equalsIgnoreCase(nuevoProducto.getModelo())) {
+                return false; // Ya existe
             }
         }
         listaProductos.add(nuevoProducto);
@@ -83,8 +87,8 @@ public class ProductoController {
     public boolean actualizarProducto(Producto productoActualizado) {
         for (int i = 0; i < listaProductos.size(); i++) {
             Producto actual = listaProductos.get(i);
-            if (actual.getModelo().equalsIgnoreCase(productoActualizado.getModelo())
-                    && actual.getMarca().equalsIgnoreCase(productoActualizado.getMarca())) {
+            if (  actual.getMarca().equalsIgnoreCase(productoActualizado.getMarca())
+                    && actual.getModelo().equalsIgnoreCase(productoActualizado.getModelo())) {
                 listaProductos.set(i, productoActualizado);
                 return guardarProductosEnArchivo();
             }
@@ -92,15 +96,25 @@ public class ProductoController {
         return false;
     }
 
-    public boolean eliminarProducto(String modelo, String marca) {
+    public boolean eliminarProducto(String marca, String modelo) {
         boolean eliminado = listaProductos.removeIf(p
-                -> p.getModelo().equalsIgnoreCase(modelo)
-                && p.getMarca().equalsIgnoreCase(marca)
+                -> p.getMarca().equalsIgnoreCase(marca)
+                && p.getModelo().equalsIgnoreCase(modelo)
         );
 
         if (eliminado) {
+            // Ordenar primero por Marca, luego por Modelo
+            Collections.sort(listaProductos, new Comparator<Producto>() {
+                @Override
+                public int compare(Producto p1, Producto p2) {
+                    int comp = p1.getMarca().compareToIgnoreCase(p2.getMarca());
+                    return (comp != 0) ? comp : p1.getModelo().compareToIgnoreCase(p2.getModelo());
+                }
+            });
+
             return guardarProductosEnArchivo();
         }
+
         return false;
     }
 }
