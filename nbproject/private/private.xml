@@ -10,19 +10,11 @@
             <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/Panel_ReporteVentasAdmin.java</file>
             <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_AltUsuarios.java</file>
             <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_Empleado.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_JefeAbasGestionInventario.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/controlador/LoginController.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/modelo/Administrador.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/modelo/Empleado.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/modelo/JefeDeAbastecimiento.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/controlador/ProductoController.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/controlador/RegistroAdminController.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/controlador/UsuarioController.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/modelo/Producto.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/modelo/Usuario.java</file>
-            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/util/Mensajes.java</file>
             <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_SistemaAdmin.java</file>
             <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_RegistraProducto.java</file>
+            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_RealizarPago.java</file>
+            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/vista/form_JefeAbasGestionInventario.java</file>
+            <file>file:/F:/Java_EFinal/Prototipo1/T3_gk_02/src/proyecto/modelo/Empleado.java</file>
         </group>
     </open-files>
 </project-private>

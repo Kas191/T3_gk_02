@@ -304,15 +304,19 @@ public class form_Empleado extends javax.swing.JFrame {
         double precioUnitario = buscarPrecio(marca, modelo);
         double total = precioUnitario * cantidad;
 
-        // Crear una fila en el orden correcto
+        // Obtener número de factura: 001, 002, etc.
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaVentas.getModel();
+        int numeroFactura = modeloTabla.getRowCount() + 1;
+        String codigoFactura = String.format("%03d", numeroFactura);
+
+        // Agregar fila a la tabla en el orden correcto
         modeloTabla.addRow(new Object[]{
-            seleccion, // Factura (marca - modelo)
-            cliente, // Cliente
-            modelo, // Producto (o marca + modelo si prefieres)
-            precioUnitario, // Precio unitario
-            cantidad, // Cantidad comprada
-            total // Total a pagar
+            codigoFactura, // 
+            cliente, // 
+            marca + " - " + modelo, // 
+            precioUnitario, // 
+            cantidad, // 
+            total // 
         });
 
         // Actualiza visualmente el stock
@@ -381,8 +385,41 @@ public class form_Empleado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbProductoActionPerformed
 
+    private void procesarPago() {
+        // 1. Obtener el total a pagar
+        double total = 0;
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            Object valor = modelo.getValueAt(i, 5); // columna "Total"
+            if (valor != null) {
+                total += Double.parseDouble(valor.toString());
+            }
+        }
+
+        // 2. Verificar si hay productos en la tabla
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No hay productos para vender.");
+            return;
+        }
+
+        // 3. Mostrar el diálogo de pago
+        form_RealizarPago dialogo = new form_RealizarPago(this, true, total, modelo);
+        dialogo.setLocationRelativeTo(this);
+        dialogo.setVisible(true);
+
+        // 4. Si se realizó el pago, limpiar la tabla
+        if (dialogo.isPagoExitoso()) {
+            modelo.setRowCount(0);
+            lblValorStock.setText("");
+            cmbProducto.setSelectedIndex(0);
+            txtCantidad.setText("");
+            JOptionPane.showMessageDialog(this, "Venta finalizada correctamente.");
+        }
+    }
+
+
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        // TODO add your handling code here:
+        procesarPago();
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void limpiarTablaVenta() {
