@@ -43,7 +43,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblTotalPagar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Total a pagar : "/>
       </Properties>
@@ -53,7 +53,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblMontoPagado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingrese el monto pagado: "/>
       </Properties>
@@ -63,7 +63,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnConfirmarPago">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar Pago"/>
       </Properties>
@@ -73,14 +73,14 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtMontoPagado">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="40" y="180" width="260" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnCancelarOperacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar Operaci&#xf3;n"/>
       </Properties>

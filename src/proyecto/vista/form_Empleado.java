@@ -4,6 +4,13 @@
  */
 package proyecto.vista;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User0
@@ -15,6 +22,7 @@ public class form_Empleado extends javax.swing.JFrame {
      */
     public form_Empleado() {
         initComponents();
+        cargarProductosComboBox();
     }
 
     /**
@@ -29,25 +37,26 @@ public class form_Empleado extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbltitulo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        lblProducto = new javax.swing.JLabel();
+        lblValorStock = new javax.swing.JLabel();
+        cmbProducto = new javax.swing.JComboBox<>();
+        cmbCliente = new javax.swing.JComboBox<>();
+        lblCliente = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+        btnAgregarProducto = new javax.swing.JButton();
+        btnEditarCantidad = new javax.swing.JButton();
+        btnLimpiarTabla = new javax.swing.JButton();
+        txtCantidad = new javax.swing.JTextField();
+        btnEliminarCantidad = new javax.swing.JButton();
+        lblValorStock1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVentas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        btnSalirAdmin = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
+        btnSalirCuenta = new javax.swing.JButton();
+        btnResumenFacturas = new javax.swing.JButton();
 
         btnCerrarSesion.setText("Cerrar sesión");
 
@@ -60,9 +69,9 @@ public class form_Empleado extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(27, 60, 83));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("VENTA DE PRODUCTOS");
+        lbltitulo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
+        lbltitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lbltitulo.setText("VENTA DE PRODUCTOS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -70,14 +79,14 @@ public class form_Empleado extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(280, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbltitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lbltitulo)
                 .addContainerGap())
         );
 
@@ -86,72 +95,91 @@ public class form_Empleado extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(249, 243, 239));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Producto: ");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, -1));
+        lblProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblProducto.setForeground(new java.awt.Color(51, 51, 51));
+        lblProducto.setText("Producto: ");
+        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Stock: ");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 100, -1));
+        lblValorStock.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblValorStock.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock.setText("0");
+        jPanel3.add(lblValorStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 70, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modelo" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 90, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marca", " " }));
-        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 90, -1));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", " " }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        cmbProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elige una opción" }));
+        cmbProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                cmbProductoActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 190, -1));
+        jPanel3.add(cmbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 190, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Cliente : ");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 59, -1));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Cantidad: ");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 100, -1));
-
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cmbCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", " " }));
+        cmbCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cmbClienteActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 100, 60));
+        jPanel3.add(cmbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 190, -1));
 
-        jButton2.setText("Editar cantidad");
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 100, 60));
+        lblCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCliente.setForeground(new java.awt.Color(51, 51, 51));
+        lblCliente.setText("Cliente : ");
+        jPanel3.add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 59, -1));
 
-        jButton3.setText("Limpiar");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 100, 60));
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 20));
+        lblCantidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCantidad.setForeground(new java.awt.Color(51, 51, 51));
+        lblCantidad.setText("Cantidad: ");
+        jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 100, -1));
 
-        jButton5.setText("Eliminar");
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, 100, 60));
+        btnAgregarProducto.setText("Agregar");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 100, 60));
+
+        btnEditarCantidad.setText("Editar");
+        btnEditarCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCantidadActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEditarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 100, 60));
+
+        btnLimpiarTabla.setText("Limpiar");
+        btnLimpiarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarTablaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnLimpiarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 100, 60));
+        jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 20));
+
+        btnEliminarCantidad.setText("Eliminar");
+        btnEliminarCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCantidadActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEliminarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, 100, 60));
+
+        lblValorStock1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock1.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock1.setText("Stock: ");
+        jPanel3.add(lblValorStock1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 70, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1000, 120));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Factura", "Cliente", "Producto", "Precio", "Cantidad ", "Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVentas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 1000, 310));
 
@@ -160,21 +188,29 @@ public class form_Empleado extends javax.swing.JFrame {
         jLabel2.setText("Rol : Cajero");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 20));
 
-        jButton4.setText("Pagar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 140, 40));
-
-        btnSalirAdmin.setBackground(new java.awt.Color(203, 4, 4));
-        btnSalirAdmin.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnSalirAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalirAdmin.setText("Salir de la Cuenta");
-        btnSalirAdmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(153, 0, 0), new java.awt.Color(153, 0, 0), new java.awt.Color(153, 0, 0)));
-        btnSalirAdmin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSalirAdmin.addActionListener(new java.awt.event.ActionListener() {
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirAdminActionPerformed(evt);
+                btnPagarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalirAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 140, 40));
+        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 140, 40));
+
+        btnSalirCuenta.setBackground(new java.awt.Color(203, 4, 4));
+        btnSalirCuenta.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnSalirCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalirCuenta.setText("Salir de la Cuenta");
+        btnSalirCuenta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(153, 0, 0), new java.awt.Color(153, 0, 0), new java.awt.Color(153, 0, 0)));
+        btnSalirCuenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSalirCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirCuentaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSalirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 140, 40));
+
+        btnResumenFacturas.setText("Resumen Facturas Generadas");
+        jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 230, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 690));
 
@@ -182,19 +218,282 @@ public class form_Empleado extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void cmbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_cmbClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void limpiarCamposProducto() {
+        txtCantidad.setText("");
+        cmbProducto.setSelectedIndex(0);
+        lblValorStock.setText("");
+    }
 
-    private void btnSalirAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirAdminActionPerformed
+    private double obtenerPrecioDeProducto(String marcaModelo) {
+        try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length >= 3) {
+                    String actual = partes[0].trim() + " - " + partes[1].trim();
+                    if (actual.equals(marcaModelo)) {
+                        return Double.parseDouble(partes[2].trim());
+                    }
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return -1; // Error
+    }
+
+    private double buscarPrecio(String marca, String modelo) {
+        try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length >= 4) {
+                    if (partes[0].equalsIgnoreCase(marca) && partes[1].equalsIgnoreCase(modelo)) {
+                        return Double.parseDouble(partes[2]); // precio
+                    }
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar el precio del producto.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return 0;
+    }
+
+    private void agregarProductoATabla() {
+        String seleccion = (String) cmbProducto.getSelectedItem();
+        String cantidadStr = txtCantidad.getText().trim();
+        String stockStr = lblValorStock.getText().trim();
+        String cliente = (String) cmbCliente.getSelectedItem();
+
+        if (seleccion.equals("Elige una opción") || cantidadStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecciona un producto y una cantidad válida.");
+            return;
+        }
+
+        int cantidad;
+        int stock;
+
+        try {
+            cantidad = Integer.parseInt(cantidadStr);
+            stock = Integer.parseInt(stockStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cantidad o stock inválido.");
+            return;
+        }
+
+        if (stock <= 0) {
+            JOptionPane.showMessageDialog(this, "Stock insuficiente. No se puede vender este producto.");
+            return;
+        }
+
+        if (cantidad > stock) {
+            JOptionPane.showMessageDialog(this, "La cantidad excede el stock disponible.");
+            return;
+        }
+
+        // Extraer marca y modelo
+        String[] partes = seleccion.split(" - ");
+        String marca = partes[0];
+        String modelo = partes[1];
+
+        // Buscar el precio en el archivo
+        double precioUnitario = buscarPrecio(marca, modelo);
+        double total = precioUnitario * cantidad;
+
+        // Crear una fila en el orden correcto
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaVentas.getModel();
+        modeloTabla.addRow(new Object[]{
+            seleccion, // Factura (marca - modelo)
+            cliente, // Cliente
+            modelo, // Producto (o marca + modelo si prefieres)
+            precioUnitario, // Precio unitario
+            cantidad, // Cantidad comprada
+            total // Total a pagar
+        });
+
+        // Actualiza visualmente el stock
+        lblValorStock.setText(String.valueOf(stock - cantidad));
+    }
+
+
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        agregarProductoATabla();
+        limpiarCamposProducto();
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
+
+    private void btnSalirCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCuentaActionPerformed
         form_login login = new form_login();
         login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnSalirAdminActionPerformed
+    }//GEN-LAST:event_btnSalirCuentaActionPerformed
+
+    private void cargarProductosComboBox() {
+        DefaultComboBoxModel<String> modeloCombo = new DefaultComboBoxModel<>();
+        modeloCombo.addElement("Elige una opción"); // nueva opción por defecto
+
+        try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length >= 2) {
+                    String marca = partes[0].trim();
+                    String modelo = partes[1].trim();
+                    String item = marca + " - " + modelo;
+                    modeloCombo.addElement(item);
+                }
+            }
+            cmbProducto.setModel(modeloCombo);
+            cmbProducto.setSelectedIndex(0); // asegura que "Elige una opción" quede seleccionado al inicio
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    private void cmbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductoActionPerformed
+
+        String seleccionado = (String) cmbProducto.getSelectedItem();
+
+        if (seleccionado.equals("Elige una opción")) {
+            lblValorStock.setText(""); // o mostrar un mensaje
+            return;
+        }
+
+        // Buscar en el archivo y mostrar el stock correspondiente
+        try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.contains(";")) {
+                    String[] partes = linea.split(";");
+                    String marcaModelo = partes[0].trim() + " - " + partes[1].trim();
+                    if (seleccionado.equals(marcaModelo)) {
+                        lblValorStock.setText(partes[3]); // stock
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer stock: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cmbProductoActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void limpiarTablaVenta() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
+        modelo.setRowCount(0); // Borra todas las filas
+    }
+
+
+    private void btnLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTablaActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Estás seguro que deseas limpiar toda la tabla?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            limpiarTablaVenta();
+        }
+    }//GEN-LAST:event_btnLimpiarTablaActionPerformed
+
+    private void eliminarProductoDeTabla() {
+        int filaSeleccionada = tablaVentas.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila para eliminar.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
+        modelo.removeRow(filaSeleccionada);
+
+        JOptionPane.showMessageDialog(this, "Producto eliminado de la tabla.");
+    }
+
+
+    private void btnEliminarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCantidadActionPerformed
+        eliminarProductoDeTabla();
+    }//GEN-LAST:event_btnEliminarCantidadActionPerformed
+
+    private String obtenerStockProducto(String marcaModelo) {
+        try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length >= 4) {
+                    String clave = partes[0].trim() + " - " + partes[1].trim();
+                    if (clave.equals(marcaModelo)) {
+                        return partes[3].trim(); // stock
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error leyendo archivo de stock.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return "0";
+    }
+
+    private void editarCantidadProductoSeleccionado() {
+        int fila = tablaVentas.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila para editar la cantidad.");
+            return;
+        }
+
+        String producto = tablaVentas.getValueAt(fila, 0).toString(); // Marca - Modelo
+        String stockActualStr = obtenerStockProducto(producto); // función auxiliar
+        int stockDisponible;
+
+        try {
+            stockDisponible = Integer.parseInt(stockActualStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener el stock del producto.");
+            return;
+        }
+
+        String cantidadActual = tablaVentas.getValueAt(fila, 4).toString(); // cantidad actual
+        String nuevaCantidadStr = JOptionPane.showInputDialog(
+                this,
+                "Stock disponible: " + stockDisponible + "\nCantidad actual: " + cantidadActual + "\n\nIngrese la nueva cantidad:",
+                cantidadActual
+        );
+
+        if (nuevaCantidadStr == null) {
+            return; // Cancelado
+        }
+        if (!nuevaCantidadStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Cantidad inválida.");
+            return;
+        }
+
+        int nuevaCantidad = Integer.parseInt(nuevaCantidadStr);
+        if (nuevaCantidad > stockDisponible) {
+            JOptionPane.showMessageDialog(this, "La cantidad ingresada supera el stock disponible.");
+            return;
+        }
+
+        // Actualizar cantidad
+        tablaVentas.setValueAt(nuevaCantidad, fila, 4);
+
+        // Recalcular total
+        double precio = Double.parseDouble(tablaVentas.getValueAt(fila, 3).toString());
+        double nuevoTotal = precio * nuevaCantidad;
+        tablaVentas.setValueAt(nuevoTotal, fila, 5);
+
+        JOptionPane.showMessageDialog(this, "Cantidad actualizada correctamente.");
+    }
+
+
+    private void btnEditarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCantidadActionPerformed
+        editarCantidadProductoSeleccionado();
+    }//GEN-LAST:event_btnEditarCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,27 +531,28 @@ public class form_Empleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JToggleButton btnCerrarSesion;
-    private javax.swing.JButton btnSalirAdmin;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnEditarCantidad;
+    private javax.swing.JButton btnEliminarCantidad;
+    private javax.swing.JButton btnLimpiarTabla;
+    private javax.swing.JButton btnPagar;
+    private javax.swing.JButton btnResumenFacturas;
+    private javax.swing.JButton btnSalirCuenta;
+    private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbProducto;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblProducto;
+    private javax.swing.JLabel lblValorStock;
+    private javax.swing.JLabel lblValorStock1;
+    private javax.swing.JLabel lbltitulo;
+    private javax.swing.JTable tablaVentas;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }

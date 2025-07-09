@@ -28,11 +28,11 @@ public class JDialogRealizarPago extends javax.swing.JDialog {
     private void initComponents() {
 
         lblLogin = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        lblTotalPagar = new javax.swing.JLabel();
+        lblMontoPagado = new javax.swing.JLabel();
+        btnConfirmarPago = new javax.swing.JButton();
+        txtMontoPagado = new javax.swing.JTextField();
+        btnCancelarOperacion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -44,18 +44,18 @@ public class JDialogRealizarPago extends javax.swing.JDialog {
         lblLogin.setText("REALIZAR PAGO");
         getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 60));
 
-        jLabel1.setText("Total a pagar : ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 120, -1));
+        lblTotalPagar.setText("Total a pagar : ");
+        getContentPane().add(lblTotalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 120, -1));
 
-        jLabel2.setText("Ingrese el monto pagado: ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        lblMontoPagado.setText("Ingrese el monto pagado: ");
+        getContentPane().add(lblMontoPagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
-        jButton1.setText("Confirmar Pago");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 200, 30));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 260, 30));
+        btnConfirmarPago.setText("Confirmar Pago");
+        getContentPane().add(btnConfirmarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 200, 30));
+        getContentPane().add(txtMontoPagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 260, 30));
 
-        jButton2.setText("Cancelar Operación");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 200, 30));
+        btnCancelarOperacion.setText("Cancelar Operación");
+        getContentPane().add(btnCancelarOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 200, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -119,12 +119,12 @@ public class JDialogRealizarPago extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnCancelarOperacion;
+    private javax.swing.JButton btnConfirmarPago;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblMontoPagado;
+    private javax.swing.JLabel lblTotalPagar;
+    private javax.swing.JTextField txtMontoPagado;
     // End of variables declaration//GEN-END:variables
 }
