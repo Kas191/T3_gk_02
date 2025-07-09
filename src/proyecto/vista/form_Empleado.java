@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import proyecto.controlador.GestorStock;
 
 /**
  *
@@ -57,7 +58,7 @@ public class form_Empleado extends javax.swing.JFrame {
         btnPagar = new javax.swing.JButton();
         btnSalirCuenta = new javax.swing.JButton();
         btnResumenFacturas = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRefrescar = new javax.swing.JButton();
 
         btnCerrarSesion.setText("Cerrar sesión");
 
@@ -213,8 +214,13 @@ public class form_Empleado extends javax.swing.JFrame {
         btnResumenFacturas.setText("Resumen Facturas Generadas");
         jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 230, 40));
 
-        jButton1.setText("Refrescar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 120, 40));
+        btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRefrescar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 120, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 690));
 
@@ -532,6 +538,16 @@ public class form_Empleado extends javax.swing.JFrame {
         editarCantidadProducto();
     }//GEN-LAST:event_btnEditarCantidadActionPerformed
 
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+
+        cargarProductosComboBox(); // recarga combo con stock nuevo
+
+        // ✅ Forzar actualización del lblValorStock para el producto actualmente seleccionado
+        cmbProductoActionPerformed(null);
+
+        JOptionPane.showMessageDialog(this, "Stock actualizado manualmente.");
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -574,11 +590,11 @@ public class form_Empleado extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarCantidad;
     private javax.swing.JButton btnLimpiarTabla;
     private javax.swing.JButton btnPagar;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnResumenFacturas;
     private javax.swing.JButton btnSalirCuenta;
     private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbProducto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

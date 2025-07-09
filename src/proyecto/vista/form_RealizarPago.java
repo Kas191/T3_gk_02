@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import proyecto.controlador.GestorStock;
 
 /**
  *
@@ -157,51 +158,8 @@ public class form_RealizarPago extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontoPagadoActionPerformed
 
-    private void actualizarStockEnArchivo() {
-        File archivo = new File("productos_stock.txt");
-        List<String> lineasActualizadas = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(";");
-                if (partes.length == 4) {
-                    String marca = partes[0].trim();
-                    String modelo = partes[1].trim();
-                    double precio = Double.parseDouble(partes[2].trim());
-                    int stock = Integer.parseInt(partes[3].trim());
-
-                    // Buscar si fue vendido
-                    for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-                        String itemTabla = modeloTabla.getValueAt(i, 0).toString(); // marca - modelo
-                        String[] combo = itemTabla.split(" - ");
-                        if (combo.length == 2
-                                && combo[0].equalsIgnoreCase(marca)
-                                && combo[1].equalsIgnoreCase(modelo)) {
-
-                            int cantidadVendida = Integer.parseInt(modeloTabla.getValueAt(i, 4).toString()); // cantidad
-                            stock = Math.max(0, stock - cantidadVendida); // evitar negativos
-                            break;
-                        }
-                    }
-
-                    lineasActualizadas.add(marca + ";" + modelo + ";" + precio + ";" + stock);
-                } else {
-                    lineasActualizadas.add(linea); // preservar líneas no válidas
-                }
-            }
-
-            // Reescribir el archivo
-            try (PrintWriter pw = new PrintWriter(new FileWriter(archivo))) {
-                for (String l : lineasActualizadas) {
-                    pw.println(l);
-                }
-            }
-
-        } catch (IOException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar el stock: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+   
+    
 
     private void generarFacturaPDF() {
         try {
@@ -335,7 +293,7 @@ public class form_RealizarPago extends javax.swing.JDialog {
         """, total, montoPagado, cambio);
         JOptionPane.showMessageDialog(this, mensaje, "Pago Realizado", JOptionPane.INFORMATION_MESSAGE);
 
-        actualizarStockEnArchivo(); // Actualiza el archivo
+        
 
         return true;
     }
@@ -345,7 +303,9 @@ public class form_RealizarPago extends javax.swing.JDialog {
         if (procesarPago()) {
             generarFacturaPDF(); // Paso 6: Generar PDF
             pagoExitoso = true;
+            
             dispose(); // Cierra el JDialog
+            
         }
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
