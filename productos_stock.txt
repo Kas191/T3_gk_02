@@ -58,7 +58,7 @@ Samsung;A32;926.2;3
 Samsung;M51;1175.46;3
 Samsung;S7;1393.78;5
 Sky rock;2;726.61;5
-Snap nini;3;146.2;0
+Snap nini;3;146.2;1
 Snap nini;3;221.92;1
 Snapnini;3;115.93;1
 Sole;C100;962.8;1
@@ -73,6 +73,6 @@ ZTE;A35;702.63;4
 ZTE;A55;855.59;2
 ZTE;A73;873.71;3
 ZTE;Blade A05;786.53;3
-Samsung;A99;500.0;10
+Samsung;A99;500.0;5
 Samsung;A98;600.0;6
 Samsung;A97;1600.0;4

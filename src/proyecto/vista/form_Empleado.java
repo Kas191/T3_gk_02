@@ -5,6 +5,7 @@
 package proyecto.vista;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
@@ -212,6 +213,11 @@ public class form_Empleado extends javax.swing.JFrame {
         jPanel1.add(btnSalirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 140, 40));
 
         btnResumenFacturas.setText("Resumen Facturas Generadas");
+        btnResumenFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResumenFacturasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 230, 40));
 
         btnRefrescar.setText("Refrescar");
@@ -547,6 +553,24 @@ public class form_Empleado extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Stock actualizado manualmente.");
     }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void mostrarResumenFacturas() {
+        File carpeta = new File("Facturas");
+        if (!carpeta.exists()) {
+            JOptionPane.showMessageDialog(this, "No hay facturas generadas aún.");
+            return;
+        }
+
+        File[] archivos = carpeta.listFiles((dir, name) -> name.endsWith(".pdf"));
+        int total = archivos != null ? archivos.length : 0;
+
+        JOptionPane.showMessageDialog(this, "Facturas generadas: " + total);
+    }
+
+
+    private void btnResumenFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumenFacturasActionPerformed
+        mostrarResumenFacturas();
+    }//GEN-LAST:event_btnResumenFacturasActionPerformed
 
     /**
      * @param args the command line arguments

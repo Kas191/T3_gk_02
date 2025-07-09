@@ -6,6 +6,7 @@ package proyecto.controlador;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  * @author User0
  */
 public class GestorStock {
-     private static final String RUTA_PRODUCTOS = "productos_stock.txt";
+
+    private static final String RUTA_PRODUCTOS = "productos_stock.txt";
 
     public static void actualizarStock(DefaultTableModel modeloTabla) {
         Map<String, Integer> stockActual = cargarStock();
@@ -55,9 +57,11 @@ public class GestorStock {
     }
 
     private static void guardarStock(Map<String, Integer> stockActual) {
-        try (BufferedReader br = new BufferedReader(new FileReader(RUTA_PRODUCTOS));
-             BufferedWriter bw = new BufferedWriter(new FileWriter("temp.txt"))) {
+        File tempFile = new File("temp.txt");
+        File originalFile = new File(RUTA_PRODUCTOS);
 
+        try (
+                BufferedReader br = new BufferedReader(new FileReader(originalFile)); BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(";");
@@ -65,13 +69,20 @@ public class GestorStock {
                     String producto = partes[0].trim() + " - " + partes[1].trim();
                     if (stockActual.containsKey(producto)) {
                         partes[3] = String.valueOf(stockActual.get(producto));
-                        bw.write(String.join(";", partes));
-                        bw.newLine();
                     }
+                    bw.write(String.join(";", partes));
+                    bw.newLine();
                 }
             }
-            // Reemplaza archivo original
-            Files.move(Paths.get("temp.txt"), Paths.get(RUTA_PRODUCTOS), StandardCopyOption.REPLACE_EXISTING);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return; // Detiene si hubo error
+        }
+
+        // 👉 Mueve después de cerrar los flujos
+        try {
+            Files.move(tempFile.toPath(), originalFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }

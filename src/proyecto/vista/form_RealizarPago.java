@@ -158,8 +158,31 @@ public class form_RealizarPago extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontoPagadoActionPerformed
 
-   
-    
+    private int obtenerSiguienteNumeroFactura() {
+        File archivo = new File("factura_id.txt");
+        int numero = 1;
+
+        try {
+            if (archivo.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(archivo));
+                String linea = br.readLine();
+                if (linea != null) {
+                    numero = Integer.parseInt(linea.trim()) + 1;
+                }
+                br.close();
+            }
+
+            // Guardar el nuevo número
+            PrintWriter pw = new PrintWriter(new FileWriter(archivo));
+            pw.println(numero);
+            pw.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return numero;
+    }
 
     private void generarFacturaPDF() {
         try {
@@ -199,7 +222,10 @@ public class form_RealizarPago extends javax.swing.JDialog {
             doc.add(Chunk.NEWLINE);
 
             // 4. Datos de factura
-            String codigoFactura = String.format("Factura N°: %03d", modeloTabla.getRowCount()); //coregir debe ir en aumento
+            int numeroFactura = obtenerSiguienteNumeroFactura();
+            String codigoFactura = String.format("Factura N°: %03d", numeroFactura);
+            
+            
             doc.add(new Paragraph(codigoFactura, subFont));
 
             doc.add(new Paragraph("Rol: Cajero", subFont));
@@ -293,19 +319,18 @@ public class form_RealizarPago extends javax.swing.JDialog {
         """, total, montoPagado, cambio);
         JOptionPane.showMessageDialog(this, mensaje, "Pago Realizado", JOptionPane.INFORMATION_MESSAGE);
 
-        
-
         return true;
     }
 
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
         if (procesarPago()) {
-            generarFacturaPDF(); // Paso 6: Generar PDF
+            generarFacturaPDF();
+            GestorStock.actualizarStock(modeloTabla);// Paso 6: Generar PDF
             pagoExitoso = true;
-            
+
             dispose(); // Cierra el JDialog
-            
+
         }
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
