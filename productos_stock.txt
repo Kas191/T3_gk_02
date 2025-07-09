@@ -5,7 +5,7 @@ Galaxi;A06;552.13;5
 Galaxi;A10;947.21;4
 Galaxi;A12;729.5;5
 Galaxi;A25 5G;906.33;2
-Galaxi;A30 5G;1022.95;0
+Galaxi;A30 5G;1022.95;3
 Galaxi;A50 5G;649.06;2
 Gol;1Valeaa;131.66;1
 Honor;200;874.92;4
@@ -51,7 +51,7 @@ Redmi;Note 13C;641.41;1
 Redmi;Note 14;635.0;3
 Redmi;Note 14;635.0;3
 Redmi;Note 14M;873.04;5
-Samsung;16 5G;885.6;0
+Samsung;16 5G;885.6;2
 Samsung;A03;344.83;1
 Samsung;A06;1203.73;0
 Samsung;A32;926.2;3
@@ -74,3 +74,5 @@ ZTE;A55;855.59;2
 ZTE;A73;873.71;3
 ZTE;Blade A05;786.53;3
 Samsung;A99;500.0;10
+Samsung;A98;600.0;6
+Samsung;A97;1600.0;4
