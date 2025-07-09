@@ -268,7 +268,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnVisualizarProductoDetalleActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(btnVisualizarProductoDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 120, 30));
+        JP_StockCritico.add(btnVisualizarProductoDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 120, 30));
 
         btnCerrarSesion1.setBackground(new java.awt.Color(255, 153, 153));
         btnCerrarSesion1.setText("Cerrar sesión");
@@ -277,7 +277,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnCerrarSesion1ActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 530, -1, 30));
+        JP_StockCritico.add(btnCerrarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 510, -1, 30));
 
         lblLogin2.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblLogin2.setForeground(new java.awt.Color(0, 48, 146));
@@ -290,7 +290,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 btnResumenCriticoActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(btnResumenCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 100, 30));
+        JP_StockCritico.add(btnResumenCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 100, 30));
 
         cmbNivelStock.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Crítico", "Moderado" }));
         cmbNivelStock.addActionListener(new java.awt.event.ActionListener() {
@@ -298,10 +298,10 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 cmbNivelStockActionPerformed(evt);
             }
         });
-        JP_StockCritico.add(cmbNivelStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, -1, -1));
+        JP_StockCritico.add(cmbNivelStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, -1, -1));
 
         jLabel1.setText("Nivel de Stock: ");
-        JP_StockCritico.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, -1, -1));
+        JP_StockCritico.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, -1));
 
         JP_Sistema.addTab("Verificación de Stock", JP_StockCritico);
 
