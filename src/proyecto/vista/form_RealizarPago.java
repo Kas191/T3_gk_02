@@ -205,24 +205,32 @@ public class form_RealizarPago extends javax.swing.JDialog {
 
     private void generarFacturaPDF() {
         try {
-            // 1. Crear documento y archivo de salida
+            // 1. Crear documento PDF
             Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
             String nombreArchivo = "Facturas/Factura_" + System.currentTimeMillis() + ".pdf";
             PdfWriter.getInstance(doc, new FileOutputStream(nombreArchivo));
             doc.open();
 
-            // 2. Fuentes personalizadas (todas en negro)
+            // 2. Fuentes en negro
             Font tituloFont = new Font(Font.HELVETICA, 16, Font.BOLD, Color.BLACK);
             Font subFont = new Font(Font.HELVETICA, 12, Font.NORMAL, Color.BLACK);
             Font headerFont = new Font(Font.HELVETICA, 11, Font.BOLD, Color.BLACK);
             Font cellFont = new Font(Font.HELVETICA, 10, Font.NORMAL, Color.BLACK);
 
             // 3. Cabecera
-            Paragraph empresa = new Paragraph("MULTITEC D & J - RUC: 20547854123", tituloFont);
+            Paragraph titulo = new Paragraph("FACTURA DE VENTA", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            doc.add(titulo);
+
+            Paragraph empresa = new Paragraph("MULTITEC D & J EMPRESA", subFont);
             empresa.setAlignment(Element.ALIGN_CENTER);
             doc.add(empresa);
 
-            Paragraph direccion = new Paragraph("Jr. Jaen 401 - Urb. San Ignacio - Cajamarca", subFont);
+            Paragraph ruc = new Paragraph("RUC: 20547854123", subFont);
+            ruc.setAlignment(Element.ALIGN_CENTER);
+            doc.add(ruc);
+
+            Paragraph direccion = new Paragraph("Jr. Jaen 401 | San Ignacio - Cajamarca", subFont);
             direccion.setAlignment(Element.ALIGN_CENTER);
             doc.add(direccion);
 
@@ -230,46 +238,65 @@ public class form_RealizarPago extends javax.swing.JDialog {
             correo.setAlignment(Element.ALIGN_CENTER);
             doc.add(correo);
 
-            doc.add(Chunk.NEWLINE); // Espacio
-
-            // 4. Fecha y hora
-            Paragraph fecha = new Paragraph("Fecha: " + LocalDate.now(), subFont);
-            Paragraph hora = new Paragraph("Hora: " + LocalTime.now().withNano(0), subFont);
-            fecha.setAlignment(Element.ALIGN_RIGHT);
-            hora.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(fecha);
-            doc.add(hora);
             doc.add(Chunk.NEWLINE);
 
-            // 5. Tabla PDF (basada en tablaVentas visual)
-            PdfPTable tabla = new PdfPTable(modeloTabla.getColumnCount());
+            // 4. Datos de factura
+            String codigoFactura = String.format("Factura N°: %03d", modeloTabla.getRowCount()); //coregir debe ir en aumento
+            doc.add(new Paragraph(codigoFactura, subFont));
+
+            doc.add(new Paragraph("Rol: Cajero", subFont));
+
+            doc.add(new Paragraph("Fecha: " + LocalDate.now(), subFont));
+            doc.add(new Paragraph("Hora: " + LocalTime.now().withNano(0), subFont));
+            doc.add(Chunk.NEWLINE);
+
+            // 5. Tabla de productos
+            PdfPTable tabla = new PdfPTable(4); // Producto, Cantidad, Precio, Total
             tabla.setWidthPercentage(100);
+            tabla.setWidths(new int[]{40, 15, 20, 25});
 
-            // Encabezados
-            for (int i = 0; i < modeloTabla.getColumnCount(); i++) {
-                PdfPCell header = new PdfPCell(new Phrase(modeloTabla.getColumnName(i), headerFont));
-                header.setHorizontalAlignment(Element.ALIGN_CENTER);
-                header.setBackgroundColor(Color.LIGHT_GRAY);
-                tabla.addCell(header);
-            }
+            tabla.addCell(new PdfPCell(new Phrase("Producto", headerFont)));
+            tabla.addCell(new PdfPCell(new Phrase("Cantidad", headerFont)));
+            tabla.addCell(new PdfPCell(new Phrase("Precio", headerFont)));
+            tabla.addCell(new PdfPCell(new Phrase("Total", headerFont)));
 
-            // Datos de la tabla
+            double sumaTotal = 0.0;
+
             for (int fila = 0; fila < modeloTabla.getRowCount(); fila++) {
-                for (int col = 0; col < modeloTabla.getColumnCount(); col++) {
-                    Object valor = modeloTabla.getValueAt(fila, col);
-                    PdfPCell celda = new PdfPCell(new Phrase(
-                            valor != null ? valor.toString() : "", cellFont));
-                    celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    celda.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    celda.setPadding(6f);
-                    tabla.addCell(celda);
-                }
+                String producto = modeloTabla.getValueAt(fila, 2).toString(); // Producto
+                String cantidad = modeloTabla.getValueAt(fila, 4).toString(); // Cantidad
+                String precio = String.format("%.2f", Double.parseDouble(modeloTabla.getValueAt(fila, 3).toString()));
+                String total = String.format("%.2f", Double.parseDouble(modeloTabla.getValueAt(fila, 5).toString()));
+
+                tabla.addCell(new PdfPCell(new Phrase(producto, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(cantidad, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(precio, cellFont)));
+                tabla.addCell(new PdfPCell(new Phrase(total, cellFont)));
+
+                sumaTotal += Double.parseDouble(total);
             }
 
             doc.add(tabla);
             doc.add(Chunk.NEWLINE);
 
-            // 6. Pie de página con hora de generación
+            // 6. Totales
+            Paragraph totalPagar = new Paragraph("Total a pagar : " + String.format("%.2f", sumaTotal), subFont);
+            totalPagar.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(totalPagar);
+
+            String pagadoStr = txtMontoPagado.getText().trim();
+            Paragraph pagado = new Paragraph("Cantidad pagada: " + pagadoStr, subFont);
+            pagado.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(pagado);
+
+            double cambio = Double.parseDouble(pagadoStr) - sumaTotal;
+            Paragraph cambioP = new Paragraph("Cambio: " + String.format("%.2f", cambio), subFont);
+            cambioP.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(cambioP);
+
+            doc.add(Chunk.NEWLINE);
+
+            // 7. Pie
             String fechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
             Paragraph pie = new Paragraph("Factura generada: " + fechaHora, subFont);
             pie.setAlignment(Element.ALIGN_RIGHT);
@@ -277,9 +304,10 @@ public class form_RealizarPago extends javax.swing.JDialog {
 
             doc.close();
 
-            JOptionPane.showMessageDialog(this, "PDF generado correctamente:\n" + nombreArchivo);
+            JOptionPane.showMessageDialog(this, "Factura PDF generada correctamente:\n" + nombreArchivo);
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al generar la factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -321,8 +349,21 @@ public class form_RealizarPago extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
-    private void btnCancelarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarOperacionActionPerformed
+    private void cancelarOperacion() {
+        int respuesta = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de cancelar la operación?",
+                "Confirmar cancelación",
+                JOptionPane.YES_NO_OPTION
+        );
 
+        if (respuesta == JOptionPane.YES_OPTION) {
+            this.dispose(); // Cierra el JDialog
+        }
+    }
+
+    private void btnCancelarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarOperacionActionPerformed
+        cancelarOperacion();
     }//GEN-LAST:event_btnCancelarOperacionActionPerformed
 
     /**

@@ -57,6 +57,7 @@ public class form_Empleado extends javax.swing.JFrame {
         btnPagar = new javax.swing.JButton();
         btnSalirCuenta = new javax.swing.JButton();
         btnResumenFacturas = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         btnCerrarSesion.setText("Cerrar sesión");
 
@@ -176,7 +177,7 @@ public class form_Empleado extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Factura", "Cliente", "Producto", "Precio", "Cantidad ", "Total"
+                "N°", "Cliente", "Producto", "Precio", "Cantidad ", "Total"
             }
         ));
         jScrollPane1.setViewportView(tablaVentas);
@@ -210,7 +211,10 @@ public class form_Empleado extends javax.swing.JFrame {
         jPanel1.add(btnSalirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 140, 40));
 
         btnResumenFacturas.setText("Resumen Facturas Generadas");
-        jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 230, 40));
+        jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 230, 40));
+
+        jButton1.setText("Refrescar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 120, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 690));
 
@@ -359,29 +363,27 @@ public class form_Empleado extends javax.swing.JFrame {
 
 
     private void cmbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductoActionPerformed
-
         String seleccionado = (String) cmbProducto.getSelectedItem();
 
         if (seleccionado.equals("Elige una opción")) {
-            lblValorStock.setText(""); // o mostrar un mensaje
+            lblValorStock.setText("");
             return;
         }
 
-        // Buscar en el archivo y mostrar el stock correspondiente
         try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                if (linea.contains(";")) {
-                    String[] partes = linea.split(";");
+                String[] partes = linea.split(";");
+                if (partes.length >= 4) {
                     String marcaModelo = partes[0].trim() + " - " + partes[1].trim();
-                    if (seleccionado.equals(marcaModelo)) {
-                        lblValorStock.setText(partes[3]); // stock
+                    if (marcaModelo.equals(seleccionado)) {
+                        lblValorStock.setText(partes[3].trim());
                         break;
                     }
                 }
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error al leer stock: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al leer el stock: " + e.getMessage());
         }
     }//GEN-LAST:event_cmbProductoActionPerformed
 
@@ -413,6 +415,7 @@ public class form_Empleado extends javax.swing.JFrame {
             lblValorStock.setText("");
             cmbProducto.setSelectedIndex(0);
             txtCantidad.setText("");
+            cargarProductosComboBox();
             JOptionPane.showMessageDialog(this, "Venta finalizada correctamente.");
         }
     }
@@ -458,78 +461,75 @@ public class form_Empleado extends javax.swing.JFrame {
         eliminarProductoDeTabla();
     }//GEN-LAST:event_btnEliminarCantidadActionPerformed
 
-    private String obtenerStockProducto(String marcaModelo) {
+    private void editarCantidadProducto() {
+        int fila = tablaVentas.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila para editar.");
+            return;
+        }
+
+        // Obtener valores actuales
+        String producto = tablaVentas.getValueAt(fila, 2).toString(); // Columna Producto (Marca - Modelo)
+        String cantidadStr = tablaVentas.getValueAt(fila, 4).toString(); // Columna Cantidad
+        int cantidadActual = Integer.parseInt(cantidadStr);
+
+        // Buscar stock desde el archivo productos_stock.txt
+        int stockDisponible = buscarStockDisponible(producto);
+
+        String nuevaCantidadStr = JOptionPane.showInputDialog(
+                this,
+                "📦 Stock disponible: " + stockDisponible + "\n"
+                + "Cantidad actual: " + cantidadActual + "\n\n"
+                + "Ingrese la nueva cantidad:"
+        );
+
+        if (nuevaCantidadStr == null || nuevaCantidadStr.isEmpty()) {
+            return;
+        }
+
+        try {
+            int nuevaCantidad = Integer.parseInt(nuevaCantidadStr);
+
+            if (nuevaCantidad <= 0 || nuevaCantidad > stockDisponible) {
+                JOptionPane.showMessageDialog(this, "La cantidad es inválida o excede el stock disponible.");
+                return;
+            }
+
+            // Actualizar la cantidad y el total
+            double precio = Double.parseDouble(tablaVentas.getValueAt(fila, 3).toString());
+            double nuevoTotal = nuevaCantidad * precio;
+
+            tablaVentas.setValueAt(nuevaCantidad, fila, 4); // actualizar cantidad
+            tablaVentas.setValueAt(nuevoTotal, fila, 5); // actualizar total
+
+            JOptionPane.showMessageDialog(this, "Cantidad actualizada correctamente.");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cantidad inválida.");
+        }
+    }
+
+    private int buscarStockDisponible(String marcaModelo) {
         try (BufferedReader br = new BufferedReader(new FileReader("productos_stock.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(";");
                 if (partes.length >= 4) {
-                    String clave = partes[0].trim() + " - " + partes[1].trim();
-                    if (clave.equals(marcaModelo)) {
-                        return partes[3].trim(); // stock
+                    String item = partes[0].trim() + " - " + partes[1].trim();
+                    if (item.equalsIgnoreCase(marcaModelo)) {
+                        return Integer.parseInt(partes[3].trim());
                     }
                 }
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error leyendo archivo de stock.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
         }
-        return "0";
-    }
-
-    private void editarCantidadProductoSeleccionado() {
-        int fila = tablaVentas.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona una fila para editar la cantidad.");
-            return;
-        }
-
-        String producto = tablaVentas.getValueAt(fila, 0).toString(); // Marca - Modelo
-        String stockActualStr = obtenerStockProducto(producto); // función auxiliar
-        int stockDisponible;
-
-        try {
-            stockDisponible = Integer.parseInt(stockActualStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error al obtener el stock del producto.");
-            return;
-        }
-
-        String cantidadActual = tablaVentas.getValueAt(fila, 4).toString(); // cantidad actual
-        String nuevaCantidadStr = JOptionPane.showInputDialog(
-                this,
-                "Stock disponible: " + stockDisponible + "\nCantidad actual: " + cantidadActual + "\n\nIngrese la nueva cantidad:",
-                cantidadActual
-        );
-
-        if (nuevaCantidadStr == null) {
-            return; // Cancelado
-        }
-        if (!nuevaCantidadStr.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Cantidad inválida.");
-            return;
-        }
-
-        int nuevaCantidad = Integer.parseInt(nuevaCantidadStr);
-        if (nuevaCantidad > stockDisponible) {
-            JOptionPane.showMessageDialog(this, "La cantidad ingresada supera el stock disponible.");
-            return;
-        }
-
-        // Actualizar cantidad
-        tablaVentas.setValueAt(nuevaCantidad, fila, 4);
-
-        // Recalcular total
-        double precio = Double.parseDouble(tablaVentas.getValueAt(fila, 3).toString());
-        double nuevoTotal = precio * nuevaCantidad;
-        tablaVentas.setValueAt(nuevoTotal, fila, 5);
-
-        JOptionPane.showMessageDialog(this, "Cantidad actualizada correctamente.");
+        return 0;
     }
 
 
     private void btnEditarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCantidadActionPerformed
-        editarCantidadProductoSeleccionado();
+        editarCantidadProducto();
     }//GEN-LAST:event_btnEditarCantidadActionPerformed
 
     /**
@@ -578,6 +578,7 @@ public class form_Empleado extends javax.swing.JFrame {
     private javax.swing.JButton btnSalirCuenta;
     private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbProducto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
