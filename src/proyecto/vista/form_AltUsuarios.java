@@ -43,8 +43,8 @@ public class form_AltUsuarios extends javax.swing.JDialog {
 
         // Asegúrate que los campos de token estén ocultos al inicio, si no son Admin.
         // Se usan los nombres de variable de tu diseñador: jTextField1 y jLabel1.
-        jTextField1.setVisible(false); // Ocultar por defecto (controlado por Listener)
-        lblCreacion.setVisible(false);     // Ocultar por defecto (controlado por Listener)
+        //jTextField1.setVisible(false); // Ocultar por defecto (controlado por Listener)
+        //lblCreacion.setVisible(false);     // Ocultar por defecto (controlado por Listener)
     }
 
     /**
@@ -56,95 +56,131 @@ public class form_AltUsuarios extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblCreacion = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         txtApellido = new javax.swing.JTextField();
-        txtcorreo = new javax.swing.JTextField();
-        jPasswordFieldB = new javax.swing.JPasswordField();
+        txtNombre = new javax.swing.JTextField();
         txtUsuario1 = new javax.swing.JTextField();
         cbroles = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        lblUsuario = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        btnLimpiar = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
+        txtcorreo = new javax.swing.JTextField();
+        jPasswordFieldB = new javax.swing.JPasswordField();
         btnMostrar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         btnGuardar1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        btnCerrar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblCreacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Creación de un Nuevo Usuario");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblCreacion.setText("Creación de un nuevo Usuario");
-        getContentPane().add(lblCreacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 240, 40));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 210, 30));
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 210, 30));
-        getContentPane().add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 210, 30));
+        jPanel1.setBackground(new java.awt.Color(51, 45, 86));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPasswordFieldB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        getContentPane().add(jPasswordFieldB, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 210, 40));
-        getContentPane().add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 210, 30));
+        txtApellido.setBackground(new java.awt.Color(51, 45, 86));
+        txtApellido.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtApellido.setForeground(new java.awt.Color(255, 255, 255));
+        txtApellido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellido Paterno", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft PhagsPa", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 260, 70));
 
-        cbroles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Jefe_Abastecimiento", " " }));
-        getContentPane().add(cbroles, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 100, -1));
+        txtNombre.setBackground(new java.awt.Color(51, 45, 86));
+        txtNombre.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft PhagsPa", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 260, 70));
 
-        jLabel2.setText("Correo");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
+        txtUsuario1.setBackground(new java.awt.Color(51, 45, 86));
+        txtUsuario1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtUsuario1.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsuario1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft PhagsPa", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 260, 60));
 
-        jLabel3.setText("Nombre");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+        cbroles.setBackground(new java.awt.Color(0, 0, 153));
+        cbroles.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        cbroles.setForeground(new java.awt.Color(255, 255, 255));
+        cbroles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rol", "Empleado", "Jefe_Abastecimiento", " " }));
+        cbroles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Microsoft PhagsPa", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.add(cbroles, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 260, 40));
 
-        jLabel4.setText("Apellido Paterno");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 130, 100, -1));
-
-        lblUsuario.setText("Usuario");
-        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 60, -1));
-
-        jLabel6.setText("Contraseña");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
-
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        txtcorreo.setBackground(new java.awt.Color(51, 45, 86));
+        txtcorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtcorreo.setForeground(new java.awt.Color(255, 255, 255));
+        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft PhagsPa", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        txtcorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                txtcorreoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
+        jPanel1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 260, 60));
 
-        btnCerrar.setText("Cerrar");
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, -1, -1));
+        jPasswordFieldB.setBackground(new java.awt.Color(51, 45, 86));
+        jPasswordFieldB.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        jPasswordFieldB.setForeground(new java.awt.Color(255, 255, 255));
+        jPasswordFieldB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft PhagsPa", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.add(jPasswordFieldB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 60));
 
-        btnMostrar.setText("Mostrar");
+        btnMostrar.setBackground(new java.awt.Color(61, 144, 215));
+        btnMostrar.setForeground(new java.awt.Color(61, 144, 215));
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, 40));
+        jPanel1.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 30, 30));
 
+        btnLimpiar.setBackground(new java.awt.Color(67, 0, 255));
+        btnLimpiar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(null);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 80, 30));
+
+        btnGuardar1.setBackground(new java.awt.Color(255, 214, 102));
+        btnGuardar1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar1.setText("Guardar");
+        btnGuardar1.setBorder(null);
+        btnGuardar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardar1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, -1));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, 80, 30));
 
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, -1));
+        btnCerrar.setBackground(new java.awt.Color(255, 0, 0));
+        btnCerrar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrar.setText("Cerrar");
+        btnCerrar.setBorder(null);
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 80, 30));
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 680, 350));
 
-        pack();
+        jPanel2.setBackground(new java.awt.Color(32, 87, 129));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCreacion.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 36)); // NOI18N
+        lblCreacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblCreacion.setText("CREACIÓN DE NUEVO USUARIO");
+        jPanel2.add(lblCreacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 580, 40));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 70));
+
+        setSize(new java.awt.Dimension(690, 427));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void addEventHandlers() {
         btnGuardar1.addActionListener(new ActionListener() {
@@ -264,6 +300,10 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnMostrarActionPerformed
 
+    private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcorreoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,15 +355,10 @@ public class form_AltUsuarios extends javax.swing.JDialog {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMostrar;
     private javax.swing.JComboBox<String> cbroles;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordFieldB;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCreacion;
-    private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario1;

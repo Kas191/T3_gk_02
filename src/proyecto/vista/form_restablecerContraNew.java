@@ -92,7 +92,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         lblRestablerContrasena.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
         lblRestablerContrasena.setForeground(new java.awt.Color(0, 48, 146));
         lblRestablerContrasena.setText("Restablecer Contraseña");
-        jPanel1.add(lblRestablerContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 320, 60));
+        jPanel1.add(lblRestablerContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 320, 60));
 
         btnMostrar.setBackground(new java.awt.Color(0, 48, 146));
         btnMostrar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -142,7 +142,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         });
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 240, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 410, 420));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

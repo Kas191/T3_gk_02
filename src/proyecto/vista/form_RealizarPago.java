@@ -71,92 +71,91 @@ public class form_RealizarPago extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblLogin = new javax.swing.JLabel();
-        lblMontoPagado = new javax.swing.JLabel();
-        btnConfirmarPago = new javax.swing.JButton();
-        txtMontoPagado = new javax.swing.JTextField();
-        btnCancelarOperacion = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        lblPago = new javax.swing.JLabel();
-        lblTotalPagar = new javax.swing.JLabel();
-        lblTotalPagar1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btnConfirmarPago = new javax.swing.JButton();
+        btnCancelarOperacion = new javax.swing.JButton();
+        lblLogin = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        txtMontoPagado = new javax.swing.JTextField();
+        lblMontoPagado = new javax.swing.JLabel();
+        lblTotalPagar = new javax.swing.JLabel();
+        lblPago = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
-        lblLogin.setForeground(new java.awt.Color(0, 48, 146));
-        lblLogin.setText("REALIZAR PAGO");
-        getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 60));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblMontoPagado.setText("Ingrese el monto pagado: ");
-        getContentPane().add(lblMontoPagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnConfirmarPago.setBackground(new java.awt.Color(221, 235, 157));
+        btnConfirmarPago.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnConfirmarPago.setText("Confirmar Pago");
         btnConfirmarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConfirmarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 200, 30));
+        jPanel1.add(btnConfirmarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 350, 30));
 
-        txtMontoPagado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMontoPagadoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtMontoPagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 260, 30));
-
+        btnCancelarOperacion.setBackground(new java.awt.Color(255, 130, 130));
+        btnCancelarOperacion.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnCancelarOperacion.setText("Cancelar Operación");
         btnCancelarOperacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarOperacionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelarOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 200, 30));
+        jPanel1.add(btnCancelarOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 350, 30));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(0, 48, 146));
+        lblLogin.setText("REALIZAR PAGO");
+        jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 60));
 
-        lblPago.setText("0");
-        jPanel1.add(lblPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, -1));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setDoubleBuffered(false);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtMontoPagado.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtMontoPagado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        txtMontoPagado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoPagadoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtMontoPagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 340, 30));
+
+        lblMontoPagado.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblMontoPagado.setText("Ingrese el monto pagado: ");
+        jPanel3.add(lblMontoPagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        lblTotalPagar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblTotalPagar.setText("Total a pagar : ");
-        jPanel1.add(lblTotalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 120, -1));
+        jPanel3.add(lblTotalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 420));
+        lblPago.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 22)); // NOI18N
+        lblPago.setText("0");
+        jPanel3.add(lblPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 150, 40));
 
-        lblTotalPagar1.setText("Total a pagar : ");
-        getContentPane().add(lblTotalPagar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 120, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 360, 120));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-        );
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 400, 420));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 400, 420));
 
-        setSize(new java.awt.Dimension(414, 431));
+        setSize(new java.awt.Dimension(414, 373));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public boolean isPagoExitoso() {
         return pagoExitoso;
     }
 
-
-    private void txtMontoPagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoPagadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMontoPagadoActionPerformed
 
     private int obtenerSiguienteNumeroFactura() {
         File archivo = new File("factura_id.txt");
@@ -351,6 +350,10 @@ public class form_RealizarPago extends javax.swing.JDialog {
         cancelarOperacion();
     }//GEN-LAST:event_btnCancelarOperacionActionPerformed
 
+    private void txtMontoPagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoPagadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMontoPagadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -401,11 +404,11 @@ public class form_RealizarPago extends javax.swing.JDialog {
     private javax.swing.JButton btnConfirmarPago;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblMontoPagado;
     private javax.swing.JLabel lblPago;
     private javax.swing.JLabel lblTotalPagar;
-    private javax.swing.JLabel lblTotalPagar1;
     private javax.swing.JTextField txtMontoPagado;
     // End of variables declaration//GEN-END:variables
 }

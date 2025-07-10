@@ -87,8 +87,11 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         });
         jPanel1.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 240, 40));
 
+        cmbMarcaProducto.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        cmbMarcaProducto.setForeground(new java.awt.Color(0, 0, 255));
         cmbMarcaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Samsung", "Redmi", "Huawei", "Motorola", "POCO", "Honor", "ZTE", "LG", "Nokia", "Vivo", "Tecno", "Itel", "Meizu", "Etoway", "JTEl", "SPARK", "Lotn", "Snapnini", "Sky Rock", "Sole", "Very Kool", "Logic", "Verde", "Gol", "Movie" }));
-        jPanel1.add(cmbMarcaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, -1));
+        cmbMarcaProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)));
+        jPanel1.add(cmbMarcaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, 40));
 
         lblCorreo1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblCorreo1.setForeground(new java.awt.Color(102, 102, 102));

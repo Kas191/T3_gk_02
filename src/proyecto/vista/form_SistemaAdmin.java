@@ -101,7 +101,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnCredencialesUsuarios1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema de Admin");
+        setTitle("Sistema de Administrador");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusable(false);
         setResizable(false);
@@ -130,7 +130,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableAdmin);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 650, 270));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 650, 300));
 
         jPanel1.setBackground(new java.awt.Color(54, 116, 181));
 
@@ -205,9 +205,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                     .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,46 +219,46 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(114, 114, 114)
                 .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 620));
 
-        btnbBuscar.setBackground(new java.awt.Color(0, 48, 146));
+        btnbBuscar.setBackground(new java.awt.Color(255, 221, 87));
         btnbBuscar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnbBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnbBuscar.setText("Buscar");
-        btnbBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnbBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(245, 200, 66), new java.awt.Color(255, 236, 143), new java.awt.Color(204, 144, 30), new java.awt.Color(234, 184, 56)));
         btnbBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 110, 20));
+        bg.add(btnbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 110, 30));
         bg.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 120, 40));
 
-        btnExportarUsuariosPdf.setBackground(new java.awt.Color(0, 48, 146));
+        btnExportarUsuariosPdf.setBackground(new java.awt.Color(153, 204, 0));
         btnExportarUsuariosPdf.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnExportarUsuariosPdf.setForeground(new java.awt.Color(255, 255, 255));
         btnExportarUsuariosPdf.setText("Exportar Lista de Usuarios PDF");
-        btnExportarUsuariosPdf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
+        btnExportarUsuariosPdf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 153, 0), new java.awt.Color(51, 153, 0), new java.awt.Color(153, 204, 0), new java.awt.Color(102, 255, 0)));
         btnExportarUsuariosPdf.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnExportarUsuariosPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportarUsuariosPdfActionPerformed(evt);
             }
         });
-        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 220, 40));
+        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 220, 40));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 530, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, 530, 30));
 
         btnCredencialesUsuarios1.setBackground(new java.awt.Color(0, 48, 146));
         btnCredencialesUsuarios1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -273,7 +271,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 btnCredencialesUsuarios1ActionPerformed(evt);
             }
         });
-        bg.add(btnCredencialesUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 220, 40));
+        bg.add(btnCredencialesUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 220, 40));
 
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 490));
 

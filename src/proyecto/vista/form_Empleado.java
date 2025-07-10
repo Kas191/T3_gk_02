@@ -64,6 +64,7 @@ public class form_Empleado extends javax.swing.JFrame {
         btnCerrarSesion.setText("Cerrar sesión");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Panel Empleado");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -108,7 +109,10 @@ public class form_Empleado extends javax.swing.JFrame {
         lblValorStock.setText("0");
         jPanel3.add(lblValorStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 70, -1));
 
+        cmbProducto.setBackground(new java.awt.Color(255, 255, 204));
+        cmbProducto.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         cmbProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elige una opción" }));
+        cmbProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         cmbProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbProductoActionPerformed(evt);
@@ -116,7 +120,10 @@ public class form_Empleado extends javax.swing.JFrame {
         });
         jPanel3.add(cmbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 190, -1));
 
+        cmbCliente.setBackground(new java.awt.Color(255, 255, 204));
+        cmbCliente.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 12)); // NOI18N
         cmbCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", " " }));
+        cmbCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         cmbCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbClienteActionPerformed(evt);
@@ -134,7 +141,10 @@ public class form_Empleado extends javax.swing.JFrame {
         lblCantidad.setText("Cantidad: ");
         jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 100, -1));
 
+        btnAgregarProducto.setBackground(new java.awt.Color(255, 204, 0));
+        btnAgregarProducto.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 16)); // NOI18N
         btnAgregarProducto.setText("Agregar");
+        btnAgregarProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
         btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProductoActionPerformed(evt);
@@ -142,6 +152,8 @@ public class form_Empleado extends javax.swing.JFrame {
         });
         jPanel3.add(btnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 100, 60));
 
+        btnEditarCantidad.setBackground(new java.awt.Color(150, 148, 255));
+        btnEditarCantidad.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnEditarCantidad.setText("Editar");
         btnEditarCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +162,8 @@ public class form_Empleado extends javax.swing.JFrame {
         });
         jPanel3.add(btnEditarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 100, 60));
 
+        btnLimpiarTabla.setBackground(new java.awt.Color(99, 200, 255));
+        btnLimpiarTabla.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 16)); // NOI18N
         btnLimpiarTabla.setText("Limpiar");
         btnLimpiarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,8 +171,12 @@ public class form_Empleado extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnLimpiarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 100, 60));
-        jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 20));
 
+        txtCantidad.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 70, 30));
+
+        btnEliminarCantidad.setBackground(new java.awt.Color(220, 37, 37));
+        btnEliminarCantidad.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnEliminarCantidad.setText("Eliminar");
         btnEliminarCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +192,7 @@ public class form_Empleado extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1000, 120));
 
+        tablaVentas.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -189,9 +208,12 @@ public class form_Empleado extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Rol : Cajero");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
+        btnPagar.setBackground(new java.awt.Color(214, 216, 93));
+        btnPagar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 15)); // NOI18N
         btnPagar.setText("Pagar");
+        btnPagar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 153), new java.awt.Color(204, 204, 0), new java.awt.Color(204, 255, 51), new java.awt.Color(204, 255, 102)));
         btnPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPagarActionPerformed(evt);
@@ -212,15 +234,21 @@ public class form_Empleado extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 140, 40));
 
+        btnResumenFacturas.setBackground(new java.awt.Color(238, 206, 185));
+        btnResumenFacturas.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnResumenFacturas.setText("Resumen Facturas Generadas");
+        btnResumenFacturas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(238, 206, 185), new java.awt.Color(238, 206, 185), new java.awt.Color(238, 206, 185), new java.awt.Color(238, 206, 185)));
         btnResumenFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResumenFacturasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 230, 40));
+        jPanel1.add(btnResumenFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 600, 230, 40));
 
+        btnRefrescar.setBackground(new java.awt.Color(111, 230, 252));
+        btnRefrescar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnRefrescar.setText("Refrescar");
+        btnRefrescar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(204, 255, 255), new java.awt.Color(153, 255, 255)));
         btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefrescarActionPerformed(evt);

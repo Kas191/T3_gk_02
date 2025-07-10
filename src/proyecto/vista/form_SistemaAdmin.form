@@ -3,7 +3,7 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Sistema de Admin"/>
+    <Property name="title" type="java.lang.String" value="Sistema de Administrador"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Default Cursor"/>
     </Property>
@@ -72,7 +72,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="110" width="650" height="270"/>
+              <AbsoluteConstraints x="10" y="110" width="650" height="300"/>
             </Constraint>
           </Constraints>
 
@@ -108,17 +108,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnActualizar" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="btnCrearNuevoUsuario1" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="btnBorrarUsuario" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="btnReportedeVentas" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="btnSalirAdmin" min="-2" pref="130" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnSalirAdmin" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="39" pref="54" max="32767" attributes="0"/>
                   </Group>
@@ -135,9 +132,9 @@
                       <Component id="btnBorrarUsuario" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnReportedeVentas" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                       <Component id="btnSalirAdmin" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="196" max="32767" attributes="0"/>
+                      <EmptySpace pref="153" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -288,7 +285,7 @@
         <Component class="javax.swing.JButton" name="btnbBuscar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="92" green="30" red="0" type="rgb"/>
+              <Color blue="57" green="dd" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Microsoft PhagsPa" size="14" style="0"/>
@@ -300,10 +297,10 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder>
-                  <Color PropertyName="highlightOuter" blue="ff" green="0" red="0" type="rgb"/>
-                  <Color PropertyName="highlightInner" blue="99" green="0" red="0" type="rgb"/>
-                  <Color PropertyName="shadowOuter" blue="ff" green="66" red="66" type="rgb"/>
-                  <Color PropertyName="shadowInner" blue="33" green="0" red="0" type="rgb"/>
+                  <Color PropertyName="highlightOuter" blue="42" green="c8" red="f5" type="rgb"/>
+                  <Color PropertyName="highlightInner" blue="8f" green="ec" red="ff" type="rgb"/>
+                  <Color PropertyName="shadowOuter" blue="1e" green="90" red="cc" type="rgb"/>
+                  <Color PropertyName="shadowInner" blue="38" green="b8" red="ea" type="rgb"/>
                 </BevelBorder>
               </Border>
             </Property>
@@ -314,7 +311,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="550" y="80" width="110" height="20"/>
+              <AbsoluteConstraints x="550" y="70" width="110" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -330,7 +327,7 @@
         <Component class="javax.swing.JButton" name="btnExportarUsuariosPdf">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="92" green="30" red="0" type="rgb"/>
+              <Color blue="0" green="cc" red="99" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Microsoft PhagsPa" size="14" style="0"/>
@@ -342,10 +339,10 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder>
-                  <Color PropertyName="highlightOuter" blue="ff" green="0" red="0" type="rgb"/>
-                  <Color PropertyName="highlightInner" blue="99" green="0" red="0" type="rgb"/>
-                  <Color PropertyName="shadowOuter" blue="ff" green="66" red="66" type="rgb"/>
-                  <Color PropertyName="shadowInner" blue="33" green="0" red="0" type="rgb"/>
+                  <Color PropertyName="highlightOuter" blue="0" green="99" red="66" type="rgb"/>
+                  <Color PropertyName="highlightInner" blue="0" green="99" red="33" type="rgb"/>
+                  <Color PropertyName="shadowOuter" blue="0" green="cc" red="99" type="rgb"/>
+                  <Color PropertyName="shadowInner" blue="0" green="ff" red="66" type="rgb"/>
                 </BevelBorder>
               </Border>
             </Property>
@@ -356,7 +353,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="440" y="390" width="220" height="40"/>
+              <AbsoluteConstraints x="440" y="430" width="220" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -366,7 +363,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="80" width="530" height="-1"/>
+              <AbsoluteConstraints x="10" y="72" width="530" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -399,7 +396,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="210" y="390" width="220" height="40"/>
+              <AbsoluteConstraints x="210" y="430" width="220" height="40"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -83,10 +83,10 @@ public class form_login extends javax.swing.JFrame {
         bg.setOpaque(true);
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 50)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(0, 48, 146));
         lblLogin.setText("LOGIN");
-        bg.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 200, 60));
+        bg.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 200, 80));
 
         jLayeredPane1.setBackground(new java.awt.Color(0, 48, 146));
         jLayeredPane1.setOpaque(true);
