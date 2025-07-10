@@ -210,7 +210,7 @@ public class form_Empleado extends javax.swing.JFrame {
                 btnSalirCuentaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 140, 40));
+        jPanel1.add(btnSalirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 140, 40));
 
         btnResumenFacturas.setText("Resumen Facturas Generadas");
         btnResumenFacturas.addActionListener(new java.awt.event.ActionListener() {

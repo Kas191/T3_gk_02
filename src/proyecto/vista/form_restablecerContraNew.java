@@ -53,25 +53,25 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
                 txtpasscontrasenaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtpasscontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 40));
+        getContentPane().add(txtpasscontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 240, 40));
 
         lblCorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(102, 102, 102));
         lblCorreo.setText("Correo");
-        getContentPane().add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 50, -1));
+        getContentPane().add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 50, -1));
 
         lblconficontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblconficontrasena.setForeground(new java.awt.Color(102, 102, 102));
         lblconficontrasena.setText("Confirmar Contraseña");
-        getContentPane().add(lblconficontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 160, -1));
+        getContentPane().add(lblconficontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 160, -1));
 
         txtrpassconfircontra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        getContentPane().add(txtrpassconfircontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 40));
+        getContentPane().add(txtrpassconfircontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 240, 40));
 
         lblcontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         lblcontrasena.setForeground(new java.awt.Color(102, 102, 102));
         lblcontrasena.setText("Contraseña");
-        getContentPane().add(lblcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 100, -1));
+        getContentPane().add(lblcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 100, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,7 +142,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         });
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 240, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 510));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 410, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

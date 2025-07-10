@@ -4,6 +4,29 @@
  */
 package proyecto.vista;
 
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfDocument;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.parser.PdfTextExtractor;
+import java.awt.Color;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User0
@@ -32,13 +55,17 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         lblLogin1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         lblValorStock1 = new javax.swing.JLabel();
         lblValorStock2 = new javax.swing.JLabel();
         lblValorStock3 = new javax.swing.JLabel();
+        btnFiltrar = new javax.swing.JButton();
+        jDateChooserHasta = new com.toedter.calendar.JDateChooser();
+        btnGenerarReporte = new javax.swing.JButton();
+        lblValorStock4 = new javax.swing.JLabel();
+        lblValorStock5 = new javax.swing.JLabel();
+        jDateChooserDesde = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        tablaVentasResumen = new javax.swing.JTable();
 
         lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(0, 48, 146));
@@ -62,9 +89,9 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,12 +100,9 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
                 .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 750, 80));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 830, 80));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("Filtrar");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 156, 38));
 
         lblValorStock1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorStock1.setForeground(new java.awt.Color(51, 51, 51));
@@ -87,39 +111,198 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
 
         lblValorStock2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorStock2.setForeground(new java.awt.Color(51, 51, 51));
-        lblValorStock2.setText("Hasta:");
-        jPanel3.add(lblValorStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 60, 30));
+        lblValorStock2.setText("Stock: ");
+        jPanel3.add(lblValorStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 70, -1));
 
         lblValorStock3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorStock3.setForeground(new java.awt.Color(51, 51, 51));
-        lblValorStock3.setText("Desde: ");
-        jPanel3.add(lblValorStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 60, 30));
+        lblValorStock3.setText("Hasta:");
+        jPanel3.add(lblValorStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 180, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 320));
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 156, 38));
+        jPanel3.add(jDateChooserHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 160, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnGenerarReporte.setText("Generar Reporte PDF");
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 150, 30));
+
+        lblValorStock4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock4.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock4.setText("Selecciona una fecha: ");
+        jPanel3.add(lblValorStock4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, -1));
+
+        lblValorStock5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock5.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock5.setText("Desde:");
+        jPanel3.add(lblValorStock5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 180, -1));
+        jPanel3.add(jDateChooserDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 160, -1));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 220, 290));
+
+        tablaVentasResumen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Fecha de Venta", "Cliente Asociado", "Total de ventas"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVentasResumen);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 520, 320));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 560, 230));
 
-        jButton2.setText("Generar Reporte PDF");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, 150, 30));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 840, 410));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 760, 480));
-
-        setSize(new java.awt.Dimension(755, 479));
+        setSize(new java.awt.Dimension(840, 419));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date desde = jDateChooserDesde.getDate();
+        Date hasta = jDateChooserHasta.getDate();
+
+        if (desde == null || hasta == null) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar ambas fechas.");
+            return;
+        }
+
+        File carpetaFacturas = new File("Facturas/");
+        if (!carpetaFacturas.exists() || !carpetaFacturas.isDirectory()) {
+            JOptionPane.showMessageDialog(this, "La carpeta 'Facturas/' no existe.");
+            return;
+        }
+
+        File[] archivosPDF = carpetaFacturas.listFiles((dir, name) -> name.toLowerCase().endsWith(".pdf"));
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentasResumen.getModel();
+        modelo.setRowCount(0); // Limpiar tabla
+
+        double totalAcumulado = 0;
+
+        try {
+            for (File archivo : archivosPDF) {
+                PdfReader reader = new PdfReader(archivo.getAbsolutePath());
+                PdfTextExtractor extractor = new PdfTextExtractor(reader);
+                String contenido = extractor.getTextFromPage(1); // Solo primera página
+                reader.close();
+
+                String[] lineas = contenido.split("\n");
+                String fechaStr = "";
+                String cliente = "General";
+                String montoStr = "";
+
+                for (String linea : lineas) {
+                    if (linea.startsWith("Fecha:")) {
+                        fechaStr = linea.replace("Fecha:", "").trim();
+                    } else if (linea.startsWith("Total a pagar")) { // ← CORREGIDO
+                        montoStr = linea.replace("Total a pagar :", "").trim();
+                    } else if (linea.startsWith("Cliente:")) {
+                        cliente = linea.replace("Cliente:", "").trim();
+                    }
+                }
+
+                if (!fechaStr.isEmpty() && !montoStr.isEmpty()) {
+                    Date fechaFactura = sdf.parse(fechaStr);
+                    if (!fechaFactura.before(desde) && !fechaFactura.after(hasta)) {
+                        modelo.addRow(new Object[]{fechaStr, cliente, montoStr});
+                        totalAcumulado += Double.parseDouble(montoStr);
+                    }
+                }
+            }
+
+            if (modelo.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "No se encontraron facturas en el rango de fechas.");
+            } else {
+                JOptionPane.showMessageDialog(this, "✅ Total acumulado: S/ " + String.format("%.2f", totalAcumulado));
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al leer las facturas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        try {
+            // 1. Crear carpeta si no existe
+            File carpeta = new File("ReporteDeVentasGenerados");
+            if (!carpeta.exists()) {
+                carpeta.mkdirs();
+            }
+
+            // 2. Preparar PDF
+            String nombreArchivo = "ReporteDeVentasGenerados/Reporte_" + System.currentTimeMillis() + ".pdf";
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+            PdfWriter.getInstance(doc, new FileOutputStream(nombreArchivo));
+            doc.open();
+
+            // 3. Fuentes
+            Font tituloFont = new Font(Font.HELVETICA, 18, Font.BOLD, Color.BLUE);
+            Font encabezadoFont = new Font(Font.HELVETICA, 12, Font.BOLD, Color.BLACK);
+            Font normalFont = new Font(Font.HELVETICA, 11, Font.NORMAL, Color.BLACK);
+
+            // 4. Título
+            Paragraph titulo = new Paragraph("REPORTE DE VENTAS TOTALES", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            doc.add(titulo);
+
+            doc.add(new Paragraph("Generado: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()), normalFont));
+            doc.add(Chunk.NEWLINE);
+
+            // 5. Tabla PDF
+            PdfPTable tabla = new PdfPTable(3); // 3 columnas
+            tabla.setWidthPercentage(100);
+            tabla.setWidths(new int[]{35, 35, 30});
+            tabla.addCell(new PdfPCell(new Phrase("Fecha de Venta", encabezadoFont)));
+            tabla.addCell(new PdfPCell(new Phrase("Cliente Asociado", encabezadoFont)));
+            tabla.addCell(new PdfPCell(new Phrase("Monto de la Venta (S/)", encabezadoFont)));
+
+            double totalAcumulado = 0.0;
+            DefaultTableModel modelo = (DefaultTableModel) tablaVentasResumen.getModel();
+
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                String fecha = modelo.getValueAt(i, 0).toString();
+                String cliente = modelo.getValueAt(i, 1).toString();
+                String monto = modelo.getValueAt(i, 2).toString();
+
+                tabla.addCell(new Phrase(fecha, normalFont));
+                tabla.addCell(new Phrase(cliente, normalFont));
+                tabla.addCell(new Phrase(monto, normalFont));
+
+                try {
+                    totalAcumulado += Double.parseDouble(monto);
+                } catch (NumberFormatException e) {
+                    // Si hay un valor inválido, lo ignora
+                }
+            }
+
+            doc.add(tabla);
+            doc.add(Chunk.NEWLINE);
+
+            // 6. Total acumulado
+            Paragraph total = new Paragraph("TOTAL ACUMULADO: S/ " + String.format("%.2f", totalAcumulado), encabezadoFont);
+            total.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(total);
+
+            doc.close();
+
+            JOptionPane.showMessageDialog(this, "✅ Reporte generado correctamente:\n" + nombreArchivo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "❌ Error al generar el reporte: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,17 +347,21 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnFiltrar;
+    private javax.swing.JButton btnGenerarReporte;
+    private com.toedter.calendar.JDateChooser jDateChooserDesde;
+    private com.toedter.calendar.JDateChooser jDateChooserHasta;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblLogin1;
     private javax.swing.JLabel lblValorStock1;
     private javax.swing.JLabel lblValorStock2;
     private javax.swing.JLabel lblValorStock3;
+    private javax.swing.JLabel lblValorStock4;
+    private javax.swing.JLabel lblValorStock5;
+    private javax.swing.JTable tablaVentasResumen;
     // End of variables declaration//GEN-END:variables
 }
