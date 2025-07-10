@@ -27,97 +27,98 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        lblLogin = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        lblLogin1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        lblValorStock1 = new javax.swing.JLabel();
+        lblValorStock2 = new javax.swing.JLabel();
+        lblValorStock3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+
+        lblLogin.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(0, 48, 146));
+        lblLogin.setText("LOGIN");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Generar Reporte de Ventas");
+        jPanel2.setBackground(new java.awt.Color(54, 116, 181));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes", "Enero", "Febrero", "Marzo", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Diciembre", " " }));
+        jPanel1.setBackground(new java.awt.Color(0, 26, 110));
+        jPanel1.setForeground(new java.awt.Color(92, 114, 133));
 
-        jButton1.setText("Generar");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton2.setText("Cerrar");
-
-        jButton3.setText("Exportar PDF");
+        lblLogin1.setFont(new java.awt.Font("Yu Gothic", 1, 40)); // NOI18N
+        lblLogin1.setForeground(new java.awt.Color(255, 255, 255));
+        lblLogin1.setText("REPORTE DE VENTAS TOTALES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 20, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(210, 210, 210)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton3)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(520, 520, 520)
-                            .addComponent(jButton2)))
-                    .addGap(0, 20, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 46, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(8, 8, 8)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8)
-                            .addComponent(jButton1)
-                            .addGap(7, 7, 7)
-                            .addComponent(jButton3)))
-                    .addGap(30, 30, 30)
-                    .addComponent(jButton2)
-                    .addGap(0, 46, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 750, 80));
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 440));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pack();
+        jButton1.setText("Filtrar");
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 156, 38));
+
+        lblValorStock1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock1.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock1.setText("Stock: ");
+        jPanel3.add(lblValorStock1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 70, -1));
+
+        lblValorStock2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock2.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock2.setText("Hasta:");
+        jPanel3.add(lblValorStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 60, 30));
+
+        lblValorStock3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock3.setForeground(new java.awt.Color(51, 51, 51));
+        lblValorStock3.setText("Desde: ");
+        jPanel3.add(lblValorStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 60, 30));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 320));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Fecha de Venta", "Cliente Asociado", "Total de ventas"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 520, 320));
+
+        jButton2.setText("Generar Reporte PDF");
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, 150, 30));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 760, 480));
+
+        setSize(new java.awt.Dimension(755, 479));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -165,13 +166,15 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblLogin1;
+    private javax.swing.JLabel lblValorStock1;
+    private javax.swing.JLabel lblValorStock2;
+    private javax.swing.JLabel lblValorStock3;
     // End of variables declaration//GEN-END:variables
 }
