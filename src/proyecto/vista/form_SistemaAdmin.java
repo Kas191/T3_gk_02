@@ -99,6 +99,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         btnExportarUsuariosPdf = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         btnCredencialesUsuarios1 = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Administrador");
@@ -130,7 +131,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableAdmin);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 650, 300));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 650, 270));
 
         jPanel1.setBackground(new java.awt.Color(54, 116, 181));
 
@@ -219,9 +220,9 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114)
+                .addGap(95, 95, 95)
                 .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 620));
@@ -237,7 +238,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 btnbBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 110, 30));
+        bg.add(btnbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 140, 40));
         bg.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 120, 40));
 
         btnExportarUsuariosPdf.setBackground(new java.awt.Color(153, 204, 0));
@@ -251,14 +252,15 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 btnExportarUsuariosPdfActionPerformed(evt);
             }
         });
-        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 220, 40));
+        bg.add(btnExportarUsuariosPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 220, 40));
 
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, 530, 30));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 440, 40));
 
         btnCredencialesUsuarios1.setBackground(new java.awt.Color(0, 48, 146));
         btnCredencialesUsuarios1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -271,7 +273,16 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 btnCredencialesUsuarios1ActionPerformed(evt);
             }
         });
-        bg.add(btnCredencialesUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 220, 40));
+        bg.add(btnCredencialesUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 220, 40));
+
+        btnVolver.setBackground(new java.awt.Color(102, 153, 255));
+        btnVolver.setText("⟳");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        bg.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 50, 40));
 
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 490));
 
@@ -463,9 +474,36 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     }
 
     private void btnbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbBuscarActionPerformed
+        String apellidoBuscado = jTextField1.getText().trim().toLowerCase();
+        if (apellidoBuscado.isEmpty()) {
+            Mensajes.mostrarAdvertencia("Por favor ingresa un apellido para buscar.");
+            return;
+        }
 
-        Mensajes.mostrarInfo("Buscando apellido .....");
+        List<Usuario> usuarios = usuarioController.listarUsuarios();
+        DefaultTableModel modelo = (DefaultTableModel) tableAdmin.getModel();
+        modelo.setRowCount(0); // Limpiar la tabla
 
+        boolean encontrado = false;
+
+        for (Usuario u : usuarios) {
+            if (u.getApellido().toLowerCase().contains(apellidoBuscado)) {
+                Object[] fila = {
+                    u.getNombre(),
+                    u.getApellido(),
+                    u.getUsuario(),
+                    u.getCorreo(),
+                    u.getRol(),
+                    "********"
+                };
+                modelo.addRow(fila);
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
+            Mensajes.mostrarInfo("No se encontraron usuarios con el apellido ingresado.");
+        }
 
     }//GEN-LAST:event_btnbBuscarActionPerformed
 
@@ -566,8 +604,13 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnCredencialesUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCredencialesUsuarios1ActionPerformed
-       generarArchivoTXT();
+        generarArchivoTXT();
     }//GEN-LAST:event_btnCredencialesUsuarios1ActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        jTextField1.setText(""); // Limpia el campo de búsqueda
+        cargarTablaUsuarios();   // Vuelve a mostrar todos los usuarios
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -618,6 +661,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnExportarUsuariosPdf;
     private javax.swing.JButton btnReportedeVentas;
     private javax.swing.JButton btnSalirAdmin;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnbBuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

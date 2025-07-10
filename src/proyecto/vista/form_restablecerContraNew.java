@@ -156,19 +156,12 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        if (jPasswordFieldA.getEchoChar() == '•') {
-            jPasswordFieldA.setEchoChar((char) 0); // Mostrar texto
-        } else {
-            jPasswordFieldA.setEchoChar('•'); // Ocultar texto
-        }
+   
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnMostrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrar1ActionPerformed
-        if (jPasswordFieldA.getEchoChar() == '•') {
-            jPasswordFieldA.setEchoChar((char) 0); // Mostrar texto
-        } else {
-            jPasswordFieldA.setEchoChar('•'); // Ocultar texto
-        }
+     
+       
     }//GEN-LAST:event_btnMostrar1ActionPerformed
 
     private void btnMostrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrar2ActionPerformed

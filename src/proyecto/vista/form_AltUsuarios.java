@@ -8,10 +8,10 @@ import proyecto.controlador.UsuarioController;
 import proyecto.modelo.Administrador;
 import proyecto.modelo.Empleado;
 import proyecto.modelo.JefeDeAbastecimiento;
-import proyecto.modelo.Usuario; // Agregado: Importar la clase Usuario
+import proyecto.modelo.Usuario; 
 import proyecto.util.Mensajes;
-
-import javax.swing.JDialog; // Importante: Extiende de JDialog
+import javax.swing.ImageIcon;
+import javax.swing.JDialog; 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,13 +38,10 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         this.usuarioController = new UsuarioController(); // Instancia del controlador de usuarios
         this.userToEdit = userToEdit;
 
-        addEventHandlers(); // Asigna los ActionListeners
-        populateForm(); // Rellena el formulario si es edición
+        addEventHandlers(); 
+        populateForm(); 
 
-        // Asegúrate que los campos de token estén ocultos al inicio, si no son Admin.
-        // Se usan los nombres de variable de tu diseñador: jTextField1 y jLabel1.
-        //jTextField1.setVisible(false); // Ocultar por defecto (controlado por Listener)
-        //lblCreacion.setVisible(false);     // Ocultar por defecto (controlado por Listener)
+   
     }
 
     /**
@@ -123,6 +120,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
 
         btnMostrar.setBackground(new java.awt.Color(61, 144, 215));
         btnMostrar.setForeground(new java.awt.Color(61, 144, 215));
+        btnMostrar.setText("⟳");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMostrarActionPerformed(evt);
@@ -219,18 +217,20 @@ public class form_AltUsuarios extends javax.swing.JDialog {
             cbroles.setSelectedItem(userToEdit.getRol());
         }
     }
-    public boolean isSuccess(){return successOperation;}
-    
-    
+
+    public boolean isSuccess() {
+        return successOperation;
+    }
+
     private void limpiarCampos() {
         txtNombre.setText("");
         txtApellido.setText("");
         txtUsuario1.setText("");
         txtcorreo.setText("");
         cbroles.setSelectedIndex(0);
-        String clave = new String(jPasswordFieldB.getPassword());
-        
-        
+
+        jPasswordFieldB.setText("");
+
     }
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarCampos();
@@ -248,7 +248,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         String clave = new String(jPasswordFieldB.getPassword());
         String correo = txtcorreo.getText();
         String rol = (String) cbroles.getSelectedItem();
-       
+
 // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
             Mensajes.mostrarError("Todos los campos son obligatorios");
@@ -289,14 +289,12 @@ public class form_AltUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardar1ActionPerformed
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
-        if (jPasswordFieldB.getEchoChar() == '•') {
-            jPasswordFieldB.setEchoChar((char) 0); // Mostrar texto
-
+        if (jPasswordFieldB.getEchoChar() == '*') {
+           
+            jPasswordFieldB.setEchoChar((char) 0);
         } else {
-
-            jPasswordFieldB.setEchoChar('•'); // Ocultar texto
-
+          
+            jPasswordFieldB.setEchoChar('*');
         }
     }//GEN-LAST:event_btnMostrarActionPerformed
 
@@ -348,7 +346,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
             }
         });
     }
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar1;
