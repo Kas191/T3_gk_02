@@ -72,6 +72,7 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         lblLogin.setText("LOGIN");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reporte de Ventas Totales");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(54, 116, 181));
@@ -89,8 +90,8 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -100,8 +101,10 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
                 .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 830, 80));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 860, 80));
 
+        jPanel3.setBackground(new java.awt.Color(215, 215, 215));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblValorStock1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -117,38 +120,44 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         lblValorStock3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorStock3.setForeground(new java.awt.Color(51, 51, 51));
         lblValorStock3.setText("Hasta:");
-        jPanel3.add(lblValorStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 180, -1));
+        jPanel3.add(lblValorStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 180, -1));
 
+        btnFiltrar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnFiltrar.setText("Filtrar");
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFiltrarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 156, 38));
-        jPanel3.add(jDateChooserHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 160, -1));
+        jPanel3.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 190, 38));
 
+        jDateChooserHasta.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(jDateChooserHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 190, -1));
+
+        btnGenerarReporte.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnGenerarReporte.setText("Generar Reporte PDF");
+        btnGenerarReporte.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(221, 168, 83), null, null));
         btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarReporteActionPerformed(evt);
             }
         });
-        jPanel3.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 150, 30));
+        jPanel3.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, 30));
 
-        lblValorStock4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblValorStock4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblValorStock4.setForeground(new java.awt.Color(51, 51, 51));
         lblValorStock4.setText("Selecciona una fecha: ");
-        jPanel3.add(lblValorStock4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, -1));
+        jPanel3.add(lblValorStock4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 200, -1));
 
         lblValorStock5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorStock5.setForeground(new java.awt.Color(51, 51, 51));
         lblValorStock5.setText("Desde:");
-        jPanel3.add(lblValorStock5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 180, -1));
-        jPanel3.add(jDateChooserDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 160, -1));
+        jPanel3.add(lblValorStock5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 180, -1));
+        jPanel3.add(jDateChooserDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 190, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 220, 290));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 220, 290));
 
+        tablaVentasResumen.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         tablaVentasResumen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -159,11 +168,11 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tablaVentasResumen);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 560, 230));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 570, 240));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 840, 410));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 870, 420));
 
-        setSize(new java.awt.Dimension(840, 419));
+        setSize(new java.awt.Dimension(869, 417));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
