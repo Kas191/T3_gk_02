@@ -35,6 +35,8 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         txt_correo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Restablecer Contraseña");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -135,7 +137,8 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 420));
 
-        pack();
+        setSize(new java.awt.Dimension(364, 427));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtpasscontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasscontrasenaActionPerformed

@@ -67,7 +67,7 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         lblCreacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Creación de un Nuevo Usuario");
+        setTitle("Gestión de Usuarios - Crear");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

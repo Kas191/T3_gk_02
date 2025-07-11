@@ -73,6 +73,7 @@ public class form_RealizarPago extends javax.swing.JDialog {
         lblPago = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registro de Venta y Pago");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -139,7 +140,7 @@ public class form_RealizarPago extends javax.swing.JDialog {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 400, 420));
 
-        setSize(new java.awt.Dimension(414, 373));
+        setSize(new java.awt.Dimension(414, 371));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public boolean isPagoExitoso() {

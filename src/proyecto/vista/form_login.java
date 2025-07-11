@@ -67,7 +67,7 @@ public class form_login extends javax.swing.JFrame {
         txtTokenAdmin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
+        setTitle("Inicio de sesión - MULTITEC D&J");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusable(false);
         setResizable(false);

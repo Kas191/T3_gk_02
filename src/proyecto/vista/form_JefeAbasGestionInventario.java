@@ -54,7 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import javax.swing.JFileChooser;
 // Swing
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -628,7 +628,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
 
 
     private void cmbProveedorOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorOrdenActionPerformed
-       
+
     }//GEN-LAST:event_cmbProveedorOrdenActionPerformed
 
 
@@ -781,11 +781,11 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDescActionPerformed
 
     private void cmbMarcaBusqueda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMarcaBusqueda1ActionPerformed
-       
+
     }//GEN-LAST:event_cmbMarcaBusqueda1ActionPerformed
 
     private void cmbModeloOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbModeloOrdenActionPerformed
-       
+
     }//GEN-LAST:event_cmbModeloOrdenActionPerformed
 
     public void generarPDFOrdenCompra() {
@@ -808,7 +808,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
 
                 // Encabezado
                 Font tituloFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Font.BOLD, Color.RED);
-                Paragraph titulo = new Paragraph("ORDEN DE COMPRA - MULTITEC D & J EMPRESA", tituloFont);
+                Paragraph titulo = new Paragraph("ORDEN DE COMPRA - MULTITEC D & J [EMPRESA] ", tituloFont);
                 titulo.setAlignment(Element.ALIGN_CENTER);
                 documento.add(titulo);
 
@@ -826,11 +826,13 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                 for (String enc : encabezados) {
                     PdfPCell cell = new PdfPCell(new Phrase(enc));
                     cell.setBackgroundColor(Color.LIGHT_GRAY);
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                     tabla.addCell(cell);
                 }
 
                 DefaultTableModel modeloTabla = (DefaultTableModel) tblDetalleOrden.getModel();
                 int totalFilas = modeloTabla.getRowCount();
+                double totalGeneral = 0.0;
 
                 for (int i = 0; i < totalFilas; i++) {
                     Boolean seleccionado = Boolean.valueOf(modeloTabla.getValueAt(i, 0).toString());
@@ -839,26 +841,31 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
                         tabla.addCell(modeloTabla.getValueAt(i, 2).toString()); // Marca
                         tabla.addCell(modeloTabla.getValueAt(i, 3).toString()); // Modelo
                         tabla.addCell(modeloTabla.getValueAt(i, 4).toString()); // Cantidad
-                        tabla.addCell(modeloTabla.getValueAt(i, 5).toString()); // Precio Unitario
-                        tabla.addCell(modeloTabla.getValueAt(i, 6).toString()); // Total
 
-                        // Formatear precio unitario y total con 2 decimales
                         double precioUnitario = Double.parseDouble(modeloTabla.getValueAt(i, 5).toString());
                         double total = Double.parseDouble(modeloTabla.getValueAt(i, 6).toString());
 
                         tabla.addCell("S/ " + formatoDecimal.format(precioUnitario));
                         tabla.addCell("S/ " + formatoDecimal.format(total));
 
+                        totalGeneral += total;
                     }
                 }
 
                 documento.add(tabla);
+
+                // Línea final con total general
+                documento.add(new Paragraph(" "));
+                Paragraph totalFinal = new Paragraph("TOTAL GENERAL: S/ " + formatoDecimal.format(totalGeneral));
+                totalFinal.setAlignment(Element.ALIGN_RIGHT);
+                documento.add(totalFinal);
+
                 documento.close();
 
-                JOptionPane.showMessageDialog(this, "PDF generado correctamente: " + archivoPDF.getAbsolutePath());
+                JOptionPane.showMessageDialog(this, "PDF generado correctamente:\n" + archivoPDF.getAbsolutePath());
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage());
+                JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             }
         }
@@ -967,7 +974,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void cmbUbicacionOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUbicacionOrdenActionPerformed
-       
+
     }//GEN-LAST:event_cmbUbicacionOrdenActionPerformed
 
     private void btnActualizarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCantidadActionPerformed
@@ -1118,7 +1125,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResumenCriticoActionPerformed
 
     private void btnCerrarSesion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion2ActionPerformed
-               int opcion = JOptionPane.showConfirmDialog(
+        int opcion = JOptionPane.showConfirmDialog(
                 this,
                 "¿Estás seguro de que deseas cerrar sesión?",
                 "Confirmar cierre de sesión",
@@ -1137,7 +1144,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesion2ActionPerformed
 
     private void btnCerrarSesion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion3ActionPerformed
-               int opcion = JOptionPane.showConfirmDialog(
+        int opcion = JOptionPane.showConfirmDialog(
                 this,
                 "¿Estás seguro de que deseas cerrar sesión?",
                 "Confirmar cierre de sesión",

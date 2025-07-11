@@ -72,7 +72,7 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
         lblLogin.setText("LOGIN");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Reporte de Ventas Totales");
+        setTitle("Reporte de Ventas del Administrador");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

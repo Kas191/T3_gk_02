@@ -64,7 +64,7 @@ public class form_Empleado extends javax.swing.JFrame {
         btnCerrarSesion.setText("Cerrar sesión");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Panel Empleado");
+        setTitle("Panel Principal - Empleado");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -59,6 +59,8 @@ public class form_RegistraProducto extends javax.swing.JDialog {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registro de Nuevo Producto");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -131,13 +133,13 @@ public class form_RegistraProducto extends javax.swing.JDialog {
 
         lblSistemaAdminstrador.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador.setForeground(new java.awt.Color(0, 48, 146));
-        lblSistemaAdminstrador.setText("Productos");
-        jPanel1.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 300, 60));
+        lblSistemaAdminstrador.setText("Producto");
+        jPanel1.add(lblSistemaAdminstrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 300, 60));
 
         lblSistemaAdminstrador1.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         lblSistemaAdminstrador1.setForeground(new java.awt.Color(0, 48, 146));
-        lblSistemaAdminstrador1.setText("Registro de");
-        jPanel1.add(lblSistemaAdminstrador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 300, 60));
+        lblSistemaAdminstrador1.setText("Registro de nuevo");
+        jPanel1.add(lblSistemaAdminstrador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 370, 60));
 
         txtPrecioProducto1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         txtPrecioProducto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
@@ -155,7 +157,8 @@ public class form_RegistraProducto extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
-        pack();
+        setSize(new java.awt.Dimension(414, 557));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private boolean productoRegistrado = false;
