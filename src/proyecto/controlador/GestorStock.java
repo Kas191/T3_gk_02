@@ -80,7 +80,7 @@ public class GestorStock {
             return; // Detiene si hubo error
         }
 
-        // 👉 Mueve después de cerrar los flujos
+        //  Mueve después de cerrar los flujos
         try {
             Files.move(tempFile.toPath(), originalFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

@@ -151,7 +151,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Panel de Gestión de Inventario");
+        setTitle("Gestión de Inventario  - Jefe de Abastecimiento");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1118,11 +1118,41 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResumenCriticoActionPerformed
 
     private void btnCerrarSesion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion2ActionPerformed
-        // TODO add your handling code here:
+               int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas cerrar sesión?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Abre el formulario de login
+            form_login login = new form_login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+
+            // Cierra la ventana actual
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCerrarSesion2ActionPerformed
 
     private void btnCerrarSesion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion3ActionPerformed
-        // TODO add your handling code here:
+               int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas cerrar sesión?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Abre el formulario de login
+            form_login login = new form_login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+
+            // Cierra la ventana actual
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCerrarSesion3ActionPerformed
 
     /**

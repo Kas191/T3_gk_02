@@ -5,14 +5,10 @@
 package proyecto.modelo;
 import proyecto.modelo.Usuario;
 
-/**
- *
- * @author User0
- */
 public class JefeDeAbastecimiento extends Usuario {
 
      public JefeDeAbastecimiento(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
-        // Los jefes de abastecimiento no tienen tokenAdmin, por lo que se pasa null al constructor del padre.
+        // Los jefes de abastecimiento no tienen tokenAdmin, por lo que se pasa null al constructor del padre
         super(nombre, apellido, usuario, clave, correo, rol, null);
         // Asegurarse que el rol para Jefe de Abastecimiento sea "Jefe_Abastecimiento"
         if (!"Jefe_Abastecimiento".equalsIgnoreCase(rol)) {

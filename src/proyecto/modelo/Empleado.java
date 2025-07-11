@@ -4,10 +4,6 @@
  */
 package proyecto.modelo;
 
-/**
- *
- * @author User0
- */
 public class Empleado extends Usuario {
 
     public Empleado(String nombre, String apellido, String usuario, String clave, String correo, String rol) {

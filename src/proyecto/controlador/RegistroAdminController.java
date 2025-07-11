@@ -35,7 +35,7 @@ public class RegistroAdminController {
         boolean registroExitoso = usuarioController.registrarUsuario(nuevoAdmin);
 
         if (registroExitoso) {
-            // Es CRUCIAL mostrar el token al usuario para que lo guarde.
+            // Es CRUCIAL mostrar el token al usuario para que lo guarde
             Mensajes.mostrarInfo("¡Administrador registrado con éxito!\n"
                                + "Su token de acceso es: \n" + generatedToken + "\n"
                                + "¡Guarde este token de forma segura! Lo necesitará para iniciar sesión.");
