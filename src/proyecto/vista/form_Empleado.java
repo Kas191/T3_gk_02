@@ -573,10 +573,10 @@ public class form_Empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarCantidadActionPerformed
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
-
+         //usar en caso de emergencia
         cargarProductosComboBox(); // recarga combo con stock nuevo
 
-        // ✅ Forzar actualización del lblValorStock para el producto actualmente seleccionado
+        //  Forzar actualización del lblValorStock para el producto actualmente seleccionado
         cmbProductoActionPerformed(null);
 
         JOptionPane.showMessageDialog(this, "Stock actualizado manualmente.");

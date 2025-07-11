@@ -1,0 +1,5 @@
+Nombre	Apellido	Usuario	Correo	Rol	Contraseña	
+Administrador	General	admin	admin@gmail.com	Admin	Admin2024*Secure	
+Juan	Perez	empleado1	juan.perez@gmail.com	Empleado	Empleado2024#Safe	
+Derly Yosoni	Cruz Amari	jefeabast	derlyYosoni@empresa.com	Jefe_Abastecimiento	1356989*Abc_A	
+Maria	Salaz	Maria01	Maria12@gmail.com	Empleado	Maria*Abc12e	

@@ -8,10 +8,10 @@ import proyecto.controlador.UsuarioController;
 import proyecto.modelo.Administrador;
 import proyecto.modelo.Empleado;
 import proyecto.modelo.JefeDeAbastecimiento;
-import proyecto.modelo.Usuario; 
+import proyecto.modelo.Usuario;
 import proyecto.util.Mensajes;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog; 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,10 +38,9 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         this.usuarioController = new UsuarioController(); // Instancia del controlador de usuarios
         this.userToEdit = userToEdit;
 
-        addEventHandlers(); 
-        populateForm(); 
+        addEventHandlers();
+        populateForm();
 
-   
     }
 
     /**
@@ -249,18 +248,18 @@ public class form_AltUsuarios extends javax.swing.JDialog {
         String correo = txtcorreo.getText();
         String rol = (String) cbroles.getSelectedItem();
 
-// Validar campos vacíos
+         // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || clave.isEmpty() || correo.isEmpty()) {
             Mensajes.mostrarError("Todos los campos son obligatorios");
             return;
         }
-// Validar correo Gmail
+       // Validar correo Gmail
         if (!correo.endsWith("@gmail.com")) {
             Mensajes.mostrarAdvertencia("El correo debe ser una cuenta Gmail válida");
             return;
         }
 
-// Validar seguridad de la contraseña
+        // Validar seguridad de la contraseña
         if (clave.length() < 8 || !clave.matches(".*[!@#$%^&*()_+=<>?/{}\\[\\]-].*")) {
             Mensajes.mostrarAdvertencia("La contraseña debe tener al menos 8 caracteres y un símbolo (por ejemplo: !, @, #, etc.)");
             return;
@@ -290,10 +289,10 @@ public class form_AltUsuarios extends javax.swing.JDialog {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         if (jPasswordFieldB.getEchoChar() == '*') {
-           
+
             jPasswordFieldB.setEchoChar((char) 0);
         } else {
-          
+
             jPasswordFieldB.setEchoChar('*');
         }
     }//GEN-LAST:event_btnMostrarActionPerformed

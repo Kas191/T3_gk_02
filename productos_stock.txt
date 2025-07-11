@@ -74,5 +74,5 @@ ZTE;A55;855.59;2
 ZTE;A73;873.71;3
 ZTE;Blade A05;786.53;3
 Samsung;A99;500.0;2
-Samsung;A98;600.0;6
-Samsung;A97;1600.0;4
+Samsung;A98;600.0;4
+Samsung;A97;1600.0;3

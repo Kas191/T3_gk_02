@@ -82,7 +82,7 @@ public abstract class Usuario {
     }
 
     public void setClave(String clave) {
-        this.clave = clave; // Esta clave se espera que ya esté codificada al ser seteada aquí
+        this.clave = clave; 
     }
 
     public void setCorreo(String correo) {

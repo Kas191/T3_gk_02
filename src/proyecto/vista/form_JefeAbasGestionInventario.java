@@ -628,7 +628,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
 
 
     private void cmbProveedorOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorOrdenActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_cmbProveedorOrdenActionPerformed
 
 
@@ -688,7 +688,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
             return;
         }
 
-        // ? CORREGIDO: primero MARCA, luego MODELO
+        //  CORREGIDO: primero MARCA, luego MODELO
         String marca = tblProductos.getValueAt(filaSeleccionada, 0).toString(); // Columna 0 = Marca
         String modelo = tblProductos.getValueAt(filaSeleccionada, 1).toString(); // Columna 1 = Modelo
 
@@ -781,11 +781,11 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDescActionPerformed
 
     private void cmbMarcaBusqueda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMarcaBusqueda1ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_cmbMarcaBusqueda1ActionPerformed
 
     private void cmbModeloOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbModeloOrdenActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_cmbModeloOrdenActionPerformed
 
     public void generarPDFOrdenCompra() {
@@ -967,7 +967,7 @@ public class form_JefeAbasGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void cmbUbicacionOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUbicacionOrdenActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_cmbUbicacionOrdenActionPerformed
 
     private void btnActualizarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCantidadActionPerformed

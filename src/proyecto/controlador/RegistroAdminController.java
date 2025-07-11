@@ -16,17 +16,7 @@ public class RegistroAdminController {
         this.usuarioController = usuarioController;
     }
 
-    /**
-     * Método para registrar un administrador inicial en el sistema.
-     * Genera automáticamente un token para el administrador.
-     * @param nombre Nombre del administrador.
-     * @param apellido Apellido del administrador.
-     * @param usuario Nombre de usuario para el login.
-     * @param clave Clave (contraseña) en texto plano.
-     * @param correo Correo electrónico.
-     * @param rol Rol del usuario (debe ser "Admin").
-     * @return true si el registro fue exitoso, false si el nombre de usuario ya existe.
-     */
+   
     public boolean registrarAdmin(String nombre, String apellido, String usuario, String clave, String correo, String rol) {
         // Verifica si ya existe un usuario con el mismo nombre de usuario (RF-042)
         if (usuarioController.buscarPorUsuario(usuario) != null) {

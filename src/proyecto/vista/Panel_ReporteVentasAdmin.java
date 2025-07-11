@@ -235,7 +235,7 @@ public class Panel_ReporteVentasAdmin extends javax.swing.JDialog {
             if (modelo.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(this, "No se encontraron facturas en el rango de fechas.");
             } else {
-                JOptionPane.showMessageDialog(this, "✅ Total acumulado: S/ " + String.format("%.2f", totalAcumulado));
+                JOptionPane.showMessageDialog(this, " Total acumulado: S/ " + String.format("%.2f", totalAcumulado));
             }
 
         } catch (Exception e) {

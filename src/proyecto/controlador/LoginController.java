@@ -20,13 +20,7 @@ public class LoginController {
         this.usuarioController = usuarioController;
     }
 
-    /**
-     * Autentica un usuario con su nombre de usuario y contraseña (texto plano).
-     * Este método se usa para roles de 'Empleado' y 'Jefe_Abastecimiento'.
-     * @param usuarioNombre El nombre de usuario.
-     * @param clavePlana La contraseña en texto plano ingresada por el usuario.
-     * @return El objeto Usuario si la autenticación es exitosa, de lo contrario, null.
-     */
+   
     public Usuario autenticar(String usuarioNombre, String clavePlana) {
         Usuario user = usuarioController.buscarPorUsuario(usuarioNombre);
         // Verifica si el usuario existe y si la contraseña decodificada del archivo coincide con la ingresada.
@@ -36,14 +30,7 @@ public class LoginController {
         return null; // Autenticación fallida.
     }
 
-    /**
-     * Autentica a un usuario Administrador con su nombre de usuario, contraseña (texto plano) y un token.
-     * Este método es específico para el login del Administrador.
-     * @param usuarioNombre El nombre de usuario (debe ser "admin").
-     * @param clavePlana La contraseña del administrador en texto plano.
-     * @param tokenIngresado El token leído del archivo (por ejemplo, desde JFileChooser) y proporcionado por el administrador.
-     * @return El objeto Usuario (administrador) si la autenticación es exitosa, de lo contrario, null.
-     */
+    
     public Usuario autenticarAdminConToken(String usuarioNombre, String clavePlana, String tokenIngresado) {
         // Primero, intenta autenticar con usuario y contraseña usando el método general.
         // Esto verifica que el usuario exista y que su contraseña sea correcta.
