@@ -1,4 +1,4 @@
-Administrador|General|admin|YWRtaW5wYXNz|admin@empresa.com|Admin|4a3b8c2d-9e1f-4g5h-6i7j-8k9l0m1n2o3p
-Juan|Perez|empleado1|ZW1wbGVhZG9wYXNz|juan.perez@empresa.com|Empleado|
+Administrador|General|admin|QWRtaW4yMDI0KlNlY3VyZQ==|admin@gmail.com|Admin|4a3b8c2d-9e1f-4g5h-6i7j-8k9l0m1n2o3p
+Juan|Perez|empleado1|RW1wbGVhZG8yMDI0I1NhZmU=|juan.perez@gmail.com|Empleado|
 Derly Yosoni|Cruz Amari|jefeabast|MTM1Njk4OSpBYmNfQQ==|derlyYosoni@empresa.com|Jefe_Abastecimiento|
-Maria |Salaz|Maria01|TWFyaWEqQWJjMTJl|Maria12@gmail.com|Empleado|
+Maria|Salaz|Maria01|TWFyaWEqQWJjMTJl|Maria12@gmail.com|Empleado|

@@ -91,7 +91,6 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnSalirAdmin = new javax.swing.JButton();
         btnBorrarUsuario = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
         btnCrearNuevoUsuario1 = new javax.swing.JButton();
         btnReportedeVentas = new javax.swing.JButton();
         btnbBuscar = new javax.swing.JButton();
@@ -159,18 +158,6 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.setBackground(new java.awt.Color(0, 48, 146));
-        btnActualizar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnActualizar.setText("Actualizar Información");
-        btnActualizar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(0, 0, 153), new java.awt.Color(102, 102, 255), new java.awt.Color(0, 0, 51)));
-        btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-
         btnCrearNuevoUsuario1.setBackground(new java.awt.Color(0, 48, 146));
         btnCrearNuevoUsuario1.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         btnCrearNuevoUsuario1.setForeground(new java.awt.Color(255, 255, 255));
@@ -202,7 +189,6 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,17 +201,15 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 .addGap(117, 117, 117)
                 .addComponent(btnCrearNuevoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBorrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReportedeVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
+                .addGap(147, 147, 147)
                 .addComponent(btnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 210, 620));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, -10, 210, 620));
 
         btnbBuscar.setBackground(new java.awt.Color(255, 221, 87));
         btnbBuscar.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -303,11 +287,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
+      
 
         btnBorrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,7 +331,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                 u.getUsuario(), // Nombre de usuario (username)
                 u.getCorreo(),
                 u.getRol(),
-                "********" // La contraseña se muestra oculta por seguridad
+                 usuarioController.decodePassword(u.getClave()) 
             };
             tableModel.addRow(rowData);
         }
@@ -387,10 +367,6 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
             Mensajes.mostrarAdvertencia("Por favor, selecciona un usuario de la tabla para actualizar.");
         }
     }
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        actualizarTabla();
-    }//GEN-LAST:event_btnActualizarActionPerformed
-
     private void BorrarUsuario() {
         int filaSeleccionada = tableAdmin.getSelectedRow();
 
@@ -494,7 +470,7 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
                     u.getUsuario(),
                     u.getCorreo(),
                     u.getRol(),
-                    "********"
+                    usuarioController.decodePassword(u.getClave()) 
                 };
                 modelo.addRow(fila);
                 encontrado = true;
@@ -654,7 +630,6 @@ public class form_SistemaAdmin extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
-    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBorrarUsuario;
     private javax.swing.JButton btnCrearNuevoUsuario1;
     private javax.swing.JButton btnCredencialesUsuarios1;

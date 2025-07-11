@@ -28,11 +28,6 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
     private void initComponents() {
 
         txt_correo = new javax.swing.JPasswordField();
-        txtpasscontrasena = new javax.swing.JTextField();
-        lblCorreo = new javax.swing.JLabel();
-        lblconficontrasena = new javax.swing.JLabel();
-        txtrpassconfircontra = new javax.swing.JPasswordField();
-        lblcontrasena = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnValidar = new javax.swing.JButton();
         lblRestablerContrasena = new javax.swing.JLabel();
@@ -40,38 +35,16 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
         btnMostrar1 = new javax.swing.JButton();
         btnMostrar2 = new javax.swing.JButton();
         txtCorreo = new javax.swing.JTextField();
+        txtpasscontrasena = new javax.swing.JTextField();
+        lblcontrasena = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        txtrpassconfircontra = new javax.swing.JPasswordField();
+        lblconficontrasena = new javax.swing.JLabel();
 
         txt_correo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtpasscontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        txtpasscontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        txtpasscontrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpasscontrasenaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtpasscontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 240, 40));
-
-        lblCorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        lblCorreo.setForeground(new java.awt.Color(102, 102, 102));
-        lblCorreo.setText("Correo");
-        getContentPane().add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 50, -1));
-
-        lblconficontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        lblconficontrasena.setForeground(new java.awt.Color(102, 102, 102));
-        lblconficontrasena.setText("Confirmar Contraseña");
-        getContentPane().add(lblconficontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 160, -1));
-
-        txtrpassconfircontra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
-        getContentPane().add(txtrpassconfircontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 240, 40));
-
-        lblcontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
-        lblcontrasena.setForeground(new java.awt.Color(102, 102, 102));
-        lblcontrasena.setText("Contraseña");
-        getContentPane().add(lblcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 100, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,7 +60,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
                 btnValidarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 240, 30));
+        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 240, 30));
 
         lblRestablerContrasena.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
         lblRestablerContrasena.setForeground(new java.awt.Color(0, 48, 146));
@@ -118,7 +91,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
                 btnMostrar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMostrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 40, 40));
+        jPanel1.add(btnMostrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 40, 40));
 
         btnMostrar2.setBackground(new java.awt.Color(0, 48, 146));
         btnMostrar2.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
@@ -131,7 +104,7 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
                 btnMostrar2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMostrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 40, 40));
+        jPanel1.add(btnMostrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 40, 40));
 
         txtCorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
         txtCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
@@ -140,9 +113,36 @@ public class form_restablecerContraNew extends javax.swing.JDialog {
                 txtCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 240, 40));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 240, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 420));
+        txtpasscontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        txtpasscontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        txtpasscontrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpasscontrasenaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtpasscontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 240, 40));
+
+        lblcontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblcontrasena.setForeground(new java.awt.Color(102, 102, 102));
+        lblcontrasena.setText("Contraseña");
+        jPanel1.add(lblcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 100, -1));
+
+        lblCorreo.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblCorreo.setForeground(new java.awt.Color(102, 102, 102));
+        lblCorreo.setText("Correo");
+        jPanel1.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 50, -1));
+
+        txtrpassconfircontra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 48, 146)));
+        jPanel1.add(txtrpassconfircontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 240, 40));
+
+        lblconficontrasena.setFont(new java.awt.Font("Microsoft PhagsPa", 0, 14)); // NOI18N
+        lblconficontrasena.setForeground(new java.awt.Color(102, 102, 102));
+        lblconficontrasena.setText("Confirmar Contraseña");
+        jPanel1.add(lblconficontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 160, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -196,8 +196,8 @@ public class UsuarioController {
                 "Juan",
                 "Perez",
                 "empleado1", // Nombre de usuario para login
-                encodePassword("empleadopass"), // Contraseña codificada
-                "juan.perez@empresa.com",
+                encodePassword("Paso14*bA4*Abc"), // Contraseña codificada
+                "juan.perez@gmail.com",
                 "Empleado"
         );
         listaUsuarios.add(empleado);
@@ -208,7 +208,7 @@ public class UsuarioController {
                 "Cruz Amari",
                 "jefeabast", // Nombre de usuario para login
                 encodePassword("1356989*Abc_A"), // Contraseña codificada
-                "derlyYosoni@empresa.com",
+                "derlyYosoni@gmail.com",
                 "Jefe_Abastecimiento"
         );
         listaUsuarios.add(jefe);
